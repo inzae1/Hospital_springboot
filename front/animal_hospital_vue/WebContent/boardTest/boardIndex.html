@@ -19,14 +19,18 @@
                     <th>날짜</th>
                     <th>조회수</th>
                 </tr>
+                <tr v-if='showContent'></tr>
             </thead>
             <tbody>
-                <tr v-for='board in info'>
+                <tr v-for='board in info' @click='getBoard()'>
                     <td>{{board.bdID}}</td>
                     <td>{{board.bdTitle}}</td>
                     <td>{{board.custId}}</td>
                     <td>{{board.bdDate}}</td>
                     <td>{{board.bdView}}</td>
+                </tr>
+                <tr v-if='showContent'>
+                    <td>{{board.bdContent}}</td>
                 </tr>
             </tbody>
         </table>
@@ -40,6 +44,7 @@
             data() {
                 return {
                     info: [],
+                    showContent: false,
                     loading: true,
                     errored: false
                 }
@@ -56,6 +61,11 @@
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
+            },
+            methods: {
+                getBoard() {
+                    this.showContent = true;
+                }
             }
 
         });
