@@ -5,86 +5,25 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src='./WEB-INF/lib/main.js'></script>
-    <script src="jquery-3.5.1.min.js"></script>
-
     <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
     <link href='index1.css' rel='stylesheet'>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                initialDate: '2020-09-12',
-                navLinks: true, // can click day/week names to navigate views
-                selectable: true,
-                selectMirror: true,
-                select: function(arg) {
-                    var title = prompt('Event Title:');
-                    if (title) {
-                        calendar.addEvent({
-                            title: title,
-                            start: arg.start,
-                            end: arg.end,
-                            allDay: arg.allDay
-                        })
-                    }
-                    calendar.unselect()
-                },
-                eventClick: function(arg) {
-                    if (confirm('예약을 취소하시겠습니까?')) {
-                        arg.event.remove()
-                    }
-                },
+                initialDate: '2020-11-03',
                 editable: true,
+                selectable: true,
+                businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
                 events: [{
                     title: 'All Day Event',
-                    start: '2020-09-01'
-                }, {
-                    title: 'Long Event',
-                    start: '2020-09-07',
-                    end: '2020-09-10'
-                }, {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2020-09-09T16:00:00'
-                }, {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2020-09-16T16:00:00'
-                }, {
-                    title: 'Conference',
-                    start: '2020-09-11',
-                    end: '2020-09-13'
-                }, {
-                    title: 'Meeting',
-                    start: '2020-09-12T10:30:00',
-                    end: '2020-09-12T12:30:00'
-                }, {
-                    title: 'Lunch',
-                    start: '2020-09-12T12:00:00'
-                }, {
-                    title: 'Meeting',
-                    start: '2020-09-12T14:30:00'
-                }, {
-                    title: 'Happy Hour',
-                    start: '2020-09-12T17:30:00'
-                }, {
-                    title: 'Dinner',
-                    start: '2020-09-12T20:00:00'
-                }, {
-                    title: 'Birthday Party',
-                    start: '2020-09-13T07:00:00'
-                }, {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2020-09-28'
+                    start: '2020-11-03'
                 }]
             });
 
@@ -100,8 +39,44 @@
         }
         
         #calendar {
-            max-width: 1100px;
-            margin: 0 auto;
+            width: 900px;
+            margin-right: 3%;
+            margin-left: 5%;
+            float: left;
+        }
+        
+        table.type05 {
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin: 20px 10px;
+        }
+        
+        table.type05 th {
+            width: 150px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+            background: #efefef;
+        }
+        
+        table.type05 td {
+            width: 350px;
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .button {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .button:hover {
+            background-color: #59b1eb;
         }
     </style>
     </script>
@@ -168,7 +143,35 @@
                 </div>
             </div>
         </div>
-        <div id='calendar' class="calendar"></div>
+        <br><br><br><br>
+        <div id='calendar'></div>
+        <br>
+        <form>
+            <table class="type05">
+                <tr>
+                    <th scope="row">예약날짜</th>
+                    <td>{{날짜}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">동물카테고리</th>
+                    <td>
+                        <select>
+                        <option>멍멍이</option>
+                        <option>냥이</option>
+                        <option>조류</option>
+                        <option>파충류</option>
+                        <option>기타</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">항목명</th>
+                    <td>내용이 들어갑니다.</td>
+                </tr>
+
+            </table>
+            <button class="button" type="submit">예약하기</button>
+        </form>
     </div>
 
 </body>
