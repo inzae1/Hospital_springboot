@@ -26,9 +26,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public void cancelReservation(String custId) throws Exception {
+	public boolean cancelReservation(String custId) throws Exception {
 		// TODO Auto-generated method stub
-		reservationDAO.cancelReservation(custId);
+		return reservationDAO.cancelReservation(custId);
 	}
 
 	@Override
