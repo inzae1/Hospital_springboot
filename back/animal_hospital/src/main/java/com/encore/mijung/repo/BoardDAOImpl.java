@@ -22,13 +22,17 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public void updateBoard(Board board) throws Exception {
-		sqlSession.update(NS + "updateBoard", board);
+	public boolean updateBoard(Board board) throws Exception {
+		int result = sqlSession.update(NS + "updateBoard", board);
+		if(result>0) return true;
+		return false;
 	}
 
 	@Override
-	public void deleteBoard(int bdID) throws Exception {
-		sqlSession.delete(NS + "deleteBoard", bdID);
+	public boolean deleteBoard(int bdID) throws Exception {
+		int result = sqlSession.delete(NS + "updateBoard", bdID);
+		if(result>0) return true;
+		return false;
 	}
 
 	@Override
