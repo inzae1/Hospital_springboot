@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #content {
+            visibility: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,19 +24,16 @@
                     <th>날짜</th>
                     <th>조회수</th>
                 </tr>
-                <tr v-if='showContent'></tr>
             </thead>
             <tbody>
-                <tr v-for='board in info' @click='getBoard()'>
+                <tr v-for='board in info' @click="getBoard()">
                     <td>{{board.bdID}}</td>
                     <td>{{board.bdTitle}}</td>
                     <td>{{board.custId}}</td>
                     <td>{{board.bdDate}}</td>
-                    <td>{{board.bdView}}</td>
+                    <td>{{board.bdView}}</td><br>
                 </tr>
-                <tr v-if='showContent'>
-                    <td>{{board.bdContent}}</td>
-                </tr>
+
             </tbody>
         </table>
 
@@ -63,8 +65,8 @@
                     .finally(() => this.loading = false)
             },
             methods: {
-                getBoard() {
-                    this.showContent = true;
+                getBoard(content) {
+
                 }
             }
 
