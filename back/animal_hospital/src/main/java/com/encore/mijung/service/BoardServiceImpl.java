@@ -21,13 +21,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void updateBoard(Board board) throws Exception {
-		boardDAO.updateBoard(board);
+	public boolean updateBoard(Board board) throws Exception {
+		return boardDAO.updateBoard(board);
 	}
 
 	@Override
-	public void deleteBoard(int bdID) throws Exception {
-		boardDAO.deleteBoard(bdID);
+	public boolean deleteBoard(int bdID) throws Exception {
+		return boardDAO.deleteBoard(bdID);
 	}
 
 	@Override

@@ -13,8 +13,8 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDAO customerDAO;
 
 	@Override
-	public void register(Customer customer) throws Exception {
-		customerDAO.register(customer);
+	public boolean register(Customer customer) throws Exception {
+		return customerDAO.register(customer);
 		
 	}
 
@@ -25,9 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void dropCustomer(String custId) throws Exception {
+	public boolean dropCustomer(String custId) throws Exception {
 		// TODO Auto-generated method stub
-		customerDAO.dropCustomer(custId);
+		return customerDAO.dropCustomer(custId);
 	}
 
 	@Override
@@ -46,6 +46,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer findPassword(Customer customer) throws Exception {
 		// TODO Auto-generated method stub
 		return customerDAO.findPassword(customer);
+	}
+
+	@Override
+	public boolean changePassword(Customer customer) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.changePassword(customer);
 	}
 	
 	

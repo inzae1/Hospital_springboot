@@ -23,6 +23,18 @@ public class Customer {
 		this.custPhone = custPhone;
 		this.custAdmin = custAdmin;
 	}
+	
+	public Customer(String custName, String custPhone) {
+		this.custName = custName;
+		this.custPhone = custPhone;
+	}
+	
+	public Customer(String custId, String custName, String custPhone) {
+		this.custId = custId;
+		this.custName = custName;
+		this.custPhone = custPhone;
+	}
+	
 
 	public String getCustId() {
 		return custId;
