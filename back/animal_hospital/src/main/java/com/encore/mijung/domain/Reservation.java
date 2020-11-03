@@ -21,8 +21,9 @@ public class Reservation {
 		this.custId = custId;
 	}
 	
-	public Reservation(String revDoctor, String revComment, String revAnimalType,
+	public Reservation(String revDate, String revDoctor, String revComment, String revAnimalType,
 			String custId) {
+		this.revDate = revDate;
 		this.revDoctor = revDoctor;
 		this.revComment = revComment;
 		this.revAnimalType = revAnimalType;
