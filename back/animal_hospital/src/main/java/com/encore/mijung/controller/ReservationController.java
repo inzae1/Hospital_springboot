@@ -19,6 +19,8 @@ import com.encore.mijung.domain.Reservation;
 import com.encore.mijung.service.CustomerService;
 import com.encore.mijung.service.ReservationService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("mijung")
 @CrossOrigin(origins= {"*"}, maxAge=6000)
@@ -28,7 +30,7 @@ public class ReservationController {
 	private ReservationService reservationService;
 	
 	@PostMapping("/reservation")
-	public ResponseEntity reservation(Reservation reservation) throws Exception{
+	public ResponseEntity reservation(@RequestBody Reservation reservation) throws Exception{
 		reservationService.reservation(reservation);
 		return new ResponseEntity(HttpStatus.OK);
 	}
