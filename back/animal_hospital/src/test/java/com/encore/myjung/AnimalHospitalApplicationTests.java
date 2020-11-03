@@ -1,4 +1,4 @@
-package com.encore.mijung;
+package com.encore.myjung;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +19,6 @@ class AnimalHospitalApplicationTests {
 				new ClassPathXmlApplicationContext(new String[] {	"/config/SqlMapConfig.xml"	 });
 		
 		CustomerService customersService= (CustomerService)context.getBean("mybatis-customer-mapping");
-		
 		
 	}
 

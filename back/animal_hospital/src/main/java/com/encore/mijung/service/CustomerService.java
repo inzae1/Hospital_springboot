@@ -1,8 +1,8 @@
-package com.encore.mijung.repo;
+package com.encore.mijung.service;
 
 import com.encore.mijung.domain.Customer;
 
-public interface CustomerDAO {
+public interface CustomerService {
 	public void register(Customer customer) throws Exception;
 	public Customer login(Customer customer) throws Exception;
 	public void dropCustomer(String custId) throws Exception;

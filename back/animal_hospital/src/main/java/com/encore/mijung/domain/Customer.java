@@ -4,20 +4,23 @@ public class Customer {
 	String custId;
 	String custPassword;
 	String custName;
+	String custPhone;
 	int custAdmin;
 	
 	public Customer() {}
 	
-	public Customer(String custId, String custPassword, String custName) {
+	public Customer(String custId, String custPassword, String custName, String custPhone) {
 		this.custId = custId;
 		this.custPassword = custPassword;
 		this.custName = custName;
+		this.custPhone = custPhone;
 	}
 
-	public Customer(String custId, String custPassword, String custName, int custAdmin) {
+	public Customer(String custId, String custPassword, String custName, String custPhone, int custAdmin) {
 		this.custId = custId;
 		this.custPassword = custPassword;
 		this.custName = custName;
+		this.custPhone = custPhone;
 		this.custAdmin = custAdmin;
 	}
 
@@ -43,6 +46,14 @@ public class Customer {
 
 	public void setCustName(String custName) {
 		this.custName = custName;
+	}
+	
+	public String getCustPhone() {
+		return custPhone;
+	}
+
+	public void setCustPhone(String custPhone) {
+		this.custPhone = custPhone;
 	}
 
 	public int getCustAdmin() {

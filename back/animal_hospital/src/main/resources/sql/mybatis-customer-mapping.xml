@@ -9,12 +9,12 @@
     <insert id="register" parameterType="customer" >
    		INSERT INTO customer     
 		(cust_id, cust_password, cust_name, cust_phone)
-		VALUES(#{cust_id}, #{cust_password}, #{cust_name}, #{cust_phone})
+		VALUES(#{custId}, #{custPassword}, #{custName}, #{custPhone})
     </insert>
-    <select id="login" parameterType="string" resultType="customer">
-		SELECT cust_id, cust_password, cust_name, cust_phone
+    <select id="login" parameterType="customer" resultType="customer">
+		SELECT cust_id, cust_password, cust_name, cust_phone, cust_admin
 		FROM customer
-		WHERE cust_id=#{cust_id} AND cust_password=#{cust_password}
+		WHERE cust_id=#{custId} AND cust_password=#{custPassword}
     </select>
     <delete id="dropCustomer" parameterType="string">
         DELETE FROM customer WHERE cust_id=#{VALUE}    
@@ -25,12 +25,12 @@
     <select id="findId" parameterType="customer" resultType="customer">
     	SELECT cust_id, cust_password, cust_name, cust_phone
     	FROM customer
-    	WHERE cust_name=#{cust_name} AND cust_phone=#{cust_phone}
+    	WHERE cust_name=#{custName} AND cust_phone=#{custPhone}
     </select>
     <select id="findPassword" parameterType="customer" resultType="customer">
     	SELECT cust_id, cust_password, cust_name, cust_phone
     	FROM customer
-    	WHERE cust_name=#{cust_name} AND cust_phone=#{cust_phone} AND cust_password=#{cust_password}
+    	WHERE cust_name=#{custName} AND cust_phone=#{custPhone} AND cust_password=#{custPassword}
     </select>
 </mapper>
 
