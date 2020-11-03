@@ -30,8 +30,13 @@
     <select id="findPassword" parameterType="customer" resultType="customer">
     	SELECT cust_id, cust_password, cust_name, cust_phone
     	FROM customer
-    	WHERE cust_name=#{custName} AND cust_phone=#{custPhone} AND cust_password=#{custPassword}
+    	WHERE cust_name=#{custName} AND cust_phone=#{custPhone} AND cust_id=#{custId}
     </select>
+    <update id="changePassword" parameterType="customer">
+    	UPDATE customer 
+    	SET cust_password=#{custPassword}
+    	WHERE cust_id=#{custId}
+    </update>
 </mapper>
 
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form action="#" method="POST" @submit.prevent="login">
+            <table>
+
+
+                <tr>
+                    <th>아이디(이메일)</th>
+                    <td><input type="email" name="custId" id="custId" v-model="custId" /></td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td>
+                        <input type="password" name="custPassword" id="custPassword" v-model="custPassword" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2 " style="height: 50px; text-align: center; ">
+                        <button type="submit " name="button ">로그인</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    loading: true,
+                    errored: false,
+                    custId: "",
+                    custPassword: ""
+
+                }
+            },
+            methods: {
+                login() {
+                    if (this.custId == " ") {
+                        alert("아이디를 입력하세요 ");
+                        return;
+                    }
+                    if (this.custPassword == " ") {
+                        alert("비밀번호를 입력하세요 ");
+                        return;
+                    }
+                    axios
+                        .post("http://localhost:7000/mijung/login", {
+                            custId: this.custId,
+                            custPassword: this.custPassword,
+                        })
+                        .then(response => {
+                            console.log(response.data);
+                            if (response.data == "") {
+                                alert("로그인에 실패했습니다.");
+
+                            } else {
+                                //this.info = response.data.;
+                                localStorage.setItem("animal_login", this.custId);
+                                localStorage.setItem("animal_admin", response.data.custAdmin);
+                                alert(response.data.custName + "님이 로그인하였습니다.");
+                            }
+
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = false)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
