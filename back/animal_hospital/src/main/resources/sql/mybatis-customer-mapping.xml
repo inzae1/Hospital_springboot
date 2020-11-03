@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 완벽한 행태의 CRUD가 다 들어있는 sqlMapper 이게 돌아간다면 MyBatis Framework에단에 문제가 없는 
+	것으로 본다 일종의 단위테스트...MyBatisAppTest.java 가 바로 MyBatis Mapper 단위테스트 -->
+
+<mapper namespace="CustomerMapper">
+ 
+    <insert id="register" parameterType="customer" >
+   		INSERT INTO customer     
+		(cust_id, cust_password, cust_name, cust_phone)
+		VALUES(#{cust_id}, #{cust_password}, #{cust_name}, #{cust_phone})
+    </insert>
+    <select id="login" parameterType="string" resultType="customer">
+		SELECT cust_id, cust_password, cust_name, cust_phone
+		FROM customer
+		WHERE cust_id=#{cust_id} AND cust_password=#{cust_password}
+    </select>
+    <delete id="dropCustomer" parameterType="string">
+        DELETE FROM customer WHERE cust_id=#{VALUE}    
+    </delete>
+    <select id="idCheck" parameterType="string" resultType="int">
+      	SELECT COUNT(cust_id) FROM customer WHERE cust_id=#{VALUE}  
+    </select>
+    <select id="findId" parameterType="customer" resultType="customer">
+    	SELECT cust_id, cust_password, cust_name, cust_phone
+    	FROM customer
+    	WHERE cust_name=#{cust_name} AND cust_phone=#{cust_phone}
+    </select>
+    <select id="findPassword" parameterType="customer" resultType="customer">
+    	SELECT cust_id, cust_password, cust_name, cust_phone
+    	FROM customer
+    	WHERE cust_name=#{cust_name} AND cust_phone=#{cust_phone} AND cust_password=#{cust_password}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
