@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button href="addBoard.html">글쓰기</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>글쓰니</th>
+                    <th>날짜</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for='board in info'>
+                    <td>{{board.bdID}}</td>
+                    <td>{{board.bdTitle}}</td>
+                    <td>{{board.custId}}</td>
+                    <td>{{board.bdDate}}</td>
+                    <td>{{board.bdView}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    info: [],
+                    loading: true,
+                    errored: false
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:7000/mijung/getAllBoard")
+                    .then(response => {
+                        console.log(response);
+                        this.info = response.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            }
+
+        });
+    </script>
+</body>
+
+</html>
