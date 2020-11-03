@@ -52,6 +52,7 @@
             methods: {
                 updateBoard() {
                     const board = {
+                        bdID: this.info.bdID,
                         bdTitle: this.info.bdTitle,
                         bdContent: this.info.bdContent,
                         bdIsSecret: this.info.bdIsSecret,
@@ -66,7 +67,10 @@
                             console.log(error);
                             this.errored = true;
                         })
-                        .finally(() => this.loading = false)
+                        .finally(() => {
+                            this.loading = false;
+                            location.href = "./boardDetail.html?bdID=" + this.info.bdID;
+                        })
                 },
                 check(event) {
                     let checked = document.getElementById('secretKey');
