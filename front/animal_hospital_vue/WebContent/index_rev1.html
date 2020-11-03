@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='./WEB-INF/lib/main.js'></script>
+    <script src="jquery-3.5.1.min.js"></script>
+
+    <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
+    <link href='index1.css' rel='stylesheet'>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                initialDate: '2020-09-12',
+                navLinks: true, // can click day/week names to navigate views
+                selectable: true,
+                selectMirror: true,
+                select: function(arg) {
+                    var title = prompt('Event Title:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: arg.start,
+                            end: arg.end,
+                            allDay: arg.allDay
+                        })
+                    }
+                    calendar.unselect()
+                },
+                eventClick: function(arg) {
+                    if (confirm('예약을 취소하시겠습니까?')) {
+                        arg.event.remove()
+                    }
+                },
+                editable: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: [{
+                    title: 'All Day Event',
+                    start: '2020-09-01'
+                }, {
+                    title: 'Long Event',
+                    start: '2020-09-07',
+                    end: '2020-09-10'
+                }, {
+                    groupId: 999,
+                    title: 'Repeating Event',
+                    start: '2020-09-09T16:00:00'
+                }, {
+                    groupId: 999,
+                    title: 'Repeating Event',
+                    start: '2020-09-16T16:00:00'
+                }, {
+                    title: 'Conference',
+                    start: '2020-09-11',
+                    end: '2020-09-13'
+                }, {
+                    title: 'Meeting',
+                    start: '2020-09-12T10:30:00',
+                    end: '2020-09-12T12:30:00'
+                }, {
+                    title: 'Lunch',
+                    start: '2020-09-12T12:00:00'
+                }, {
+                    title: 'Meeting',
+                    start: '2020-09-12T14:30:00'
+                }, {
+                    title: 'Happy Hour',
+                    start: '2020-09-12T17:30:00'
+                }, {
+                    title: 'Dinner',
+                    start: '2020-09-12T20:00:00'
+                }, {
+                    title: 'Birthday Party',
+                    start: '2020-09-13T07:00:00'
+                }, {
+                    title: 'Click for Google',
+                    url: 'http://google.com/',
+                    start: '2020-09-28'
+                }]
+            });
+
+            calendar.render();
+        });
+    </script>
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        
+        #calendar {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+    </style>
+    </script>
+</head>
+
+<body>
+    <!-- 상단 -->
+    <div class='wrapper'>
+        <!-- 상단 메뉴 -->
+        <div id='header-fixed' class=''>
+            <div class='header-left'>
+                <h1 class='header-logo'>
+                    <!-- 주소 연결 -->
+                    <a href='index1.html'>
+                        <img src='img/logo.png' alt='logo' title>
+                    </a>
+                    <span>
+                    "우리 병원 이름은?!"<br>
+                        <strong>
+                            <i class='logo-span-down'></i>
+                            "하루 한건"
+                        </strong>
+                    </span>
+                </h1>
+            </div>
+            <div class='header-center'>
+                <ul class='dropdown-menu'>
+                    <li class='dropdown division'>
+                        <a class='active' href=#>
+                            병원소개
+                        </a>
+                    </li>
+                    <li class='dropdown division'>
+                        <a class='active' href="index_rev1.html">
+                            진료예약
+                        </a>
+                    </li>
+                    <li class='dropdown division'>
+                        <a class='active' href=#>
+                            Q&A
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class='header-right'>
+                <div class='header-login'>
+                    <ul class='list-unstyled'>
+                        <li class='btn-login'>
+                            <!-- login 이동 -->
+                            <a href="#" class=''>
+                                <i class=''></i>
+                                <span>Login</span>
+                            </a>
+                        </li>
+                        <li>
+                            <!-- 회원가입 -->
+                            <a href='#' class=''>
+                                <i class=''></i>
+                                <span>회원가입</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id='calendar' class="calendar"></div>
+    </div>
+
+</body>
+
+</html>
