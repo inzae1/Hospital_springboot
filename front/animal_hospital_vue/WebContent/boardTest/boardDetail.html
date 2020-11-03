@@ -15,8 +15,17 @@
 <body>
     <div id="app">
         제목: {{info.bdTitle}} 내용: {{info.bdContent}}
-        <button @click='updateBoard'>수정하기</button>
+        <button @click='updateBoard'>수정하기</button><br> 댓글달기
+        <br>
+        <form method="POST" name="frm" @submit.prevent="addReply">
+            <textarea id="reply" v-model="reply"></textarea>
+            <input type="submit" value="확인">
+        </form>
+        <div>
+            {{info.bdReply}}
+        </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
@@ -25,6 +34,7 @@
             data() {
                 return {
                     info: null,
+                    reply: '',
                     loading: true,
                     errored: false
                 }
@@ -47,6 +57,27 @@
             methods: {
                 updateBoard() {
                     location.href = "./boardUpdate.html?bdID=" + app.info.bdID;
+                },
+                addReply() {
+                    const board = {
+                        bdReply: this.reply,
+                        bdID: this.info.bdID,
+                    };
+
+
+                    axios
+                        .put("http://localhost:7000/mijung/replyBoard", board)
+                        .then(() => {
+
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => {
+                            this.info.bdReply = this.reply;
+                            this.loading = false
+                        })
                 }
             }
 
