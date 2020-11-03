@@ -5,57 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid'],
+                defaultView: 'dayGridMonth',
+                defaultDate: new Date(),
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+            });
+            calendar.render();
+        });
+    </script>
 </head>
 
 <body>
-    <div id='app'>
-        <form action="#" method="POST" name="frmForm" id="_frmForm" @submit.prevent="reservation">
-            날짜
-            <input type="date" id="date" name="date " v-model="revDate "> <br> 의사 <input type="text " id="doctor " name="doctor " v-model="revDoctor "> <br> 코멘트 <input type="text " id="comment " name="comment " v-model="revComment "> <br> 동물타입
-            <input type="text " id="animalType" name="animalType " v-model="revAnimalType "> <br> 아이디 <input type="text " id="id " name="id " v-model="custId "> <br>
-            <button type="submit">버튼</button>
-        </form>
-    </div>
-    <script>
-        new Vue({
-            el: "#app ",
-            data: {
-                loading: true,
-                errored: false,
-                revDate: "",
-                revDoctor: "",
-                revComment: "",
-                revAnimalType: "",
-                custId: ""
-            }, //data,
-            methods: {
-                reservation() {
-                    console.log(this.revDate);
-                    axios
-                        .post("http://127.0.0.1:7000/mijung/reservation", {
-                            revDate: this.revDate,
-                            revDoctor: this.revDoctor,
-                            revComment: this.revComment,
-                            revAnimalType: this.revAnimalType,
-                            custId: this.custId
-                        }) //post
-                        .then(function(response) {
-                            alert('${app.custId}님이 등록되셨습니다.');
-                            location.href = "./index.html";
-                        }) //then
-                        .catch(error => {
-                            console.log(error);
-                            this.errored = true
-                        }) //catch
-                        .finally(() => this.loading = false)
-
-                } //reservation
-            } //methods
-        }); //vue
-    </script>
+    <div id='calendar'></div>
 </body>
 
 </html>

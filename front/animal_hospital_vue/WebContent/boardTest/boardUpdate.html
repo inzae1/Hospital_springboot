@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <form action="" method="PUT" name="frm" @submit.prevent="updateBoard">
+            제목: <input type="text" id="title" v-model='info.bdTitle'><br> 내용:
+            <textarea id="content" v-model='info.bdContent'></textarea><br> 비밀글
+            <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
+            <input type="submit" value="수정하기 ">
+        </form>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue "></script>
+    <script>
+        new Vue({
+            el: "#app ",
+            data() {
+                return {
+                    info: null,
+                    loading: true,
+                    errored: false,
+                    secretKey: false
+                }
+            },
+            mounted() {
+                let bdID = location.href.split('?')[1].split('=')[1];
+
+                axios
+                    .get("http://localhost:7000/mijung/getBoard/ " + bdID)
+                    .then(response => {
+                        this.info = response.data;
+                        if (this.info.bdIsSecret == 1) {
+                            this.secretKey = true;
+                        } else {
+                            this.secretKey = false;
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            },
+            methods: {
+                updateBoard() {
+                    const board = {
+                        bdTitle: this.info.bdTitle,
+                        bdContent: this.info.bdContent,
+                        bdIsSecret: this.info.bdIsSecret,
+                    };
+                    console.log(board);
+                    axios
+                        .put("http://localhost:7000/mijung/updateBoard", board)
+                        .then((response) => {
+                            console.log(response);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                check(event) {
+                    let checked = document.getElementById('secretKey');
+                    if (checked.checked) {
+                        this.info.bdIsSecret = 1;
+                    } else {
+                        this.info.bdIsSecret = 0;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

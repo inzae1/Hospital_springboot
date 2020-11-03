@@ -14,7 +14,7 @@
 <update id="updateBoard" parameterType="board">
 	UPDATE board
 	SET bd_title=#{bdTitle}, bd_content=#{bdContent}, bd_is_Secret=#{bdIsSecret}
-	WHERE bd_ID=#{bdID}, cust_id=#{custId}
+	WHERE bd_ID=#{bdID}
 </update>
 
 <delete id="deleteBoard" parameterType="int">
