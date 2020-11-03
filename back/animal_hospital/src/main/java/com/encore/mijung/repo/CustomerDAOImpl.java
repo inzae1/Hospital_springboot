@@ -15,9 +15,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	private SqlSession sqlSesstion;
 	
 	@Override
-	public void register(Customer customer) throws Exception {
-		sqlSesstion.insert(ns+"register", customer);
-		
+	public boolean register(Customer customer) throws Exception {
+		int result = sqlSesstion.insert(ns+"register", customer);
+		if(result>0) return true;
+		return false;
 	}
 
 	@Override
@@ -26,8 +27,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	@Override
-	public void dropCustomer(String custId) throws Exception {
-		sqlSesstion.delete(ns+"dropCustomer", custId);
+	public boolean dropCustomer(String custId) throws Exception {
+		int result =sqlSesstion.delete(ns+"dropCustomer", custId);
+		if(result>0) return true;
+		return false;
 	}
 
 	@Override
@@ -46,6 +49,14 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public Customer findPassword(Customer customer) throws Exception {
 
 		return sqlSesstion.selectOne(ns+"findPassword", customer);
+	}
+
+	@Override
+	public boolean changePassword(Customer customer) throws Exception {
+		// TODO Auto-generated method stub
+		int result =sqlSesstion.update(ns+"changePassword", customer);
+		if(result>0) return true;
+		return false;
 	}
 
 }
