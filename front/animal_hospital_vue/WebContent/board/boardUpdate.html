@@ -72,7 +72,7 @@
                             location.href = "./boardDetail.html?bdID=" + this.info.bdID;
                         })
                 },
-                check(event) {
+                check() {
                     let checked = document.getElementById('secretKey');
                     if (checked.checked) {
                         this.info.bdIsSecret = 1;

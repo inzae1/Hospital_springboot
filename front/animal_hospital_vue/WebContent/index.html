@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel='stylesheet' href='default.css'>
     <link rel='stylesheet' href='index.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
 <body>
@@ -27,12 +28,12 @@
                                 <span>병원소개</span>
                             </a>
                             <li class=' '>
-                                <a href=' '>
+                                <a href='index_rev1.html'>
                                     <span>진료예약</span>
                                 </a>
                             </li>
                             <li class=' '>
-                                <a href=' '>
+                                <a href='./board/boardIndex.html'>
                                     <span>Q & A</span>
                                 </a>
                             </li>
@@ -40,16 +41,28 @@
                     </ul>
                 </div>
                 <!-- 로그인 부분 -->
-                <div class='header-right '>
-                    <ul class=' '>
+                <div class='header-right' id='app'>
+                    <ul class=' ' v-if="!isLogin">
                         <li class=' '>
-                            <a href=' '>
+                            <a href='login.html'>
                                 <h2>로그인</h2>
                             </a>
                         </li>
                         <li class=' '>
-                            <a href=' '>
+                            <a href='register.html'>
                                 <h2>회원가입</h2>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class=' ' v-if="isLogin">
+                        <li class=' '>
+                            <a href="#" @click="logout">
+                                <h2>로그아웃</h2>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='mypage.html'>
+                                <h2>마이페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -129,6 +142,29 @@
     <div>
 
     </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            },
+            methods: {
+                logout() {
+                    let con_logout = confirm("로그아웃 하시겠습니까");
+                    if (con_logout) {
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        location.reload(true);
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
