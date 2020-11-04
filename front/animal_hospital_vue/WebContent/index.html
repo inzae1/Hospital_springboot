@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel='stylesheet' href='default.css'>
     <link rel='stylesheet' href='index.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
 <body>
@@ -40,16 +41,28 @@
                     </ul>
                 </div>
                 <!-- 로그인 부분 -->
-                <div class='header-right '>
-                    <ul class=' '>
+                <div class='header-right' id='app'>
+                    <ul class=' ' v-if="!isLogin">
                         <li class=' '>
-                            <a href=' '>
+                            <a href='login.html'>
                                 <h2>로그인</h2>
                             </a>
                         </li>
                         <li class=' '>
-                            <a href=' '>
+                            <a href='register.html'>
                                 <h2>회원가입</h2>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class=' ' v-if="isLogin">
+                        <li class=' '>
+                            <a href='#'>
+                                <h2>로그아웃</h2>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='#'>
+                                <h2>마이페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -104,6 +117,19 @@
     <div>
 
     </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
