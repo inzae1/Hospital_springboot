@@ -44,6 +44,7 @@
                         .post("http://localhost:7000/mijung/addBoard/", board)
                         .then(() => {
                             alert("글쓰기 성공");
+                            location.href = "./boardIndex.html";
                         })
                         .catch(e => {
                             console.log(e);
