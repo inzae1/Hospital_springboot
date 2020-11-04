@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel='stylesheet' href='index1.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
 <body>
@@ -60,7 +61,7 @@
                         </a>
                     </li>
                     <li class='dropdown division'>
-                        <a class='active' href="index_rev1.html">
+                        <a class='active' href="index_re+++++++++++++++++++++++++++1.html">
                             진료예약
                         </a>
                     </li>
@@ -72,28 +73,59 @@
                 </ul>
             </div>
             <div class='header-right'>
-                <div class='header-login'>
-                    <ul class='list-unstyled'>
+                <div class='header-login' id='app'>
+                    <ul class='list-unstyled' v-if="!isLogin">
                         <li class='btn-login'>
                             <!-- login 이동 -->
-                            <a href="#" class=''>
+                            <a href="login.html" class=''>
                                 <i class=''></i>
                                 <span>Login</span>
                             </a>
                         </li>
                         <li>
                             <!-- 회원가입 -->
-                            <a href='#' class=''>
+                            <a href='register.html' class=''>
                                 <i class=''></i>
                                 <span>회원가입</span>
                             </a>
                         </li>
-
                     </ul>
+                    <ul class='list-unstyled' v-if="isLogin">
+                        <li class='btn-login'>
+                            <!-- login 이동 -->
+                            <a href="#" class=''>
+                                <i class=''></i>
+                                <span>로그아웃</span>
+                            </a>
+                        </li>
+                        <li>
+                            <!-- 회원가입 -->
+                            <a href='#' class=''>
+                                <i class=''></i>
+                                <span>마이페이지</span>
+                            </a>
+                        </li>
+                    </ul>
+
                 </div>
+                </if>
             </div>
         </header>
     </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

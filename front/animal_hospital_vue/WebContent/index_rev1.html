@@ -14,12 +14,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+            var date = new Date();
             dates = [];
             doctors = ["윤인재 원장", "지혜수 원장", "나현재 원장"];
             const date1 = new Date(2019, 10, 1);
             const date2 = new Date(2021, 1, 1);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
-                dates[index] = new Date(2020, 5, 1 + index);
+                dates[index] = Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
             }
 
             var models = new Array();
