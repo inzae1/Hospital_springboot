@@ -51,7 +51,7 @@ public class ReservationController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
-	@GetMapping("getAllReservation")
+	@GetMapping("/getAllReservation")
 	public ResponseEntity<List<Reservation>> getAllReservation() throws Exception{
 		List<Reservation> revs = reservationService.getAllReservation();
 		if(revs.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);

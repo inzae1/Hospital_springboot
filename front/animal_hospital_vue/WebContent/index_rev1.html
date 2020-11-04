@@ -69,9 +69,11 @@
             }
             var date = new Date();
 
+            alert(revData.$data.info);
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                defaultDate: "2020-11-04",
-                initialDate: date.getFullYear() + "-" + ("0" + date.getMonth()).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
+                initialDate: "2020-11-04",
+                //date.getFullYear() + "-" + ("0" + Number(date.getMonth()) - 1).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
                 editable: false,
                 selectable: false,
                 businessHours: true,
@@ -81,8 +83,10 @@
 
                 eventClick: function(arg) {
                     if (localStorage.getItem("animal_admin") == null) {
-                        confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
-                        location.href("login.html")
+                        var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
+                        if (loginLocation) {
+                            location.href = "login.html"
+                        }
                     } else {
                         revData.$data.revDoctor = arg.event.title;
                         revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
@@ -160,7 +164,6 @@
             <br><br><br><br><br>
             <section class='visual'>
                 </header>
-                <br><br><br><br>
                 <div id='calendar'></div>
                 <br>
                 <div id="rev_app">
@@ -207,8 +210,8 @@
                                 <td colspan="2" style="text-align: center;"><button id="button" type="submit">예약하기</button></td>
                             </tr>
                         </table>
-
                     </form>
+
 
                 </div>
         </div>
@@ -237,18 +240,20 @@
         <script>
             var revData = new Vue({
                 el: "#rev_app ",
-                data: {
-                    loading: true,
-                    errored: false,
-                    revDate: "",
-                    revDoctor: "",
-                    revComment: "",
-                    revAnimalType: "",
-                    custId: localStorage.getItem("animal_login"),
-                    title: "",
+                data() {
+                    return {
+                        info: [],
+                        loading: true,
+                        errored: false,
+                        revDate: "",
+                        revDoctor: "",
+                        revComment: "",
+                        revAnimalType: "",
+                        custId: localStorage.getItem("animal_login"),
+                        title: ""
+                    } //return 
+                }, //date
 
-
-                }, //data,
                 methods: {
                     reservation() {
                         axios
@@ -270,7 +275,20 @@
                             }) //catch
                             .finally(() => this.loading = false)
                     } //reservation
-                } //methods
+                }, //methods
+                mounted() {
+                    axios
+                        .get("http://127.0.0.1:7000/mijung/getAllReservation")
+                        .then(response => {
+                            this.info = response.data
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = false)
+                },
+
             }); //vue
             new Vue({
                 el: "#app",
