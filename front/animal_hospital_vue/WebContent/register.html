@@ -16,29 +16,33 @@
                 <tr>
                     <th>아이디(이메일)</th>
                     <td><input type="email" name="custId" id="custId" v-model="custId" placeholder="ex) abc@abc.com" @blur="idCheck" /></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <span v-if="custIdCheck">이미 사용중인 아이디입니다</span>
-                    </td>
+                    <td><span v-if="custIdCheck">이미 사용중인 아이디입니다</span></td>
                 </tr>
                 <tr>
                     <th>비밀번호</th>
-                    <td><input type="password" name="custPassword" id="custPassword" v-model="custPassword" /></td>
+                    <td><input type="password" name="custPassword1" id="custPassword1" v-model="custPassword1" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td><input type="password" name="custPassword2" id="custPassword2" v-model="custPassword2" @keyup="pwCheck" /></td>
+                    <td><span v-if="!custPwCheck">비밀번호가 일치하지 않습니다.</span></td>
                 </tr>
                 <tr>
                     <th>이름</th>
                     <td><input type="text" name="custName" id="custName" v-model="custName" /></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
                     <td><input type="tel" name="custPhone" id="custPhone" v-model="custPhone"></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="height: 50px; text-align: center;">
-                        <button type="submit" name="button">회원가입</button>
+                        <button type="submit" name="button" :disabled="custIdCheck||!custPwCheck">회원가입</button>
                     </td>
+                    <td></td>
                 </tr>
             </table>
         </form>
@@ -51,10 +55,12 @@
                     loading: true,
                     errored: false,
                     custId: "",
-                    custPassword: "",
+                    custPassword1: "",
+                    custPassword2: "",
                     custName: "",
                     custPhone: "",
-                    custIdCheck: false
+                    custIdCheck: false,
+                    custPwCheck: true
                 }
             },
             methods: {
@@ -70,12 +76,13 @@
                     axios
                         .post("http://localhost:7000/mijung/register", {
                             custId: this.custId,
-                            custPassword: this.custPassword,
+                            custPassword: this.custPassword1,
                             custName: this.custName,
                             custPhone: this.custPhone
                         })
                         .then(response => {
-                            alert(`${app.custName} 님이 등록되었습니다.`);
+                            alert(`${app.custName} 님이 가입하였습니다.`);
+                            location.href = "index.html"
                         })
                         .catch(error => {
                             console.log(error);
@@ -92,7 +99,16 @@
                             this.errored = true
                         })
                         .finally(() => this.empEmpty = false)
+                },
+                pwCheck() {
+                    console.log("aa");
+                    if (this.custPassword1 != this.custPassword2) {
+                        this.custPwCheck = false;
+                    } else {
+                        this.custPwCheck = true;
+                    }
                 }
+
             }
         });
     </script>

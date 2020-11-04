@@ -1,0 +1,91 @@
+/* body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        } */
+
+#calendar {
+    width: 900px;
+    margin-right: 1%;
+    margin-left: 1%;
+    float: left;
+}
+
+table.type05 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    margin: auto;
+    border-radius: 5px;
+    width: 500px;
+}
+
+table.type05 th {
+    width: 100px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #2c3e50;
+    color: white;
+    vertical-align: middle;
+    margin: auto;
+    border-radius: 5px;
+}
+
+table.type05 td {
+    width: 100px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#button {
+    background-color: #2c3e50;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 12px 100px;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+#button2 {
+    background-color: #2c3e50;
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    margin-left: 500px;
+}
+
+#button2:hover {
+    background-color: slategrey;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    margin-left: 500px;
+}
+
+#button:hover {
+    background-color: slategrey;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 12px 100px;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.select {
+    width: 200px;
+    padding: .8em .5em;
+    font-family: inherit;
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+    border: 1px solid #999;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
