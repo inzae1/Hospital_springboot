@@ -26,9 +26,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for='board in info' @click="getBoard()">
+
+                <tr v-for='board in info'>
                     <td>{{board.bdID}}</td>
-                    <td>{{board.bdTitle}}</td>
+                    <td @click="getBoard(board)">{{board.bdTitle}}</td>
                     <td>{{board.custId}}</td>
                     <td>{{board.bdDate}}</td>
                     <td>{{board.bdView}}</td><br>
@@ -46,7 +47,6 @@
             data() {
                 return {
                     info: [],
-                    showContent: false,
                     loading: true,
                     errored: false
                 }
@@ -65,8 +65,8 @@
                     .finally(() => this.loading = false)
             },
             methods: {
-                getBoard(content) {
-
+                getBoard(board) {
+                    location.href = "./boardDetail.html?bdID=" + board.bdID;
                 }
             }
 

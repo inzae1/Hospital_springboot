@@ -36,13 +36,9 @@ public class CustomerController {
 	public ResponseEntity login(@RequestBody Customer customer) throws Exception{
 		Customer loginCustomer = customerService.login(customer);
 		String msg = "";
-		if(customer.getCustId()!=loginCustomer.getCustId()) {
-			msg = "가입되지 않은 아이디입니다.";
-			return new ResponseEntity(msg, HttpStatus.NO_CONTENT);
-		}else if(customer.getCustPassword()!=loginCustomer.getCustPassword()) {
-			msg ="비밀번호가 일치하지 않습니다.";
-			return new ResponseEntity(msg, HttpStatus.NO_CONTENT);
-		}else return new ResponseEntity(loginCustomer, HttpStatus.OK);
+		if(loginCustomer!=null) {
+			return new ResponseEntity(loginCustomer, HttpStatus.OK);
+		}else return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 	
 	@DeleteMapping("/dropCustomer/{custId}")
@@ -54,6 +50,7 @@ public class CustomerController {
 	
 	@GetMapping("/idCheck/{custId}")
 	public ResponseEntity idCheck(@PathVariable String custId) throws Exception{
+		System.out.println("idcheck");
 		return new ResponseEntity(customerService.idCheck(custId), HttpStatus.OK);
 	}
 	
@@ -73,10 +70,14 @@ public class CustomerController {
 		else return new ResponseEntity(findCustomer, HttpStatus.OK);
 	}
 	
-	@PutMapping("/changePassword")
-	public ResponseEntity changePassword(@RequestBody Customer customer) throws Exception{
+	@PutMapping("/changePassword/{custId}/{custPassword}")
+	public ResponseEntity changePassword(@PathVariable String custId, @PathVariable String custPassword) throws Exception{
+		Customer customer = new Customer();
+		customer.setCustId(custId);
+		customer.setCustPassword(custPassword);
 		boolean result = customerService.changePassword(customer);
 		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(HttpStatus.OK);
 	}
+
 }

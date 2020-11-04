@@ -8,8 +8,8 @@
  
     <insert id="reservation" parameterType="reservation" >
    		INSERT INTO reservation     
-		(rev_doctor, rev_comment, rev_animal_type)
-		VALUES(#{revDoctor}, #{revComment}, #{revAnimalType})
+		(rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id)
+		VALUES(#{revDate},#{revDoctor}, #{revComment}, #{revAnimalType}, #{custId})
     </insert>
     <select id="getReservation" parameterType="string" resultType="reservation">
 		SELECT rev_id, rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id

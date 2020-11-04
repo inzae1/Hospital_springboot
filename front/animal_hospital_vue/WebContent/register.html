@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form action="#" method="POST" @submit.prevent="register">
+            <table>
+                <tr>
+                    <th>아이디(이메일)</th>
+                    <td><input type="email" name="custId" id="custId" v-model="custId" placeholder="ex) abc@abc.com" @blur="idCheck" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span v-if="custIdCheck">이미 사용중인 아이디입니다</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td><input type="password" name="custPassword" id="custPassword" v-model="custPassword" /></td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td><input type="text" name="custName" id="custName" v-model="custName" /></td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td><input type="tel" name="custPhone" id="custPhone" v-model="custPhone"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 50px; text-align: center;">
+                        <button type="submit" name="button">회원가입</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    loading: true,
+                    errored: false,
+                    custId: "",
+                    custPassword: "",
+                    custName: "",
+                    custPhone: "",
+                    custIdCheck: false
+                }
+            },
+            methods: {
+                register() {
+                    if (this.custId == "") {
+                        alert("아이디를 입력하세요");
+                        return;
+                    }
+                    if (this.custPassword == "") {
+                        alert("비밀번호를 입력하세요");
+                        return;
+                    }
+                    axios
+                        .post("http://localhost:7000/mijung/register", {
+                            custId: this.custId,
+                            custPassword: this.custPassword,
+                            custName: this.custName,
+                            custPhone: this.custPhone
+                        })
+                        .then(response => {
+                            alert(`${app.custName} 님이 등록되었습니다.`);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = false)
+                },
+                idCheck() {
+                    axios
+                        .get("http://localhost:7000/mijung/idCheck/" + this.custId)
+                        .then(response => (this.custIdCheck = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.empEmpty = false)
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

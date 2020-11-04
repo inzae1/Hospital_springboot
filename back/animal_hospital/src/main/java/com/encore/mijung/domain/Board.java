@@ -13,6 +13,12 @@ public class Board {
 	public Board() {
 
 	}
+	
+	public Board(String bdTitle, String bdContent,  int bdIsSecret) {
+		this.bdTitle = bdTitle;
+		this.bdContent = bdContent;
+		this.bdIsSecret = bdIsSecret;
+	}
 
 	public Board(String bdTitle, String bdContent, int bdView, int bdIsSecret, String custId) {
 		this.bdTitle = bdTitle;

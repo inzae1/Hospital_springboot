@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        제목: {{info.bdTitle}} 내용: {{info.bdContent}}
+        <button @click='updateBoard'>수정하기</button><br>
+        <button @click='deleteteBoard'>삭제하기</button><br>
+        <br>
+        <div v-show='show'>
+            댓글달기
+            <form method="POST" name="frm" @submit.prevent="addReply">
+                <textarea id="reply" v-model="reply"></textarea>
+                <input type="submit" value="확인">
+            </form>
+        </div>
+        <div>
+            {{info.bdReply}}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    info: null,
+                    reply: '',
+                    show: true,
+                    loading: true,
+                    errored: false
+                }
+            },
+            mounted() {
+                let bdID = location.href.split('?')[1].split('=')[1];
+
+                axios
+                    .get("http://localhost:7000/mijung/getBoard/" + bdID)
+                    .then(response => {
+                        console.log(response);
+                        this.info = response.data;
+                        if (this.info.bdReply == null) {
+                            this.show = true;
+                        } else {
+                            this.show = false;
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            },
+            methods: {
+                updateBoard() {
+                    location.href = "./boardUpdate.html?bdID=" + app.info.bdID;
+                },
+                addReply() {
+                    const board = {
+                        bdReply: this.reply,
+                        bdID: this.info.bdID,
+                    };
+
+                    axios
+                        .put("http://localhost:7000/mijung/replyBoard", board)
+                        .then(() => {
+
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => {
+                            this.info.bdReply = this.reply;
+                            this.show = false;
+                            this.loading = false;
+                        })
+                },
+                deleteteBoard() {
+                    axios
+                        .delete("http://localhost:7000/mijung/deleteBoard/" + app.info.bdID)
+                        .then(() => {
+                            alert("삭제 성공");
+                            location.href = './boardIndex.html';
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => {
+                            this.loading = false;
+                        })
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

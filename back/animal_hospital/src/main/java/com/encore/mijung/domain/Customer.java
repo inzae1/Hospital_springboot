@@ -29,6 +29,10 @@ public class Customer {
 		this.custPhone = custPhone;
 	}
 	
+	public Customer(String CustId) {
+		this.custId = CustId;
+	}
+	
 	public Customer(String custId, String custName, String custPhone) {
 		this.custId = custId;
 		this.custName = custName;
