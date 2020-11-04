@@ -22,7 +22,11 @@
             const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
+<<<<<<< HEAD
                 dates[index] = Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+=======
+                dates[index] = new Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+>>>>>>> a9865b11aa27a125845f4cde67f68f3c7b244ab4
             }
 
             var models = new Array();
@@ -75,10 +79,14 @@
                 selectable: false,
                 businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
+                eventBorderColor: "red",
                 events: models,
 
                 eventClick: function(arg) {
-                    if (confirm('해당 날짜에 예약하시겠습니까?')) {
+                    if (localStorage.getItem("animal_admin") != null) {
+                        confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
+                        location.href("login.html")
+                    } else {
                         revData.$data.revDoctor = arg.event.title;
                         revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
                     }
@@ -108,7 +116,7 @@
             border-spacing: 1px;
             line-height: 1.5;
             border-top: 1px solid #ccc;
-            margin: 20px 10px;
+            margin: auto;
             border-radius: 5px;
             width: 500px;
         }
@@ -128,7 +136,6 @@
         table.type05 td {
             width: 100px;
             padding: 10px;
-            vertical-align: top;
             border-bottom: 1px solid #ccc;
         }
         
@@ -149,7 +156,7 @@
             font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
         }
         
-        select {
+        .select {
             width: 200px;
             padding: .8em .5em;
             font-family: inherit;
@@ -159,14 +166,6 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-        }
-        
-        .fc-daygrid-event-dot {
-            color: red;
-        }
-        
-        textarea {
-            border-radius: 5px;
         }
     </style>
     </script>
@@ -240,7 +239,7 @@
                         <tr>
                             <th scope="row">동물카테고리</th>
                             <td>
-                                <select required v-model="revAnimalType">
+                                <select class="select" required v-model="revAnimalType">
                                 <option value="" disabled selected hidden>동물종류를 선택해주세요</option>
                                 <option>멍멍이</option>
                                 <option>냥이</option>
@@ -258,7 +257,7 @@
                         <tr>
                             <th scope="row">증상
                             </th>
-                            <td><textarea placeholder="반려동물의 증상을 200자 이내로 입력해주세요." cols="50" rows="8" v-model="revComment"></textarea></td>
+                            <td><textarea placeholder="반려동물의 증상을 200자 이내로 입력해주세요." cols="50" rows="8" style="border-radius: 6px;" v-model="revComment"></textarea></td>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center;"><button id="button" type="submit">예약하기</button></td>

@@ -5,16 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        #content {
-            visibility: hidden;
-        }
-    </style>
 </head>
 
 <body>
     <div id="app">
-        <a href="./addBoard.html"><button>글쓰기</button></a>
+        <a href="./addBoard.html"><button v-if="loginId != null">글쓰기</button></a>
         <table>
             <thead>
                 <tr>
@@ -47,29 +42,33 @@
             data() {
                 return {
                     info: [],
+                    admin: 0,
+                    loginId: '',
                     loading: true,
                     errored: false
                 }
             },
             mounted() {
+                this.loginId = localStorage.getItem('animal_login');
+                this.admin = localStorage.getItem('animal_admin');
+                console.log(this.loginId);
                 axios
                     .get("http://localhost:7000/mijung/getAllBoard")
                     .then(response => {
-                        console.log(response);
                         this.info = response.data;
                     })
                     .catch(e => {
                         console.log(e);
                         this.errored = true;
                     })
-                    .finally(() => this.loading = false)
+                    .finally(() => this.loading = false);
             },
             methods: {
                 getBoard(board) {
                     location.href = "./boardDetail.html?bdID=" + board.bdID;
                     board.bdView += 1;
                     axios
-                        .put("http://localhost:7000/mijung/updateBoard", board)
+                        .put("http://localhost:7000/mijung/updateBoard", board);
 
                 }
             }
