@@ -69,10 +69,18 @@
             }
             var date = new Date();
 
-            for (let index = 0; index < revData.$data.info.length; index++) {
-                console.log(revData.$data.info[index]);
+            let vueData = revData.$data;
 
-            }
+            var iterateData = function(data) {
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        console.log(data[key].id);
+                    }
+                }
+            };
+
+            console.log(iterateData(vueData.info))
+
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: "2020-11-04",
