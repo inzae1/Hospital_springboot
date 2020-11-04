@@ -69,7 +69,10 @@
             }
             var date = new Date();
 
-            alert(revData.$data.info);
+            for (let index = 0; index < revData.$data.info.length; index++) {
+                console.log(revData.$data.info[index]);
+
+            }
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: "2020-11-04",
@@ -78,7 +81,7 @@
                 selectable: false,
                 businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
-                eventBorderColor: "red",
+                eventBorderColor: "#3788d8",
                 events: models,
 
                 eventClick: function(arg) {
