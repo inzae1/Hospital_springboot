@@ -75,7 +75,8 @@
                             custPhone: this.custPhone
                         })
                         .then(response => {
-                            alert(`${app.custName} 님이 등록되었습니다.`);
+                            alert(`${app.custName} 님이 가입하였습니다.`);
+                            location.href = "index.html"
                         })
                         .catch(error => {
                             console.log(error);

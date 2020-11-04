@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <table class="type05">
+            <thead>
+                <h2 style="text-align: center;">예약 상세조회</h2>
+            </thead>
+            <tr>
+                <th scope="row">예약날짜</th>
+                <td>{{info.revDate}}</td>
+            </tr>
+            <tr>
+                <th scope="row">진료 동물</th>
+                <td>{{info.revAnimalType}}</td>
+            </tr>
+            <tr>
+                <th scope="row">담당의사</th>
+                <td>{{info.revDoctor}}</td>
+            </tr>
+            <tr>
+                <th scope="row">증상</th>
+                <td>{{info.revComment}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;"><button id="button" type="button" @click="cancelReservation">예약 취소</button></td>
+            </tr>
+        </table>
+        <button id="custExit" type="button" @click="dropCustomer">회원 탈퇴</button>
+    </div>
+    <script>
+        let id = localStorage.getItem("animal_login");
+        console.log(id);
+        let app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    info: [],
+                    custId: id,
+                    loading: true,
+                    errored: false
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:7000/mijung/getReservation/" + id)
+                    .then(response => {
+                        this.info = response.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            },
+            methods: {
+                dropCustomer() {
+                    let con_drop = confirm("정말 탈퇴하시겠습니까");
+                    if (con_drop) {
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        location.href = "index.html";
+                    }
+                },
+                cancelReservation() {
+                    let con_cancel = confirm("예약을 취소하시겠습니까")
+                    if (con_cancel) {
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .then(() => {
+                                alert("예약을 취소하였습니다");
+                                location.reload(true);
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
+                    }
+                }
+
+            },
+        })
+    </script>
+</body>
+
+</html>
