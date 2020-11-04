@@ -16,12 +16,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+            var date = new Date();
             dates = [];
             var date = new Date();
             const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
+<<<<<<< HEAD
+                dates[index] = Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+=======
                 dates[index] = new Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+>>>>>>> 3fcc72092e2997471ebeb153d7a5c7458da8a78d
             }
 
             var models = new Array();
