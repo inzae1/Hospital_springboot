@@ -57,7 +57,6 @@
                         bdContent: this.info.bdContent,
                         bdIsSecret: this.info.bdIsSecret,
                     };
-                    console.log(board);
                     axios
                         .put("http://localhost:7000/mijung/updateBoard", board)
                         .then((response) => {

@@ -9,19 +9,31 @@
 
 <body>
     <div id="app">
-        제목: {{info.bdTitle}} 내용: {{info.bdContent}} 조회수: {{info.bdView}}
-        <button @click='updateBoard'>수정하기</button><br>
-        <button @click='deleteteBoard'>삭제하기</button><br>
+        <table>
+            <thead>
+                <th>제목</th>
+                <td>{{info.bdTitle}}</td>
+                <th>조회수</th>
+                <td>{{info.bdView}}</td>
+            </thead>
+
+        </table>
+        내용<br>
+        <textarea cols="50" rows="10">{{info.bdContent}}</textarea><br>
+        <div v-if='checkWriter()'>
+            <button @click='updateBoard'>수정하기</button><br>
+            <button @click='deleteteBoard'>삭제하기</button><br>
+        </div>
         <br>
-        <div v-show='show'>
+        <div v-if='checkReply()'>
             댓글달기
             <form method="POST" name="frm" @submit.prevent="addReply">
                 <textarea id="reply" v-model="reply"></textarea>
                 <input type="submit" value="확인">
             </form>
         </div>
-        <div>
-            {{info.bdReply}}
+        <div v-if="info.bdReply != null">
+            답변 {{info.bdReply}}
         </div>
     </div>
 
@@ -34,7 +46,6 @@
                 return {
                     info: null,
                     reply: '',
-                    show: true,
                     loading: true,
                     errored: false
                 }
@@ -46,11 +57,6 @@
                     .get("http://localhost:7000/mijung/getBoard/" + bdID)
                     .then(response => {
                         this.info = response.data;
-                        if (this.info.bdReply == null) {
-                            this.show = true;
-                        } else {
-                            this.show = false;
-                        }
                     })
                     .catch(e => {
                         console.log(e);
@@ -79,8 +85,8 @@
                         })
                         .finally(() => {
                             this.info.bdReply = this.reply;
-                            this.show = false;
                             this.loading = false;
+                            // location.reload();
                         })
                 },
                 deleteteBoard() {
@@ -97,6 +103,19 @@
                         .finally(() => {
                             this.loading = false;
                         })
+                },
+                checkWriter() {
+                    if (this.info.custId === localStorage.getItem('animal_login')) return true;
+                    else return false;
+                },
+                checkReply() {
+                    // admin만 가능, 답글이 없어야 가능
+                    if (localStorage.getItem('animal_admin') === '1') {
+                        if (this.info.bdReply === null) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
         });
