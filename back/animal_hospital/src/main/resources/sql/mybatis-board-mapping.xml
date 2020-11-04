@@ -13,7 +13,7 @@
 
 <update id="updateBoard" parameterType="board">
 	UPDATE board
-	SET bd_title=#{bdTitle}, bd_content=#{bdContent}, bd_is_Secret=#{bdIsSecret}
+	SET bd_title=#{bdTitle}, bd_content=#{bdContent}, bd_is_Secret=#{bdIsSecret},bd_view=#{bdView}
 	WHERE bd_ID=#{bdID}
 </update>
 
