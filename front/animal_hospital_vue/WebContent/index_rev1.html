@@ -80,19 +80,12 @@
                 events: models,
 
                 eventClick: function(arg) {
-<<<<<<< HEAD
-                    if (localStorage.getItem("animal_login") != null) {
-=======
                     if (localStorage.getItem("animal_admin") == null) {
                         confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
                         location.href("login.html")
                     } else {
->>>>>>> 159868d646dbce44a363ddf50b139a6fdb105baa
                         revData.$data.revDoctor = arg.event.title;
                         revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
-                    } else {
-                        confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
-                        location.href("login.html")
                     }
                 },
             });
