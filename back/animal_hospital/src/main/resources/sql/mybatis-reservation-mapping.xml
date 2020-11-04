@@ -14,10 +14,10 @@
     <select id="getReservation" parameterType="string" resultType="reservation">
 		SELECT rev_id, rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id
 		FROM reservation
-		WHERE cust_id=#{VALUE}
+		WHERE cust_id=#{VALUE} AND rev_date>now() LIMIT 1
     </select>
     <delete id="cancelReservation" parameterType="string">
-        DELETE FROM reservation WHERE cust_id=#{VALUE}    
+        DELETE FROM reservation WHERE cust_id=#{VALUE} AND rev_date>now()
     </delete>
     <select id="getAllReservation" resultType="reservation">
     	SELECT rev_id, rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id

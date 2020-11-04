@@ -1,4 +1,5 @@
 header {
+    position: relative;
     text-align: center;
     height: 80px;
 }
@@ -158,9 +159,25 @@ header .header-center li a:hover span:after {
     right: 0;
 }
 
+.visual .control>div>div>a {
+    overflow: hidden;
+    display: inline-block;
+    width: 8px;
+    height: 9px;
+}
+
+.visual .control>div>div>a img {
+    display: inline-block;
+    max-height: 30px;
+    width: auto;
+    padding-right: 30px;
+}
+
 .visaul .control ul {
     display: inline-block;
     font-size: 0;
+    position: relative;
+    top: -7px;
 }
 
 .visual .control li {
@@ -184,6 +201,89 @@ header .header-center li a:hover span:after {
     color: transparent;
 }
 
-.visual control a {
-    border: 1px solid red;
+.visual .con>div {
+    height: 640px;
+}
+
+.visual .con .slide {
+    background: url(./img/slide_one.jpg) no-repeat center;
+    color: #333;
+    font-size: 32px;
+    line-height: 46px;
+}
+
+.visual .con .slide p {
+    padding: 19px 0 0;
+    line-height: 100%;
+    font-size: 20px;
+}
+
+.visual .con .slide .txt {
+    position: absolute;
+    left: 1300px;
+    top: 175px;
+}
+
+.footer {
+    text-align: center;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#footer>a {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#footer>a>img {
+    max-height: 35px;
+    width: auto;
+}
+
+.footer img {
+    display: inline-block;
+    max-height: 80px;
+    width: auto;
+    padding-right: 30px;
+    padding: 42px 0 26px;
+}
+
+.footer .nav li {
+    display: inline-block;
+    position: relative;
+    padding: 0 15px;
+}
+
+.footer .nav li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 14px;
+    background: #b2b2b2;
+}
+
+.footer .nav li:first-child:after {
+    display: none;
+}
+
+.footer .nav li a {
+    font-size: 13.5px;
+    color: #333
+}
+
+.footer address {
+    padding: 25px 0 0;
+    font-size: 13.5px;
+    color: #666;
+}
+
+.footer address em {
+    display: block;
+    padding: 25px 0 0;
+    font-size: 12.5;
+    color: #999;
 }

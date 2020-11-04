@@ -23,7 +23,11 @@
             const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
+<<<<<<< HEAD
+                dates[index] = Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+=======
                 dates[index] = new Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+>>>>>>> a9865b11aa27a125845f4cde67f68f3c7b244ab4
             }
 
             var models = new Array();
