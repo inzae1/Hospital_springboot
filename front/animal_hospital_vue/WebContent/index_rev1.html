@@ -16,57 +16,58 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             dates = [];
-            doctors = ["윤인재 원장", "지혜수 원장", "나현재 원장"];
-            const date1 = new Date(2019, 10, 1);
-            const date2 = new Date(2021, 1, 1);
+            var date = new Date();
+            const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
-                dates[index] = new Date(2020, 5, 1 + index);
+                dates[index] = new Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
             }
 
             var models = new Array();
 
-            for (let index = 1; index < dates.length; index++) {
+            for (let index = 0; index < dates.length; index++) {
                 var dateInfo = new Object();
                 dateInfo.title = "윤인재 원장";
                 dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                console.log(doctors[index]);
+
                 models.push(dateInfo);
             }
 
-            for (let index = 1; index < dates.length; index++) {
+            for (let index = 0; index < dates.length; index++) {
                 var dateInfo = new Object();
                 dateInfo.title = "지혜수 원장";
                 dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                console.log(doctors[index]);
+
                 models.push(dateInfo);
             }
 
-            for (let index = 1; index < dates.length; index++) {
+            for (let index = 0; index < dates.length; index++) {
                 var dateInfo = new Object();
                 dateInfo.title = "나현재 원장";
                 dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                console.log(doctors[index]);
+
                 models.push(dateInfo);
             }
 
-            for (let index = 1; index < dates.length; index++) {
+            for (let index = 0; index < dates.length; index++) {
                 var dateInfo = new Object();
                 dateInfo.title = "방은호 원장";
                 dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                console.log(doctors[index]);
+
                 models.push(dateInfo);
             }
 
-            for (let index = 1; index < dates.length; index++) {
+            for (let index = 0; index < dates.length; index++) {
                 var dateInfo = new Object();
                 dateInfo.title = "김태형 원장";
                 dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                console.log(doctors[index]);
+
                 models.push(dateInfo);
             }
             var date = new Date();
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                month: date.getMonth(),
                 initialDate: date.getFullYear() + "-" + ("0" + date.getMonth()).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
                 editable: false,
                 selectable: false,
@@ -130,7 +131,7 @@
         }
         
         #button {
-            background-color: #83a387;
+            background-color: #2c3e50;
             color: #fff;
             font-size: 16px;
             border-radius: 10px;
@@ -156,6 +157,10 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
+        }
+        
+        .fc-daygrid-event-dot {
+            color: red;
         }
         
         textarea {
@@ -288,7 +293,7 @@
                 revDoctor: "",
                 revComment: "",
                 revAnimalType: "",
-                custId: "",
+                custId: localStorage.getItem("animal_login"),
                 title: "",
 
 
@@ -304,12 +309,13 @@
                             custId: this.custId
                         }) //post
                         .then(function(response) {
-                            alert('${app.custId}님이 등록되셨습니다.');
-                            location.href = "./index.html";
+                            alert("예약 완료되셨습니다.");
+                            location.reload(true)
                         }) //then
                         .catch(error => {
                             console.log(error);
                             this.errored = true
+                            alert("예약 실패하셨습니다.");
                         }) //catch
                         .finally(() => this.loading = false)
                 } //reservation
