@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <th>번호</th>
+                    <th>답변여부</th>
                     <th>제목</th>
                     <th>글쓰니</th>
                     <th>날짜</th>
@@ -24,7 +25,10 @@
 
                 <tr v-for='board in info'>
                     <td>{{board.bdID}}</td>
-                    <td @click="getBoard(board)">{{board.bdTitle}}</td>
+                    <td v-if="board.bdReply!=null">Y</td>
+                    <td v-else>N</td>
+                    <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}}**</td>
+                    <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
                     <td>{{board.custId}}</td>
                     <td>{{board.bdDate}}</td>
                     <td>{{board.bdView}}</td><br>
@@ -81,10 +85,13 @@
                         axios
                             .put("http://localhost:7000/mijung/updateBoard", board);
                     }
-
-
+                },
+                isSecret(board) {
+                    if (board.bdIsSecret === 1) return true;
+                    else return false;
                 }
-            }
+            },
+
 
         });
     </script>

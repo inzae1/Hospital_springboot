@@ -19,7 +19,7 @@
 
         </table>
         내용<br>
-        <textarea cols="50" rows="10">{{info.bdContent}}</textarea><br>
+        <span cols="50" rows="10" border='1'>{{info.bdContent}}</span><br>
         <div v-if='checkWriter()'>
             <button @click='updateBoard'>수정하기</button><br>
             <button @click='deleteteBoard'>삭제하기</button><br>
