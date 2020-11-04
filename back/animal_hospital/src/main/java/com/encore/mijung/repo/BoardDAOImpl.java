@@ -30,7 +30,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public boolean deleteBoard(int bdID) throws Exception {
-		int result = sqlSession.delete(NS + "updateBoard", bdID);
+		int result = sqlSession.delete(NS + "deleteBoard", bdID);
 		if(result>0) return true;
 		return false;
 	}
