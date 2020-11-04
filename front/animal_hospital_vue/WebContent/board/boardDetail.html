@@ -25,7 +25,7 @@
             <button @click='deleteteBoard'>삭제하기</button><br>
         </div>
         <br>
-        <div v-if='checkReply'>
+        <div v-if='checkReply()'>
             댓글달기
             <form method="POST" name="frm" @submit.prevent="addReply">
                 <textarea id="reply" v-model="reply"></textarea>
@@ -105,15 +105,13 @@
                         })
                 },
                 checkWriter() {
-                    console.log(this.info.custId);
-                    console.log(localStorage.getItem('animal_login'));
                     if (this.info.custId === localStorage.getItem('animal_login')) return true;
                     else return false;
                 },
                 checkReply() {
                     // admin만 가능, 답글이 없어야 가능
-                    if (localStorage.getItem('animal_admin') === 1) {
-                        if (this.info.bdReply == null) {
+                    if (localStorage.getItem('animal_admin') === '1') {
+                        if (this.info.bdReply === null) {
                             return true;
                         }
                     }
