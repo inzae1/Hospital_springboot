@@ -80,7 +80,14 @@
                 events: models,
 
                 eventClick: function(arg) {
+<<<<<<< HEAD
                     if (localStorage.getItem("animal_login") != null) {
+=======
+                    if (localStorage.getItem("animal_admin") == null) {
+                        confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
+                        location.href("login.html")
+                    } else {
+>>>>>>> 159868d646dbce44a363ddf50b139a6fdb105baa
                         revData.$data.revDoctor = arg.event.title;
                         revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
                     } else {
@@ -130,45 +137,60 @@
                     </ul>
                 </div>
                 <!-- 로그인 부분 -->
-                <div class='header-right '>
-                    <ul class=' '>
+                <div class='header-right' id='app'>
+                    <ul class=' ' v-if="!isLogin">
                         <li class=' '>
-                            <a href=' '>
+                            <a href='login.html'>
                                 <h2>로그인</h2>
                             </a>
                         </li>
                         <li class=' '>
-                            <a href=' '>
+                            <a href='register.html'>
                                 <h2>회원가입</h2>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class=' ' v-if="isLogin">
+                        <li class=' '>
+                            <a href="#" @click="logout">
+                                <h2>로그아웃</h2>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='mypage.html'>
+                                <h2>마이페이지</h2>
                             </a>
                         </li>
                     </ul>
                 </div>
             </header>
-            <br><br><br><br>
-            <div id='calendar'></div>
-            <br>
-            <div id="app">
-                <span v-if="revDoctor==''"> 
+            <br><br><br><br><br>
+            <section class='visual'>
+                </header>
+                <br><br><br><br>
+                <div id='calendar'></div>
+                <br>
+                <div id="rev_app">
+                    <span v-if="revDoctor==''"> 
             <br><br><br><br><br><br><br><br><br><br><br><br>
 
             <img src="https://www.flaticon.com/svg/static/icons/svg/0/49.svg" style="opacity: 0.5; width: 100px; display: block; margin: 0px auto;"><br><br>
             <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">왼쪽의 날짜와 원장님을 선택해주세요.</h2>
             </span>
-                <form action="#" method="POST" name="frmForm" id="_frmForm" @submit.prevent="reservation" v-else>
-                    <table class="type05">
-                        <thead>
+                    <form action="#" method="POST" name="frmForm" id="_frmForm" @submit.prevent="reservation" v-else>
+                        <table class="type05">
+                            <thead>
 
-                            <h2 style="text-align: center;"> 예약 상세조회<button id="button2" onclick="locationBack()">Back</button></h2><br>
-                        </thead>
-                        <tr>
-                            <th scope="row">예약날짜</th>
-                            <td>{{revDate}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">동물카테고리</th>
-                            <td>
-                                <select class="select" required v-model="revAnimalType">
+                                <h2 style="text-align: center;"> 예약 상세조회<button id="button2" onclick="locationBack()">Back</button></h2><br>
+                            </thead>
+                            <tr>
+                                <th scope="row">예약날짜</th>
+                                <td>{{revDate}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">동물카테고리</th>
+                                <td>
+                                    <select class="select" required v-model="revAnimalType">
                                 <option value="" disabled selected hidden>동물종류를 선택해주세요</option>
                                 <option>멍멍이</option>
                                 <option>냥이</option>
@@ -176,31 +198,52 @@
                                 <option>파충류</option>
                                 <option>기타</option>
                             </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">담당의사
-                            </th>
-                            <td>{{revDoctor}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">증상
-                            </th>
-                            <td><textarea placeholder="반려동물의 증상을 200자 이내로 입력해주세요." cols="50" rows="8" style="border-radius: 6px;" v-model="revComment"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="text-align: center;"><button id="button" type="submit">예약하기</button></td>
-                        </tr>
-                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">담당의사
+                                </th>
+                                <td>{{revDoctor}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">증상
+                                </th>
+                                <td><textarea placeholder="반려동물의 증상을 200자 이내로 입력해주세요." cols="50" rows="8" style="border-radius: 6px;" v-model="revComment"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;"><button id="button" type="submit">예약하기</button></td>
+                            </tr>
+                        </table>
 
-                </form>
+                    </form>
 
-
-            </div>
+                </div>
         </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <footer class='footer '>
+            <div id='footer'>
+                <a href="#"><img src='img/upper_arrow.png' alt='대메뉴 바로가기'></a>
+                <img src='img/logo.png' alt='미정이네동물병원'>
+                <ul class='nav'>
+                    <li>
+                        <a href='#'>병원소개</a>
+                    </li>
+                    <li>
+                        <a href='#'>진료예약</a>
+                    </li>
+                    <li>
+                        <a href='#'>Q & A</a>
+                    </li>
+                </ul>
+                <address>
+                    (50411)서울특별시 강남구 청담동 106-10 청담더원 <span>TEL:1566-1688</span>
+                    <em>Copyright © 미정이네동물병원. All Rights Reserved.</em>
+                </address>
+            </div>
+        </footer>
         <script>
             var revData = new Vue({
-                el: "#app ",
+                el: "#rev_app ",
                 data: {
                     loading: true,
                     errored: false,
@@ -236,6 +279,27 @@
                     } //reservation
                 } //methods
             }); //vue
+            new Vue({
+                el: "#app",
+                data: {
+                    isLogin: false
+                },
+                mounted() {
+                    if (localStorage.getItem("animal_login") != null) {
+                        this.isLogin = true;
+                    }
+                },
+                methods: {
+                    logout() {
+                        let con_logout = confirm("로그아웃 하시겠습니까");
+                        if (con_logout) {
+                            localStorage.removeItem("animal_login");
+                            localStorage.removeItem("animal_admin");
+                            location.reload(true);
+                        }
+                    }
+                }
+            });
         </script>
 </body>
 
