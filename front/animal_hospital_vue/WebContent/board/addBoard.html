@@ -11,9 +11,9 @@
     <div id="app">
         <form action="" method="POST" name="frm" @submit.prevent="addBoard">
             제목: <input type="text" id="title" v-model='title'><br> 내용:
-            <textarea id="content" v-model='content'></textarea>
-
-            <input type="submit" value="gg">
+            <textarea id="content" v-model='content'></textarea> 비밀글
+            <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
+            <input type="submit" value="등록">
         </form>
 
     </div>
@@ -24,9 +24,10 @@
             el: "#app",
             data() {
                 return {
-                    info: [],
                     title: '',
                     content: '',
+                    bdIsSecret: 0,
+                    secretKey: false,
                     loading: true,
                     errored: false
                 }
@@ -37,7 +38,7 @@
                         bdTitle: this.title,
                         bdContent: this.content,
                         bdView: 0,
-                        bdIsSecret: 0,
+                        bdIsSecret: this.bdIsSecret,
                         custId: '1111'
                     };
                     axios
@@ -51,6 +52,14 @@
                             this.errored = true;
                         })
                         .finally(() => this.loading = false)
+                },
+                check() {
+                    let checked = document.getElementById('secretKey');
+                    if (checked.checked) {
+                        this.bdIsSecret = 1;
+                    } else {
+                        this.bdIsSecret = 0;
+                    }
                 }
             }
         });
