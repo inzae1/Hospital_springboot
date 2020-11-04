@@ -12,7 +12,7 @@
 <body>
     <div id="app">
 
-        <table class="type05">
+        <table class="type05" v-if="info">
             <thead>
                 <h2 style="text-align: center;">예약 상세조회</h2>
             </thead>
@@ -36,6 +36,9 @@
                 <td colspan="2" style="text-align: center;"><button id="button" type="button" @click="cancelReservation">예약 취소</button></td>
             </tr>
         </table>
+        <div v-else>
+            <h2>예약 내역이 없습니다.</h2>
+        </div>
         <button id="custExit" type="button" @click="dropCustomer">회원 탈퇴</button>
     </div>
     <script>
