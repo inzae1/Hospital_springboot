@@ -38,7 +38,7 @@
                         bdContent: this.content,
                         bdView: 0,
                         bdIsSecret: this.bdIsSecret,
-                        custId: '1111'
+                        custId: localStorage.getItem('animal_login')
                     };
                     axios
                         .post("http://localhost:7000/mijung/addBoard/", board)

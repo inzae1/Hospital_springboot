@@ -43,7 +43,7 @@
                 return {
                     info: [],
                     admin: 0,
-                    loginId: '',
+                    loginId: null,
                     loading: true,
                     errored: false
                 }
@@ -51,7 +51,6 @@
             mounted() {
                 this.loginId = localStorage.getItem('animal_login');
                 this.admin = localStorage.getItem('animal_admin');
-                console.log(this.loginId);
                 axios
                     .get("http://localhost:7000/mijung/getAllBoard")
                     .then(response => {
@@ -65,10 +64,24 @@
             },
             methods: {
                 getBoard(board) {
-                    location.href = "./boardDetail.html?bdID=" + board.bdID;
-                    board.bdView += 1;
-                    axios
-                        .put("http://localhost:7000/mijung/updateBoard", board);
+                    // 비밀글일 경우 작성자만 볼 수 있도록 해야함.
+                    if (board.bdIsSecret === 1) {
+                        if ((board.custId === this.loginId) || (localStorage.getItem('animal_admin') === '1')) {
+                            location.href = "./boardDetail.html?bdID=" + board.bdID;
+                            board.bdView += 1;
+                            axios
+                                .put("http://localhost:7000/mijung/updateBoard", board);
+                        } else {
+                            alert("작성자만 볼 수 있습니다. 로그인 하세요");
+                            return;
+                        }
+                    } else {
+                        location.href = "./boardDetail.html?bdID=" + board.bdID;
+                        board.bdView += 1;
+                        axios
+                            .put("http://localhost:7000/mijung/updateBoard", board);
+                    }
+
 
                 }
             }
