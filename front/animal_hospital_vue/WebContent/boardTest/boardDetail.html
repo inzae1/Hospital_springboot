@@ -9,7 +9,7 @@
 
 <body>
     <div id="app">
-        제목: {{info.bdTitle}} 내용: {{info.bdContent}}
+        제목: {{info.bdTitle}} 내용: {{info.bdContent}} 조회수: {{info.bdView}}
         <button @click='updateBoard'>수정하기</button><br>
         <button @click='deleteteBoard'>삭제하기</button><br>
         <br>
@@ -45,7 +45,6 @@
                 axios
                     .get("http://localhost:7000/mijung/getBoard/" + bdID)
                     .then(response => {
-                        console.log(response);
                         this.info = response.data;
                         if (this.info.bdReply == null) {
                             this.show = true;
