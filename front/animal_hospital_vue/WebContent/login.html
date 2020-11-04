@@ -69,6 +69,7 @@
                                 localStorage.setItem("animal_login", this.custId);
                                 localStorage.setItem("animal_admin", response.data.custAdmin);
                                 alert(response.data.custName + "님이 로그인하였습니다.");
+                                location.href = "index.html";
                             }
 
                         })
