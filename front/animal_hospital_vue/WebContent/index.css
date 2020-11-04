@@ -237,6 +237,15 @@ header .header-center li a:hover span:after {
     top: 0;
 }
 
+#footer .on {
+    color: rgb(255, 255, 255);
+}
+
+#footer .on:hover {
+    color: #333;
+    font-weight: 300;
+}
+
 #footer>a>img {
     max-height: 35px;
     width: auto;
