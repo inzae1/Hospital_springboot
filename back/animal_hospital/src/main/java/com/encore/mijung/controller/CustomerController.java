@@ -70,10 +70,14 @@ public class CustomerController {
 		else return new ResponseEntity(findCustomer, HttpStatus.OK);
 	}
 	
-	@PutMapping("/changePassword")
-	public ResponseEntity changePassword(@RequestBody Customer customer) throws Exception{
+	@PutMapping("/changePassword/{custId}/{custPassword}")
+	public ResponseEntity changePassword(@PathVariable String custId, @PathVariable String custPassword) throws Exception{
+		Customer customer = new Customer();
+		customer.setCustId(custId);
+		customer.setCustPassword(custPassword);
 		boolean result = customerService.changePassword(customer);
 		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(HttpStatus.OK);
 	}
+
 }
