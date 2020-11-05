@@ -37,6 +37,11 @@
     	SET cust_password=#{custPassword}
     	WHERE cust_id=#{custId}
     </update>
+    <select id="getNameById" parameterType="string" resultType="customer">
+	    SELECT cust_name 
+		FROM customer 
+		WHERE cust_id = #{VALUE}
+    </select>
 </mapper>
 
 

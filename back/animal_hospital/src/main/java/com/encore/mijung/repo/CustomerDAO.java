@@ -10,4 +10,5 @@ public interface CustomerDAO {
 	public Customer findId(Customer customer) throws Exception;
 	public Customer findPassword(Customer customer) throws Exception;
 	public boolean changePassword(Customer customer) throws Exception;
+	public Customer getNameById(String custId) throws Exception;
 }
