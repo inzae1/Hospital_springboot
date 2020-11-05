@@ -84,20 +84,21 @@
     color: transparent;
 }
 
-.visual .con>div {
-    height: 640px;
-}
-
-.visual .con .slide img {
-    height: 640px;
-    width: 100%;
-}
-
 .visual .con .slide {
-    background: url(../img/slide_one.jpg) no-repeat center;
-    color: #333;
+    color: rgb(255, 255, 255);
     font-size: 32px;
+    font-weight: 800;
     line-height: 46px;
+}
+
+.visual .con .slide span {
+    color: rgb(80, 10, 5);
+}
+
+.visual .con .slide .txt {
+    position: relative;
+    left: 1200px;
+    top: 175px;
 }
 
 .visual .con .slide p {
@@ -106,8 +107,74 @@
     font-size: 20px;
 }
 
-.visual .con .slide .txt {
-    position: absolute;
-    left: 1300px;
-    top: 175px;
+
+/* slide */
+
+.slide {
+    height: 640px;
+    overflow: hidden;
+}
+
+.slide ul {
+    width: calc(100% * 4);
+    display: flex;
+    animation: slide 12s infinite;
+}
+
+
+/* slide를 12초동안 진행하며 무한반복 함 */
+
+.slide li {
+    width: calc(100% / 4);
+    height: 640px;
+}
+
+.slide li:nth-child(1) {
+    background: url(../img/slide_one.jpg) no-repeat center;
+}
+
+.slide li:nth-child(2) {
+    background: url(../img/slide_two.jpg) no-repeat center;
+}
+
+.slide li:nth-child(3) {
+    background: url(../img/slide_three.jpg) no-repeat center;
+}
+
+.slide li:nth-child(4) {
+    background: url(../img/slide_four.jpg) no-repeat center;
+}
+
+@keyframes slide {
+    0% {
+        margin-left: 0;
+    }
+    /* 0 ~ 10  : 정지 */
+    10% {
+        margin-left: 0;
+    }
+    /* 10 ~ 25 : 변이 */
+    25% {
+        margin-left: -100%;
+    }
+    /* 25 ~ 35 : 정지 */
+    35% {
+        margin-left: -100%;
+    }
+    /* 35 ~ 50 : 변이 */
+    50% {
+        margin-left: -200%;
+    }
+    60% {
+        margin-left: -200%;
+    }
+    75% {
+        margin-left: -300%;
+    }
+    85% {
+        margin-left: -300%;
+    }
+    100% {
+        margin-left: 0;
+    }
 }
