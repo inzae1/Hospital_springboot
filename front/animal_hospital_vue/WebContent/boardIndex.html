@@ -6,17 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel='stylesheet' href='./CSS/default.css'>
+    <link rel='stylesheet' href='./CSS/header.css'>
+    <link rel='stylesheet' href='./CSS/footer.css'>
     <link rel='stylesheet' href='./CSS/boardIndex.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
-
 </head>
 
 <body>
     <div class="wrapper">
         <div class='inner-wrapper'>
-            <header include-html='./source/header.html'></header>
+            <header>
+                <!-- 로고 부분 -->
+                <div class='header-left'>
+                    <a href=' index.html'>
+                        <img src='img/logo.png ' alt='logo '>
+                    </a>
+                </div>
+                <!-- 메뉴 부분 -->
+                <div class='header-center '>
+                    <ul class=''>
+                        <li class=''>
+                            <a href='intro.html'>
+                                <span>병원소개</span>
+                                <!-- <ul class=''>
+                        <li class=''><a href=''>나와라</a></li>
+                        <li class=''><a href=''>나와라</a></li>
+                        <li class=''><a href=''>나와라</a></li>
+                    </ul> -->
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='index_rev1.html'>
+                                <span>진료예약</span>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='boardIndex.html'>
+                                <span>Q & A</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 로그인 부분 -->
+                <div class='header-right' id='loginApp'>
+                    <ul class=' ' v-if="!isLogin">
+                        <li class=' '>
+                            <a href='login.html'>
+                                <h2>로그인</h2>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='register.html'>
+                                <h2>회원가입</h2>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class=' ' v-if="isLogin">
+                        <li class=' '>
+                            <a href="#" @click="logout">
+                                <h2>로그아웃</h2>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='mypage.html'>
+                                <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
             <br><br><br><br><br>
             <section class='visual'>
                 <div class='slide'>
@@ -61,6 +121,27 @@
         </div>
     </div>
     <script>
+        new Vue({
+            el: "#loginApp",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            },
+            methods: {
+                logout() {
+                    let con_logout = confirm("로그아웃 하시겠습니까");
+                    if (con_logout) {
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        location.reload(true);
+                    }
+                }
+            }
+        });
         new Vue({
             el: "#app",
             data() {
@@ -114,11 +195,9 @@
 
 
         });
+        includeHTML();
     </script>
 
 </body>
-<script>
-    includeHTML();
-</script>
 
 </html>
