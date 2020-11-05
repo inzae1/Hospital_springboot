@@ -3,12 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>미정이 예약페이지</title>
     <script src='./WEB-INF/lib/main.js'></script>
     <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
-    <link rel='stylesheet' href='rev_css.css'>
-    <link rel='stylesheet' href='default_copy.css'>
-    <link rel='stylesheet' href='index.css'>
+    <link rel='stylesheet' href='./CSS/rev_css.css'>
+    <link rel='stylesheet' href='./CSS/default_copy.css'>
+    <link rel='stylesheet' href='./CSS/intro.css'>
+    <link rel='stylesheet' href='./CSS/header.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./source/includeHTML.js"></script>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,7 +22,10 @@
             var calendarEl = document.getElementById('calendar');
             var date = new Date();
             dates = [];
-            var date = new Date();
+            var revInfo = JSON.parse(localStorage.getItem("revInfo"))
+            var revInfoArray = [];
+            var revInfoArrayCover = [];
+
             const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
@@ -27,77 +33,119 @@
             }
 
             var models = new Array();
+            var modelsFalse = new Array();
 
-            for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "윤인재 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                models.push(dateInfo);
+            for (let index = 0; index < revInfo.length; index++) {
+                revInfoArray.push(revInfo[index].revDate + revInfo[index].revDoctor)
             }
 
             for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "지혜수 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "윤인재 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "윤인재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "윤인재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
 
-                models.push(dateInfo);
+                    modelsFalse.push(dateInfo);
+                }
+
+            }
+            for (let index = 0; index < dates.length; index++) {
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "지혜수 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "지혜수 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "지혜수 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+
+                    modelsFalse.push(dateInfo);
+                }
+            }
+            for (let index = 0; index < dates.length; index++) {
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "나현재 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "나현재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "나현재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+
+                    modelsFalse.push(dateInfo);
+                }
+            }
+            for (let index = 0; index < dates.length; index++) {
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "방은호 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "방은호 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "방은호 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+
+                    modelsFalse.push(dateInfo);
+                }
             }
 
             for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "나현재 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "김태형 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "김태형 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "김태형 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
 
-                models.push(dateInfo);
-            }
-
-            for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "방은호 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                models.push(dateInfo);
-            }
-
-            for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "김태형 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                models.push(dateInfo);
+                    modelsFalse.push(dateInfo);
+                }
             }
             var date = new Date();
 
-            let vueData = revData.$data;
-
-<<<<<<< HEAD
-            }
-            // [{"title" : "운인재 원장"},
-            // {"start" : "2022-2-4"}]
-=======
-            console.log(JSON.stringify(vueData.info));
-
->>>>>>> 69796bef043175db3216063e1ecd1b341a174e97
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: "2020-11-04",
-                //date.getFullYear() + "-" + ("0" + Number(date.getMonth()) - 1).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
                 editable: false,
                 selectable: false,
                 businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
-                eventBorderColor: "#3788d8",
-                events: models,
+                eventSources: [{
+                    events: modelsFalse,
+                    color: "red",
+                }, {
+                    events: models,
+                    color: "#3788d8",
+                    id: "revPossible"
+                }],
 
                 eventClick: function(arg) {
-                    if (localStorage.getItem("animal_admin") == null) {
-                        var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
-                        if (loginLocation) {
-                            location.href = "login.html"
+                    if (arg.event.id == "revPossible") {
+                        if (localStorage.getItem("animal_admin") == null) {
+                            var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
+                            if (loginLocation) {
+                                location.href = "login.html"
+                            }
+                        } else {
+                            revData.$data.revDoctor = arg.event.title;
+                            revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
                         }
                     } else {
-                        revData.$data.revDoctor = arg.event.title;
-                        revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
+                        alert("이미 예약된 날짜입니다. 다른 날짜를 선택해주세요.")
                     }
                 },
             });
@@ -106,12 +154,13 @@
         });
 
         function locationBack() {
-            location.reload(true);
+            location.reload()
         }
     </script>
 </head>
 
 <body>
+
     <div class="wrapper">
         <div class='inner-wrapper'>
             <header class="header">
@@ -123,21 +172,26 @@
                 </div>
                 <!-- 메뉴 부분 -->
                 <div class='header-center '>
-                    <ul class=' '>
-                        <li class=' '>
-                            <a href=' '>
+                    <ul class=''>
+                        <li class=''>
+                            <a href='intro.html'>
                                 <span>병원소개</span>
+                                <!-- <ul class=''>
+                        <li class=''><a href=''>나와라</a></li>
+                        <li class=''><a href=''>나와라</a></li>
+                        <li class=''><a href=''>나와라</a></li>
+                    </ul> -->
                             </a>
-                            <li class=' '>
-                                <a href='index_rev1.html'>
-                                    <span>진료예약</span>
-                                </a>
-                            </li>
-                            <li class=' '>
-                                <a href=' '>
-                                    <span>Q & A</span>
-                                </a>
-                            </li>
+                        </li>
+                        <li class=' '>
+                            <a href='index_rev1.html'>
+                                <span>진료예약</span>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='boardIndex.html'>
+                                <span>Q & A</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -219,31 +273,12 @@
                             </tr>
                         </table>
                     </form>
-
-
                 </div>
+            </section>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <footer class='footer '>
-            <div id='footer'>
-                <a href="#"><img src='img/upper_arrow.png' alt='대메뉴 바로가기'></a>
-                <img src='img/logo.png' alt='미정이네동물병원'>
-                <ul class='nav'>
-                    <li>
-                        <a href='#'>병원소개</a>
-                    </li>
-                    <li>
-                        <a href='#'>진료예약</a>
-                    </li>
-                    <li>
-                        <a href='./board/boardIndex.html'>Q & A</a>
-                    </li>
-                </ul>
-                <address>
-                    (50411)서울특별시 강남구 청담동 106-10 청담더원 <span>TEL:1566-1688</span>
-                    <em>Copyright © 미정이네동물병원. All Rights Reserved.</em>
-                </address>
-            </div>
+
+
+        <footer include-html='./source/footer.html'>
         </footer>
         <script>
             var revData = new Vue({
@@ -285,11 +320,13 @@
                     } //reservation
                 }, //methods
                 mounted() {
+
                     axios
                         .get("http://127.0.0.1:7000/mijung/getAllReservation")
                         .then(response => {
                             this.info = response.data
-
+                            localStorage.setItem("revInfo", JSON.stringify(this.info))
+                            console.log("mount")
                         })
                         .catch(error => {
                             console.log(error);
@@ -321,6 +358,10 @@
                 }
             });
         </script>
+    </div>
 </body>
+<script>
+    includeHTML();
+</script>
 
 </html>
