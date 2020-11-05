@@ -119,3 +119,31 @@ table.type04 td {
     -moz-appearance: none;
     appearance: none;
 }
+
+.visual {
+    position: relative;
+    padding: 0 50px;
+}
+
+.visual .title {
+    width: 250px;
+    text-align: center;
+    font-size: 60px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 5px solid white;
+    font-weight: 600;
+    color: white;
+}
+
+.visual .con>div {
+    height: 250px;
+}
+
+.visual .con .slide {
+    background: url(../img/slide_nine.jpg) no-repeat center;
+    color: #333;
+    background-position-y: -650px;
+}

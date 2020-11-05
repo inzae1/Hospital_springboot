@@ -97,8 +97,8 @@
 }
 
 .content th {
-    height: 400px;
-    width: 300px;
+    height: 0px;
+    width: 0px;
     /* background-color: brown; */
 }
 
@@ -115,7 +115,7 @@
 
 .content td.tduse {
     /* background-color: rgb(255, 7, 123); */
-    width: 700px;
+    width: 1100px;
 }
 
 .spec {

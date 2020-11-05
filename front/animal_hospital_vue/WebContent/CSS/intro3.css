@@ -42,41 +42,6 @@
     font-weight: 500;
 }
 
-.doctors {
-    text-align: center;
-}
-
-.doctors .bor {
-    width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px
-}
-
-.doctors ul li {
-    list-style-type: none;
-    display: inline-block;
-    padding: 0 20px 10px 20px;
-    font-size: 18px;
-}
-
-.doctors ul li:after {
-    content: '';
-    display: block;
-    width: 110px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 5px;
-}
-
-.doctors ul li a {
-    color: #333;
-    font-size: 20px;
-}
-
-.doctors ul li a span {
-    font-size: 15px;
-}
-
 .content {
     height: 500px;
     width: 1200px;
@@ -115,7 +80,7 @@
 
 .content td.tduse {
     /* background-color: rgb(255, 7, 123); */
-    width: 700px;
+    width: 1100px;
 }
 
 .spec {

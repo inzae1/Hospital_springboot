@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' href='./CSS/default.css'>
-    <link rel='stylesheet' href='./CSS/index.css'>
+    <link rel='stylesheet' href='./CSS/intro2.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
+    <link rel='stylesheet' href='./CSS/default.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
-
 
 </head>
 
@@ -18,6 +17,7 @@
     <div class="wrapper">
         <div class='inner-wrapper'>
             <header>
+
                 <!-- 로고 부분 -->
                 <div class='header-left'>
                     <a href=' index.html'>
@@ -77,53 +77,105 @@
                         </li>
                     </ul>
                 </div>
+
+
             </header>
             <br><br><br>
+
+
             <section class='visual'>
+
                 <!-- advertise -->
-                <div>
-                    <a href="#" class='prev'>past</a>
-                    <a href='#' class='next'>next</a>
-                </div>
-                <div class='control'>
-                    <div>
-                        <div>
-                            <a href='#' class='play on'>play</a>
-
-                            <a href='#' class='pause on'>pause</a>
-
+                <div class='con'>
+                    <div class='slide'>
+                        <div class='title'>
+                            <span>병원소개</span>
                         </div>
-
+                    </div>
+                </div>
+                <br><br>
+                <div class='submenu'>
+                    <div class='intro'>
                         <ul>
-                            <li class='on'>
-                                <a href='#'></a>
-                            </li>
+                            <li>|</li>
+                            <li><a href='intro.html'>의료진 소개</a></li>
+                            <li>|</li>
+                            <li><a href='intro2.html'>진료 과목</a></li>
+                            <li>|</li>
+                            <li><a href='intro3.html'>찾아오시는 길</a></li>
+                            <li>|</li>
+                        </ul>
+                    </div>
+                </div>
+                <br><br><br>
+                <div class='doctors'>
+                    <div class='bor'>
+                        <ul>
                             <li>
-                                <a href='#'></a>
+                                <a href='#'>내과
+                                    <span></span>
+                                </a>
                             </li>
-                            <li>
-                                <a href='#'></a>
+                            <li><a href='#'>외과
+                                <span></span>
+                            </a>
                             </li>
-                            <li>
-                                <a href='#'></a>
+                            <li><a href='#'>안과
+                                <span></span>
+                            </a>
                             </li>
-                            <li>
-                                <a href='#'></a>
+                            <li><a href='#'>고양이과
+                                <span></span>
+                            </a>
+                            </li>
+                            <li><a href='#'>영상의학과
+                                <span></span>
+                            </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class='con'>
-                    <div class='slide'>
-                        <div class='txt'>
-                            인간은<br> 멸망해야한다.
-                            <p>동물이 최고시다.</p>
-                        </div>
+
+                <div class='content'>
+                    <div class='table'>
+                        <table>
+                            <tr>
+                                <th>
+
+                                </th>
+                                <td class='tdnone'></td>
+                                <td class='tduse'>
+                                    <ul class='spec'>
+                                        <li>일반 내과 소개</li>
+                                        <span>
+                                            아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은 환자에 대한 정확한 이해와 진단이<br>
+                                            있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해 환자의 임상 증상을 최소화하고<br>
+                                            삶의 질을 개선하는 것을 목표로 합니다.
+                                        </span>
+                                        <li>진료과목 안내</li>
+                                        <span>
+                                            비뇨/생식기 내과<br>
+                                            내분기 내과<br>
+                                            호흡기 내과<br>
+                                            소화기 내과<br>
+                                            면역질환 내과<br>
+                                            감염 내과<br>
+                
+                                        </span>
+
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
+
                 </div>
             </section>
             <footer include-html='./source/footer.html'></footer>
         </div>
+    </div>
+
+
     </div>
     <script>
         new Vue({
@@ -152,5 +204,6 @@
 <script>
     includeHTML();
 </script>
+
 
 </html>
