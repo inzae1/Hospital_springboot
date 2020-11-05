@@ -1,0 +1,104 @@
+.visual {
+    position: relative;
+    padding: 0 50px;
+}
+
+.visual .title {
+    width: 250px;
+    text-align: center;
+    font-size: 60px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 5px solid white;
+    font-weight: 600;
+    color: white;
+}
+
+.visual .con>div {
+    height: 250px;
+}
+
+.visual .con .slide {
+    background: url(../img/slide_six.jpg) no-repeat center;
+    color: #333;
+    background-position-y: -610px;
+}
+
+.submenu {
+    text-align: center;
+}
+
+.submenu ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+}
+
+.submenu ul li a:hover {
+    font-weight: 500;
+}
+
+.content {
+    height: 500px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: aqua; */
+    font-size: 15px;
+}
+
+.content .table {
+    padding: 50px 0 0 80px
+}
+
+.content table {
+    padding: 10px;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+}
+
+.content th {
+    height: 400px;
+    width: 300px;
+    /* background-color: brown; */
+}
+
+.content th img {
+    max-height: 400px;
+    height: 400px;
+    width: 300px;
+}
+
+.content td.tdnone {
+    /* background-color: rgb(0, 255, 191); */
+    width: 20px;
+}
+
+.content td.tduse {
+    /* background-color: rgb(255, 7, 123); */
+    width: 1100px;
+}
+
+.spec {
+    padding-left: 30px;
+}
+
+.spec li {
+    padding-top: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgb(238, 113, 29);
+}
+
+.spec span {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.spec span.doctorName {
+    font-size: 60px;
+}
