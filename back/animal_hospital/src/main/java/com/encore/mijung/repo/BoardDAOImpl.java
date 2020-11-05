@@ -46,8 +46,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> getAllBoard() throws Exception {
-		return sqlSession.selectList(NS + "getAllBoard");
+	public List<Board> getAllBoard(int page) throws Exception {
+		return sqlSession.selectList(NS + "getAllBoard", page);
 	}
 
 	@Override
@@ -63,6 +63,11 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<Board> searchBoardByContent(String content) throws Exception {
 		return sqlSession.selectList(NS + "searchBoardByContent", content);
+	}
+
+	@Override
+	public int countBoard() throws Exception {
+		return sqlSession.selectOne(NS + "countBoard");
 	}
 
 }

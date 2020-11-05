@@ -33,9 +33,11 @@
 	WHERE bd_ID=#{bdID}
 </select>
 
-<select id="getAllBoard" resultType="board">
+<select id="getAllBoard" resultType="board" parameterType="int">
 	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
 	FROM board
+	ORDER BY bd_ID desc
+	LIMIT #{VALUE}, 5
 </select>
 
 <select id="getBoard" parameterType="int" resultType="board">
@@ -47,11 +49,16 @@
 	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
 	FROM board
 	WHERE bd_title LIKE '%' #{VALUE} '%'
+	ORDER BY bd_ID desc
 </select>
 <select id="searchBoardByContent" parameterType="string" resultType="board">
 	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
 	FROM board
 	WHERE bd_content LIKE '%' #{VALUE} '%'
+	ORDER BY bd_ID desc
+</select>
+<select id="countBoard" resultType="int">
+	SELECT COUNT(bd_ID) FROM board
 </select>
 
 </mapper>

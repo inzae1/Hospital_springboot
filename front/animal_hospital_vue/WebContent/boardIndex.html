@@ -115,6 +115,13 @@
 
                         </tbody>
                     </table>
+                    <div>
+                        <table>
+                            <tr>
+                                <td v-for="p in Math.ceil(countBoard/5)" @click="pageMove(p)">{{p}}</td>
+                            </tr>
+                        </table>
+                    </div>
                     <table>
                         <tr>
                             <td>
@@ -168,16 +175,32 @@
                     loading: true,
                     errored: false,
                     searchSelect: 'title',
-                    searchContent: ''
+                    searchContent: '',
+                    page: '1',
+                    countBoard: '',
                 }
             },
             mounted() {
+                if (location.href.indexOf('?') != -1) {
+                    this.page = location.href.split('?')[1].split('=')[1];
+                }
                 this.loginId = localStorage.getItem('animal_login');
                 this.admin = localStorage.getItem('animal_admin');
                 axios
-                    .get("http://localhost:7000/mijung/getAllBoard")
+                    .get("http://localhost:7000/mijung/countBoard")
                     .then(response => {
-                        this.info = response.data.reverse();
+                        this.countBoard = response.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false);
+                axios
+                    .get("http://localhost:7000/mijung/getAllBoard/" + this.page)
+                    .then(response => {
+                        this.info = response.data;
+                        concole.log(this.info);
                     })
                     .catch(e => {
                         console.log(e);
@@ -214,6 +237,7 @@
                         alert("검색어를 입력해주세요");
                         return;
                     } else if (this.searchSelect == "title") {
+                        this.page = 1;
                         axios
                             .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent)
                             .then(response => {
@@ -225,6 +249,7 @@
                             })
                             .finally(() => this.loading = false);
                     } else {
+                        this.page = 1;
                         axios
                             .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent)
                             .then(response => {
@@ -236,10 +261,12 @@
                             })
                             .finally(() => this.loading = false);
                     }
-
+                },
+                pageMove(p) {
+                    this.page = p;
+                    location.href = "boardIndex.html?page=" + this.page;
                 }
-            },
-
+            }
 
         });
         includeHTML();

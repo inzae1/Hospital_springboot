@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> getAllBoard() throws Exception {
-		return boardDAO.getAllBoard();
+	public List<Board> getAllBoard(int page) throws Exception {
+		return boardDAO.getAllBoard(page);
 	}
 
 	@Override
@@ -59,6 +59,11 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> searchBoardByContent(String content) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDAO.searchBoardByContent(content);
+	}
+
+	@Override
+	public int countBoard() throws Exception {
+		return boardDAO.countBoard();
 	}
 
 }
