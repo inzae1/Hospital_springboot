@@ -125,7 +125,7 @@ body .container .content label:not([for='remember']) {
 body .container .content input.inpt {
     font-size: 14px;
     display: block;
-    width: 20%;
+    width: 100%;
     height: 42px;
     margin-bottom: 12px;
     padding: 16px 13px;
@@ -170,7 +170,7 @@ body .container .content input.submit {
     font-size: 12px;
     line-height: 42px;
     display: block;
-    width: 20%;
+    width: 100%;
     margin-bottom: 5%;
     margin-left: 1%;
     height: 42px;
@@ -249,8 +249,8 @@ body .container .content .submit-wrap {
 
 body .container .content .submit-wrap a {
     font-size: 12px;
-    margin-left: 5%;
-    margin-bottom: 3%;
+    margin-left: 20%;
+    margin-bottom: 20%;
     display: block;
     text-decoration: none;
     color: #999999;
@@ -328,8 +328,4 @@ body .container .content .signup-cont {
     color: #333;
     background-position-y: -750px;
     padding-top: 10px;
-}
-
-.inpt {
-    back
 }

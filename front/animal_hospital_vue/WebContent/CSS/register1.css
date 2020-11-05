@@ -10,7 +10,7 @@ body .container {
     position: relative;
     overflow: hidden;
     width: 700px;
-    height: 500px;
+    height: 800px;
     margin: 80px auto 0;
     background-color: #ffffff;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -82,7 +82,7 @@ body .container .tabs .tab.active {
 
 body .container .content form {
     position: relative;
-    height: 287px;
+    height: 1000px;
 }
 
 body .container .content label:first-of-type,
@@ -141,7 +141,7 @@ body .container .content label:not([for='remember']) {
 body .container .content input.inpt {
     font-size: 14px;
     display: block;
-    width: 20%;
+    width: 100%;
     height: 42px;
     margin-bottom: 6px;
     margin-top: 6px;
@@ -187,11 +187,10 @@ body .container .content input.submit {
     font-size: 12px;
     line-height: 42px;
     display: block;
-    width: 20%;
-    margin-left: 1%;
+    width: 100%;
+    margin-top: 10%;
     height: 42px;
     cursor: pointer;
-    vertical-align: middle;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #263238;
@@ -259,7 +258,7 @@ body .container .content .checkbox:checked+label:before {
 
 body .container .content .submit-wrap {
     position: absolute;
-    bottom: 0;
+    margin-bottom: 100%;
     width: 100%;
 }
 
