@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.encore.mijung.domain.Board;
+import com.encore.mijung.domain.Search;
 import com.encore.mijung.service.BoardService;
 
 @RestController
@@ -78,18 +79,32 @@ public class BoardController {
 		return new ResponseEntity(maxPage, HttpStatus.OK);
 	}
 	
-	@GetMapping("searchBoardByTitle/{title}")
-	public ResponseEntity searchBoardByTitle(@PathVariable String title)throws Exception{
-		List<Board> boards = service.searchBoardByTitle(title);
+	@GetMapping("searchBoardByTitle/{title}/{page}")
+	public ResponseEntity searchBoardByTitle(@PathVariable String title, @PathVariable int page)throws Exception{
+		Search search = new Search(title, (page-1)*5);
+		List<Board> boards = service.searchBoardByTitle(search);
 		if(boards.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(boards, HttpStatus.OK);
 	}
 	
-	@GetMapping("searchBoardByContent/{content}")
-	public ResponseEntity searchBoardByContent(@PathVariable String content)throws Exception{
-		List<Board> boards = service.searchBoardByContent(content);
+	@GetMapping("searchBoardByContent/{content}/{page}")
+	public ResponseEntity searchBoardByContent(@PathVariable String content,@PathVariable int page)throws Exception{
+		Search search = new Search(content, (page-1)*5);
+		List<Board> boards = service.searchBoardByContent(search);
 		if(boards.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(boards, HttpStatus.OK);
+	}
+	
+	@GetMapping("countBoardByTitle/{content}")
+	public ResponseEntity countBoardByTitle(@PathVariable String content) throws Exception{
+		int maxPage = service.countBoardByTitle(content);
+		return new ResponseEntity(maxPage, HttpStatus.OK);
+	}
+	
+	@GetMapping("countBoardByContent/{content}")
+	public ResponseEntity countBoardByContent(@PathVariable String content) throws Exception{
+		int maxPage = service.countBoardByContent(content);
+		return new ResponseEntity(maxPage, HttpStatus.OK);
 	}
 
 }

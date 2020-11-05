@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.encore.mijung.domain.Board;
+import com.encore.mijung.domain.Search;
 import com.encore.mijung.repo.BoardDAO;
 
 @Service
@@ -51,19 +52,28 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> searchBoardByTitle(String title) throws Exception {
-		return boardDAO.searchBoardByTitle(title);
+	public List<Board> searchBoardByTitle(Search search) throws Exception {
+		return boardDAO.searchBoardByTitle(search);
 	}
 
 	@Override
-	public List<Board> searchBoardByContent(String content) throws Exception {
-		// TODO Auto-generated method stub
-		return boardDAO.searchBoardByContent(content);
+	public List<Board> searchBoardByContent(Search search) throws Exception {
+		return boardDAO.searchBoardByContent(search);
 	}
 
 	@Override
 	public int countBoard() throws Exception {
 		return boardDAO.countBoard();
+	}
+
+	@Override
+	public int countBoardByTitle(String title) throws Exception {
+		return boardDAO.countBoardByTitle(title);
+	}
+
+	@Override
+	public int countBoardByContent(String content) throws Exception {
+		return boardDAO.countBoardByContent(content);
 	}
 
 }

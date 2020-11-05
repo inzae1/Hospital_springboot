@@ -31,14 +31,15 @@
     display: inline-block;
     max-height: 80px;
     width: auto;
-    padding: 20px 0 20px 1200px;
+    padding: 20px 0 20px 1100px;
 }
 
 #app .table {
     text-align: center;
     margin: auto;
-    width: 50%;
-    height: 90%;
+    width: 65%;
+    height: 100px;
+    max-height: 90%;
     padding-top: 30px;
     padding-bottom: 30px;
     border-top: 1px solid silver;
@@ -46,7 +47,11 @@
 }
 
 #app .table thead {
-    font-size: 18px;
+    font-size: 15px;
+}
+
+#app .table tr th {
+    text-align: center;
 }
 
 #app .table .tbody {

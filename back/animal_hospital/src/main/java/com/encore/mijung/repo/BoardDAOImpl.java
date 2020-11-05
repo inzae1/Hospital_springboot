@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.encore.mijung.domain.Board;
+import com.encore.mijung.domain.Search;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -56,18 +57,29 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> searchBoardByTitle(String title) throws Exception {
-		return sqlSession.selectList(NS + "searchBoardByTitle", title);
+	public List<Board> searchBoardByTitle(Search search) throws Exception {
+		return sqlSession.selectList(NS + "searchBoardByTitle", search);
 	}
 
 	@Override
-	public List<Board> searchBoardByContent(String content) throws Exception {
-		return sqlSession.selectList(NS + "searchBoardByContent", content);
+	public List<Board> searchBoardByContent(Search search) throws Exception {
+		return sqlSession.selectList(NS + "searchBoardByContent", search);
 	}
 
 	@Override
 	public int countBoard() throws Exception {
 		return sqlSession.selectOne(NS + "countBoard");
+	}
+
+	@Override
+	public int countBoardByTitle(String title) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NS + "countBoardByTitle", title);
+	}
+
+	@Override
+	public int countBoardByContent(String content) throws Exception {
+		return sqlSession.selectOne(NS + "countBoardByContent", content);
 	}
 
 }

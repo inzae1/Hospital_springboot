@@ -12,6 +12,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -89,15 +92,15 @@
                 <div id="app">
                     <a href="./addBoard.html" class='btn'><button v-if="loginId != null">글쓰기</button></a>
 
-                    <table class='table'>
+                    <table class='table table-hover'>
                         <thead>
                             <tr>
-                                <th>번호</th>
-                                <th>답변여부</th>
-                                <th>제목</th>
-                                <th>글쓰니</th>
-                                <th>날짜</th>
-                                <th>조회수</th>
+                                <th width='8%'>번호</th>
+                                <th width='12%'>답변여부</th>
+                                <th width='40%'>제목</th>
+                                <th width='15%'>글쓴이</th>
+                                <th width='10%'>날짜</th>
+                                <th width='15%'>조회수</th>
                             </tr>
                         </thead>
                         <tbody class='tbody'>
@@ -115,29 +118,32 @@
 
                         </tbody>
                     </table>
-                    <div>
+
+                    <center>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#" v-for="p in Math.ceil(countBoard/5)" @click="pageMove(p)">{{p}}</a></li>
+                            </ul>
+                        </nav>
+                    </center>
+                    <center>
                         <table>
                             <tr>
-                                <td v-for="p in Math.ceil(countBoard/5)" @click="pageMove(p)">{{p}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <table>
-                        <tr>
-                            <td>
-                                <select name="searchSelectBox" v-model="searchSelect">
+                                <td>
+                                    <select name="searchSelectBox" v-model="searchSelect">
                                     <option value="title">제목</option>
                                     <option value="content">내용</option>
                                 </select>
-                            </td>
-                            <td>
-                                <input type="text" name="search" id="search" v-model="searchContent">
-                            </td>
-                            <td>
-                                <button type="button" @click="searchBoard">검색</button>
-                            </td>
-                        </tr>
-                    </table>
+                                </td>
+                                <td>
+                                    <input type="text" name="search" id="search" v-model="searchContent">
+                                </td>
+                                <td>
+                                    <button type="button" @click="searchBoard">검색</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
                 </div>
             </section>
             <footer include-html='./source/footer.html'></footer>
@@ -178,6 +184,7 @@
                     searchContent: '',
                     page: '1',
                     countBoard: '',
+                    search: 0
                 }
             },
             mounted() {
@@ -200,7 +207,6 @@
                     .get("http://localhost:7000/mijung/getAllBoard/" + this.page)
                     .then(response => {
                         this.info = response.data;
-                        concole.log(this.info);
                     })
                     .catch(e => {
                         console.log(e);
@@ -237,9 +243,20 @@
                         alert("검색어를 입력해주세요");
                         return;
                     } else if (this.searchSelect == "title") {
+                        this.search = 1;
                         this.page = 1;
                         axios
-                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent)
+                            .get("http://localhost:7000/mijung/countBoardByTitle/" + this.searchContent)
+                            .then(response => {
+                                this.countBoard = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
                             .then(response => {
                                 this.info = response.data;
                             })
@@ -250,8 +267,19 @@
                             .finally(() => this.loading = false);
                     } else {
                         this.page = 1;
+                        this.search = 1;
                         axios
-                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent)
+                            .get("http://localhost:7000/mijung/countBoardByContent/" + this.searchContent)
+                            .then(response => {
+                                this.countBoard = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
                             .then(response => {
                                 this.info = response.data;
                             })
@@ -264,7 +292,32 @@
                 },
                 pageMove(p) {
                     this.page = p;
-                    location.href = "boardIndex.html?page=" + this.page;
+                    if (this.search == 0) {
+                        location.href = "boardIndex.html?page=" + this.page;
+                    } else if (this.search == 1) {
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                    } else {
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                    }
+
                 }
             }
 
