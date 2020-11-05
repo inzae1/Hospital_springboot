@@ -5,43 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src='./WEB-INF/lib/main.js'></script>
-    <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
     <link rel='stylesheet' href='./CSS/login.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
-    <link rel='stylesheet' href='./CSS/intro.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
-    <style>
-        #login-form {
-            width: 270px;
-            margin: 100px auto;
-            border: 1px solid gray;
-            border-radius: 5px;
-            padding: 15px;
-        }
-        /* inline이였던 요소들을 block으로 바꿈 */
-        
-        #login-form input,
-        #login-form label {
-            display: block;
-        }
-        
-        #login-form label {
-            margin-top: 10px;
-        }
-        
-        #login-form input {
-            margin-top: 5px;
-        }
-        /* 애트리뷰트 선택자 */
-        
-        #login-form input[type='image'] {
-            margin: 10px auto;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -109,73 +79,64 @@
                         </ul>
                     </div>
                 </header>
-                <br><br><br><br><br>
-                <div id="loginapp">
-                    <section class="container">
-                        <article class="half">
-                            <h1>로그인</h1>
-                            <div class="tabs">
+                <br><br><br>
 
+
+                <section class='visual'>
+                    <div class='con'>
+                        <div class='slide'>
+                            <div class='title'>
+                                <span>?</span>
                             </div>
-                            <div class="content">
-                                <div class="signin-cont cont">
-                                    <form action="#" method="post" @submit.prevent="login" enctype="multipart/form-data">
-                                        <input type="email" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="Your email">
-                                        <label for="email">Your email</label>
-                                        <input type="password" name="custPassword" id="custPassword" v-model="custPassword" class="inpt" required="required" placeholder="Your password">
-                                        <label for="password">Your password</label>
-                                        <div class="submit-wrap">
-                                            <input type="submit" value="Sign in" class="submit">
-                                            <a href="#" class="more">Forgot your ID / password?</a>
-                                        </div>
-                                    </form>
+                        </div>
+                    </div>
+                    <div id="loginapp">
+                        <section class="container">
+                            <article class="half">
+                                <h1>로그인</h1>
+                                <div class="tabs">
+
                                 </div>
-                                <div class="signup-cont cont">
-                                    <form action="#" method="post" enctype="multipart/form-data">
-                                        <input type="email" name="email" id="name" class="inpt" required="required" placeholder="Your name">
-                                        <label for="name">Your name</label>
-                                        <input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email">
-                                        <label for="email">Your email</label>
-                                        <input type="password" name="password" id="custPassword" class="inpt" required="required" placeholder="Your password">
-                                        <label for="password">Your password</label>
-                                        <div class="submit-wrap">
-                                            <input type="submit" value="Sign up" class="submit">
-                                            <a href="#" class="more">Terms and conditions</a>
-                                        </div>
-                                    </form>
+                                <div class="content">
+                                    <div class="signin-cont cont">
+                                        <form action="#" method="post" @submit.prevent="login" enctype="multipart/form-data">
+                                            <input type="email" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="Your email">
+                                            <label for="email">Your email</label>
+                                            <input type="password" name="custPassword" id="custPassword" v-model="custPassword" class="inpt" required="required" placeholder="Your password">
+                                            <label for="password">Your password</label>
+                                            <div class="submit-wrap">
+                                                <input type="submit" value="Sign in" class="submit">
+                                                <a href="#" class="more">Forgot your ID / password?</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="signup-cont cont">
+                                        <form action="#" method="post" enctype="multipart/form-data">
+                                            <input type="email" name="email" id="name" class="inpt" required="required" placeholder="Your name">
+                                            <label for="name">Your name</label>
+                                            <input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email">
+                                            <label for="email">Your email</label>
+                                            <input type="password" name="password" id="custPassword" class="inpt" required="required" placeholder="Your password">
+                                            <label for="password">Your password</label>
+                                            <div class="submit-wrap">
+                                                <input type="submit" value="Sign up" class="submit">
+                                                <a href="#" class="more">Terms and conditions</a>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                        <div class="half bg"></div>
-                    </section>
-                </div>
+                            </article>
+                            <div class="half bg"></div>
+                        </section>
+                    </div>
+                </section>
             </div>
-        </div>
-        </form>
-        </div>
-        </div>
-        <!-- <div id="loginapp">
-                    <form action="#" method="POST" @submit.prevent="login" id="login-form">
-                        <table class="type01">
-                            <tr>
-                                <th>아이디(이메일)</th>
-                                <td><input style="" type="email" name="custId" id="custId" v-model="custId" /></td>
-                            </tr>
-                            <tr>
-                                <th>비밀번호</th>
-                                <td>
-                                    <input type="password" name="custPassword" id="custPassword" v-model="custPassword" /></td>
-                            </tr>
-                            <tr>
-                                <td><button type="submit " name="loginbutton ">로그인</button></td>
-                                <td><button type="button" onclick="location.href='findIdPassword.html'">ID/PW찾기</button></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div> -->
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <footer include-html='./source/footer.html'>
-        </footer>
+            </form>
+
+            </section>
+
+            <footer include-html='./source/footer.html'>
+            </footer>
         </div>
         </div>
         <script>
@@ -250,5 +211,8 @@
             });
         </script>
     </body>
+    <script>
+        includeHTML();
+    </script>
 
 </html>
