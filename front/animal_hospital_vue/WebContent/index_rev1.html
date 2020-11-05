@@ -308,7 +308,7 @@
                             }) //post
                             .then(function(response) {
                                 alert("예약 완료되셨습니다.");
-                                mounted
+                                location.reload()
                             }) //then
                             .catch(error => {
                                 console.log(error);
@@ -325,7 +325,6 @@
                         .then(response => {
                             this.info = response.data
                             localStorage.setItem("revInfo", JSON.stringify(this.info))
-                            console.log("mount")
                         })
                         .catch(error => {
                             console.log(error);
