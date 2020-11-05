@@ -8,7 +8,6 @@
     <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
     <link rel='stylesheet' href='./CSS/rev_css.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
-    <link rel='stylesheet' href='./CSS/intro.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
@@ -126,7 +125,8 @@
                 dayMaxEvents: true, // allow "more" link when too many events
                 eventSources: [{
                     events: modelsFalse,
-                    color: "red",
+                    backgroundColor: "red",
+                    display: "block"
                 }, {
                     events: models,
                     color: "#3788d8",
@@ -158,7 +158,7 @@
     </script>
 </head>
 
-<body>
+<body onload="reload()">
 
     <div class="wrapper">
         <div class='inner-wrapper'>
@@ -222,9 +222,16 @@
                     </ul>
                 </div>
             </header>
-            <br><br><br><br><br>
+            <br><br><br>
             <section class='visual'>
-                </header>
+                <div class='con'>
+                    <div class='slide'>
+                        <div class='title'>
+                            <span>진료예약</span>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
                 <div id='calendar'></div>
                 <br>
                 <div id="rev_app">
@@ -235,11 +242,12 @@
             <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">왼쪽의 날짜와 원장님을 선택해주세요.</h2>
             </span>
                     <form action="#" method="POST" name="frmForm" id="_frmForm" @submit.prevent="reservation" v-else>
-                        <table class="type05">
+                        <table class="type04">
                             <thead>
+                                <h2 id="thead04"> 예약 상세조회<button id="button2" onclick="locationBack()">Back</button></h2><br>
 
-                                <h2 style="text-align: center;"> 예약 상세조회<button id="button2" onclick="locationBack()">Back</button></h2><br>
                             </thead>
+
                             <tr>
                                 <th scope="row">예약날짜</th>
                                 <td><b>{{revDate}}</b></td>
@@ -265,7 +273,7 @@
                             <tr>
                                 <th scope="row">증상
                                 </th>
-                                <td><textarea placeholder="반려동물의 증상을 200자 이내로 입력해주세요." cols="50" rows="8" style="border-radius: 6px;" v-model="revComment"></textarea></td>
+                                <td><textarea placeholder="   반려동물의 증상을 200자 이내로 입력해주세요." cols="40" rows="8" style="border-radius: 6px;" v-model="revComment"></textarea></td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: center;"><button id="button" type="submit">예약하기</button></td>
@@ -309,6 +317,8 @@
                             .then(function(response) {
                                 alert("예약 완료되셨습니다.");
                                 location.reload()
+                                localStorage.setItem("reLoad", 1);
+
                             }) //then
                             .catch(error => {
                                 console.log(error);
@@ -325,6 +335,10 @@
                         .then(response => {
                             this.info = response.data
                             localStorage.setItem("revInfo", JSON.stringify(this.info))
+                            if (localStorage.getItem("reLoad") == 1) {
+                                location.reload()
+                                localStorage.removeItem("reLoad");
+                            }
                         })
                         .catch(error => {
                             console.log(error);
