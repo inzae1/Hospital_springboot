@@ -125,8 +125,8 @@
                 dayMaxEvents: true, // allow "more" link when too many events
                 eventSources: [{
                     events: modelsFalse,
-                    backgroundColor: "red",
-                    display: "block"
+                    color: "gray",
+
                 }, {
                     events: models,
                     color: "#3788d8",
@@ -139,6 +139,8 @@
                         if (loginLocation) {
                             return location.href = "login.html"
                         }
+                    } else if (localStorage.getItem("onceRev") == 1) {
+                        return alert("하나 이상의 예약을 할 수 없습니다.")
                     } else if (arg.event.id == "revPossible") {
                         revData.$data.revDoctor = arg.event.title;
                         revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
@@ -239,7 +241,9 @@
             <br><br><br><br><br><br><br><br><br><br><br><br>
 
             <img src="https://www.flaticon.com/svg/static/icons/svg/0/49.svg" style="opacity: 0.5; width: 100px; display: block; margin: 0px auto;"><br><br>
-            <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">왼쪽의 날짜와 원장님을 선택해주세요.</h2>
+            <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">왼쪽의 날짜와 원장님을 선택해주세요.</h2><br>
+            <img src="./img/blue.png" style="opacity: 1; width: 27px; display: block; margin: 0px auto;"> <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">예약 가능 날짜</h2><br>
+            <img src="./img/gray.png" style="opacity: 1; width: 30px; display: block; margin: 0px auto;"> <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">예약 불가 날짜</h2>
             </span>
                     <form action="#" method="POST" name="frmForm" id="_frmForm" @submit.prevent="reservation" v-else>
                         <table class="type04">
@@ -318,6 +322,7 @@
                                 alert("예약 완료되셨습니다.");
                                 location.reload()
                                 localStorage.setItem("reLoad", 1);
+                                localStorage.setItem("onceRev", 1);
 
                             }) //then
                             .catch(error => {

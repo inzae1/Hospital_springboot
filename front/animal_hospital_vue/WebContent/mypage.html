@@ -177,6 +177,7 @@
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
+                                localStorage.removeItem("onceRev");
                             })
                             .catch(e => {
                                 console.log(e);
