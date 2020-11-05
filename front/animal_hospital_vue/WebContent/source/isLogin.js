@@ -1,21 +1,10 @@
-new Vue({
-    el: "#app",
-    data: {
-        isLogin: false
-    },
-    mounted() {
-        if (localStorage.getItem("animal_login") != null) {
-            this.isLogin = true;
-        }
-    },
-    methods: {
-        logout() {
-            let con_logout = confirm("로그아웃 하시겠습니까");
-            if (con_logout) {
-                localStorage.removeItem("animal_login");
-                localStorage.removeItem("animal_admin");
-                location.reload(true);
-            }
-        }
+function isLogin() {
+    let isLogin = localStorage.getItem("animal_login");
+    if (isLogin == null) {
+        console.log(document.getElementById("loginCheck"));
+        document.getElementById("loginCheck").innerHTML("<li><a href='login.html><h2>로그인</h2></a></li><li><a href='register.html><h2>회원가입</h2></a></li>");
+
+    } else {
+        document.getElementById("loginCheck").innerHTML("<li><a href='login.html><h2>로그인</h2></a></li><li><a href='mypage.html'><h2>마이페이지</h2></a></li>");
     }
-});
+}
