@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' href='default.css'>
-    <link rel='stylesheet' href='index.css'>
+    <script src='./WEB-INF/lib/main.js'></script>
+    <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
+    <link rel='stylesheet' href='./CSS/rev_css.css'>
+    <link rel='stylesheet' href='./CSS/default_copy.css'>
+    <link rel='stylesheet' href='./CSS/intro.css'>
+    <link rel='stylesheet' href='./CSS/header.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./source/includeHTML.js"></script>
     <style>
         #login-form {
             width: 270px;
@@ -40,179 +45,167 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class='inner-wrapper'>
-            <header class="header">
-                <!-- 로고 부분 -->
-                <div class='header-left'>
-                    <a href=' index.html'>
-                        <img src='img/logo.png ' alt='logo '>
-                    </a>
-                </div>
-                <!-- 메뉴 부분 -->
-                <div class='header-center '>
-                    <ul class=' '>
-                        <li class=' '>
-                            <a href=' '>
-                                <span>병원소개</span>
-                            </a>
+
+    <body>
+        <div class="wrapper">
+            <div class='inner-wrapper'>
+                <header class="header">
+                    <!-- 로고 부분 -->
+                    <div class='header-left'>
+                        <a href=' index.html'>
+                            <img src='img/logo.png ' alt='logo '>
+                        </a>
+                    </div>
+                    <!-- 메뉴 부분 -->
+                    <div class='header-center '>
+                        <ul class=''>
+                            <li class=''>
+                                <a href='intro.html'>
+                                    <span>병원소개</span>
+                                    <!-- <ul class=''>
+                            <li class=''><a href=''>나와라</a></li>
+                            <li class=''><a href=''>나와라</a></li>
+                            <li class=''><a href=''>나와라</a></li>
+                        </ul> -->
+                                </a>
+                            </li>
                             <li class=' '>
                                 <a href='index_rev1.html'>
                                     <span>진료예약</span>
                                 </a>
                             </li>
                             <li class=' '>
-                                <a href=' '>
+                                <a href='boardIndex.html'>
                                     <span>Q & A</span>
                                 </a>
                             </li>
-                        </li>
-                    </ul>
+                        </ul>
+                    </div>
+                    <!-- 로그인 부분 -->
+                    <div class='header-right' id='app'>
+                        <ul class=' ' v-if="!isLogin">
+                            <li class=' '>
+                                <a href='login.html'>
+                                    <h2>로그인</h2>
+                                </a>
+                            </li>
+                            <li class=' '>
+                                <a href='register.html'>
+                                    <h2>회원가입</h2>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class=' ' v-if="isLogin">
+                            <li class=' '>
+                                <a href="#" @click="logout">
+                                    <h2>로그아웃</h2>
+                                </a>
+                            </li>
+                            <li class=' '>
+                                <a href='mypage.html'>
+                                    <h2>마이페이지</h2>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+                <br><br><br><br><br>
+                <div id="loginapp">
+                    <form action="#" method="POST" @submit.prevent="login" id="login-form">
+                        <table>
+                            <tr>
+                                <th>아이디(이메일)</th>
+                                <td><input type="email" name="custId" id="custId" v-model="custId" /></td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호</th>
+                                <td>
+                                    <input type="password" name="custPassword" id="custPassword" v-model="custPassword" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2 " style="height: 50px; text-align: center; ">
+                                    <button type="submit " name="loginbutton ">로그인</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
-                <!-- 로그인 부분 -->
-                <div class='header-right' id='app'>
-                    <ul class=' ' v-if="!isLogin">
-                        <li class=' '>
-                            <a href='login.html'>
-                                <h2>로그인</h2>
-                            </a>
-                        </li>
-                        <li class=' '>
-                            <a href='register.html'>
-                                <h2>회원가입</h2>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class=' ' v-if="isLogin">
-                        <li class=' '>
-                            <a href="#" @click="logout">
-                                <h2>로그아웃</h2>
-                            </a>
-                        </li>
-                        <li class=' '>
-                            <a href='mypage.html'>
-                                <h2>마이페이지</h2>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-            <br><br><br><br><br>
-            <div id="loginapp">
-                <form action="#" method="POST" @submit.prevent="login" id="login-form">
-                    <table>
-                        <tr>
-                            <th>아이디(이메일)</th>
-                            <td><input type="email" name="custId" id="custId" v-model="custId" /></td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호</th>
-                            <td>
-                                <input type="password" name="custPassword" id="custPassword" v-model="custPassword" /></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2 " style="height: 50px; text-align: center; ">
-                                <button type="submit " name="loginbutton ">로그인</button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <footer include-html='./source/footer.html'>
+                </footer>
             </div>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <footer class='footer '>
-                <div id='footer'>
-                    <a href="#"><img src='img/upper_arrow.png' alt='대메뉴 바로가기'></a>
-                    <img src='img/logo.png' alt='미정이네동물병원'>
-                    <ul class='nav'>
-                        <li>
-                            <a href='#'>병원소개</a>
-                        </li>
-                        <li>
-                            <a href='#'>진료예약</a>
-                        </li>
-                        <li>
-                            <a href='#'>Q & A</a>
-                        </li>
-                    </ul>
-                    <address>
-                    (50411)서울특별시 강남구 청담동 106-10 청담더원 <span>TEL:1566-1688</span>
-                    <em>Copyright © 미정이네동물병원. All Rights Reserved.</em>
-                </address>
-                </div>
-            </footer>
         </div>
-    </div>
-    <script>
-        let navapp = new Vue({
-            el: "#app",
-            data: {
-                isLogin: false
-            },
-            mounted() {
-                if (localStorage.getItem("animal_login") != null) {
-                    this.isLogin = true;
-                }
-            },
-            methods: {
-                logout() {
-                    let con_logout = confirm("로그아웃 하시겠습니까");
-                    if (con_logout) {
-                        localStorage.removeItem("animal_login");
-                        localStorage.removeItem("animal_admin");
-                        location.href = "index.html";
+        <script>
+            let navapp = new Vue({
+                el: "#app",
+                data: {
+                    isLogin: false
+                },
+                mounted() {
+                    if (localStorage.getItem("animal_login") != null) {
+                        this.isLogin = true;
+                    }
+                },
+                methods: {
+                    logout() {
+                        let con_logout = confirm("로그아웃 하시겠습니까");
+                        if (con_logout) {
+                            localStorage.removeItem("animal_login");
+                            localStorage.removeItem("animal_admin");
+                            location.href = "index.html";
+                        }
                     }
                 }
-            }
-        });
-        let app = new Vue({
-            el: '#loginapp',
-            data() {
-                return {
-                    loading: true,
-                    errored: false,
-                    custId: "",
-                    custPassword: ""
+            });
+            let app = new Vue({
+                el: '#loginapp',
+                data() {
+                    return {
+                        loading: true,
+                        errored: false,
+                        custId: "",
+                        custPassword: ""
 
-                }
-            },
-            methods: {
-                login() {
-                    if (this.custId == " ") {
-                        alert("아이디를 입력하세요 ");
-                        return;
                     }
-                    if (this.custPassword == " ") {
-                        alert("비밀번호를 입력하세요 ");
-                        return;
+                },
+                methods: {
+                    login() {
+                        if (this.custId == " ") {
+                            alert("아이디를 입력하세요 ");
+                            return;
+                        }
+                        if (this.custPassword == " ") {
+                            alert("비밀번호를 입력하세요 ");
+                            return;
+                        }
+                        axios
+                            .post("http://localhost:7000/mijung/login", {
+                                custId: this.custId,
+                                custPassword: this.custPassword,
+                            })
+                            .then(response => {
+                                console.log(response.data);
+                                if (response.data == "") {
+                                    alert("로그인에 실패했습니다.");
+
+                                } else {
+                                    //this.info = response.data.;
+                                    localStorage.setItem("animal_login", this.custId);
+                                    localStorage.setItem("animal_admin", response.data.custAdmin);
+                                    alert(response.data.custName + "님이 로그인하였습니다.");
+                                    location.href = "index.html";
+                                }
+
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
                     }
-                    axios
-                        .post("http://localhost:7000/mijung/login", {
-                            custId: this.custId,
-                            custPassword: this.custPassword,
-                        })
-                        .then(response => {
-                            console.log(response.data);
-                            if (response.data == "") {
-                                alert("로그인에 실패했습니다.");
-
-                            } else {
-                                //this.info = response.data.;
-                                localStorage.setItem("animal_login", this.custId);
-                                localStorage.setItem("animal_admin", response.data.custAdmin);
-                                alert(response.data.custName + "님이 로그인하였습니다.");
-                                location.href = "index.html";
-                            }
-
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            this.errored = true
-                        })
-                        .finally(() => this.loading = false)
                 }
-            }
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
 
 </html>

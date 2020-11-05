@@ -24,10 +24,7 @@ function includeHTML() {
             return;
         }
     }
-<<<<<<< HEAD
-=======
     setTimeout(function() {
-        callback;
+        callback();
     }, 0);
->>>>>>> 3172f4e46643527e0aa1d9ab8ed6acd08e1767bd
 }
