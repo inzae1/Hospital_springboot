@@ -43,6 +43,16 @@
 	FROM board
 	WHERE bd_ID=#{bdID}
 </select>
+<select id="searchBoardByTitle" parameterType="string" resultType="board">
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	FROM board
+	WHERE bd_title LIKE '%' #{VALUE} '%'
+</select>
+<select id="searchBoardByContent" parameterType="string" resultType="board">
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	FROM board
+	WHERE bd_content LIKE '%' #{VALUE} '%'
+</select>
 
 </mapper>
 	
