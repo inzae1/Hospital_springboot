@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' href='./CSS/intro.css'>
+    <link rel='stylesheet' href='./CSS/intro2.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <link rel='stylesheet' href='./CSS/default.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -107,61 +107,39 @@
                         </ul>
                     </div>
                 </div>
-                <br><br><br>
-                <div class='doctors'>
-                    <div class='bor'>
-                        <ul>
-                            <li>
-                                <a href='#'>윤인재
-                                    <span>원장</span>
-                                </a>
-                            </li>
-                            <li><a href='#'>지혜수
-                                <span>원장</span>
-                            </a>
-                            </li>
-                            <li><a href='#'>나현재
-                                <span>원장</span>
-                            </a>
-                            </li>
-                            <li><a href='#'>김태형
-                                <span>원장</span>
-                            </a>
-                            </li>
-                            <li><a href='#'>방은호
-                                <span>원장</span>
-                            </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
                 <div class='content'>
                     <div class='table'>
                         <table>
                             <tr>
                                 <th>
-                                    <img src='./img/doctor.jpg' alt='image'>
+                                    <span>
+                                        <!-- * 카카오맵 - 지도퍼가기 -->
+                                        <!-- 1. 지도 노드 -->
+                                        <div id="daumRoughmapContainer1604566155551" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+                                        <!--
+                                            2. 설치 스크립트
+                                            * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+                                        -->
+                                        <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+                                        <!-- 3. 실행 스크립트 -->
+                                        <script charset="UTF-8">
+                                            new daum.roughmap.Lander({
+                                                "timestamp" : "1604566155551",
+                                                "key" : "22t9j",
+                                                "mapWidth" : "640",
+                                                "mapHeight" : "360"
+                                            }).render();
+                                        </script>
+                                    </span>
                                 </th>
                                 <td class='tdnone'></td>
                                 <td class='tduse'>
                                     <ul class='spec'>
-                                        <li>이름</li>
-                                        <span class='doctorName'>
-                                            윤 인 재
-                                        </span>
-                                        <li>진료과목</li>
+                                        <li>주소</li>
                                         <span>
-                                            일반임상, 예방의학<br>
-                                            전북대학교 수의과대학 학사 졸업<br>
-                                            현) 이리온 동물병원 청담점 진료수의사
-                                        </span>
-                                        <li>경력</li>
-                                        <span>
-                                            
-                                            2014 서울 수의임상 학회 참석<br>
-                                            2019 서울 수의임상 학회 참석<br>
-                                            서울시 임상 수의사회 정회원
+                                        (50411) 서울특별시 강남구 청담동 106-10 청담더원 1층
                                         </span>
                                     </ul>
                                 </td>
