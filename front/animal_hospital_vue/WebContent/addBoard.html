@@ -5,19 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel='stylesheet' href='./CSS/default.css'>
+    <link rel='stylesheet' href='./CSS/index.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./source/includeHTML.js"></script>
+    <script src="./source/isLogin.js"></script>
+
 </head>
 
 <body>
-    <div id="app">
-        <form action="" method="POST" name="frm" @submit.prevent="addBoard">
-            제목: <input type="text" id="title" v-model='title'><br> 내용:
-            <textarea id="content" v-model='content'></textarea> 비밀글
-            <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
-            <input type="submit" value="등록">
-        </form>
+    <div class="wrapper">
+        <div class='inner-wrapper'>
+            <header include-html='./source/header.html'></header>
+            <br><br><br><br><br>
+            <section class='visual'>
+                <div id="app">
+                    <form action="" method="POST" name="frm" @submit.prevent="addBoard">
+                        제목: <input type="text" id="title" v-model='title'><br> 내용:
+                        <textarea id="content" v-model='content'></textarea> 비밀글
+                        <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
+                        <input type="submit" value="등록">
+                    </form>
+                </div>
+            </section>
+            <footer include-html='./source/footer.html'></footer>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
         new Vue({
             el: "#app",
@@ -64,5 +78,8 @@
         });
     </script>
 </body>
+<script>
+    includeHTML();
+</script>
 
 </html>
