@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' href='../default.css'>
-    <link rel='stylesheet' href='../index.css'>
+    <link rel='stylesheet' href='./css/default.css'>
+    <link rel='stylesheet' href='./css/index.css'>
 </head>
 
 <body>
+    <header include-html='../source/header.html'></header>
+    <br><br><br><br><br>
     <div id="app">
         <a href="./addBoard.html"><button v-if="loginId != null">글쓰기</button></a>
         <table>
@@ -40,10 +42,14 @@
         </table>
 
     </div>
+    <footer include-html='./source/footer.html'></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="../WEB-INF/lib/includeHTML.js"></script>
+    <script src="./source/includeHTML.js"></script>
+    <script src="./source/isLogin.js"></script>
     <script>
+        includeHTML();
+        isLogin();
         new Vue({
             el: "#app",
             data() {

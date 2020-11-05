@@ -69,6 +69,19 @@
             }
             var date = new Date();
 
+<<<<<<< HEAD
+=======
+            let vueData = revData.$data;
+
+<<<<<<< HEAD
+            }
+            // [{"title" : "운인재 원장"},
+            // {"start" : "2022-2-4"}]
+=======
+            console.log(JSON.stringify(vueData.info));
+
+>>>>>>> 69796bef043175db3216063e1ecd1b341a174e97
+>>>>>>> 6688c746d4a27a43dcd2d29aeece6a1ba5836bcc
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: "2020-11-04",
                 //date.getFullYear() + "-" + ("0" + Number(date.getMonth()) - 1).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
@@ -279,13 +292,14 @@
                         .get("http://127.0.0.1:7000/mijung/getAllReservation")
                         .then(response => {
                             this.info = response.data
+
                         })
                         .catch(error => {
                             console.log(error);
                             this.errored = true
                         })
                         .finally(() => this.loading = false)
-                },
+                }
 
             }); //vue
             new Vue({
