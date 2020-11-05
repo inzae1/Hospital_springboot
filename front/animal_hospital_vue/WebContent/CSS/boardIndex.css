@@ -1,13 +1,37 @@
 #app {
-    /* background-color: silver; */
     height: 640px;
+}
+
+.visual {
+    position: relative;
+    padding: 0 50px;
+}
+
+.visual .slide {
+    height: 250px;
+    width: 100%;
+    background: url(../img/slide_three.jpg) no-repeat center;
+    background-position-y: -550px;
+}
+
+.visual .title {
+    width: 250px;
+    text-align: center;
+    font-size: 60px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 5px solid white;
+    font-weight: 600;
+    color: white;
 }
 
 #app a.btn {
     display: inline-block;
     max-height: 80px;
     width: auto;
-    padding: 0 0 20px 420px;
+    padding: 20px 0 20px 1200px;
 }
 
 #app .table {
@@ -25,6 +49,10 @@
     font-size: 18px;
 }
 
-#app .table tbody {
+#app .table .tbody {
     font-size: 14px;
+}
+
+#app .table .tbody {
+    border-bottom: 1px solid silver;
 }

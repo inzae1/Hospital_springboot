@@ -15,6 +15,52 @@
                         <li class=''><a href=''>나와라</a></li>
                         <li class=''><a href=''>나와라</a></li>
                     </ul> -->
+<<<<<<< HEAD
+                </a>
+            </li>
+            <li class=' '>
+                <a href='index_rev1.html'>
+                    <span>진료예약</span>
+                </a>
+            </li>
+            <li class=' '>
+                <a href='boardIndex.html'>
+                    <span>Q & A</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 로그인 부분 -->
+    <div class='header-right' id='app'>
+        <ul class=' ' v-if="!isLogin">
+            <li class=' '>
+                <a href='login.html'>
+                    <h2>로그인</h2>
+                </a>
+            </li>
+            <li class=' '>
+                <a href='register.html'>
+                    <h2>회원가입</h2>
+                </a>
+            </li>
+        </ul>
+        <ul class=' ' v-if="isLogin">
+            <li class=' '>
+                <a href="#" @click="logout">
+                    <h2>로그아웃</h2>
+                </a>
+            </li>
+            <li class=' '>
+                <a href='mypage.html'>
+                    <h2>마이페이지</h2>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+</header>
+=======
             </a>
         </li>
         <li class=' '>
@@ -56,3 +102,4 @@
         </li>
     </ul>
 </div>
+>>>>>>> ba1ffbba97fc1cb1dc3b953cf9633f52c8378c8e

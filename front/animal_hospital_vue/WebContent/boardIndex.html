@@ -19,8 +19,16 @@
             <header include-html='./source/header.html'></header>
             <br><br><br><br><br>
             <section class='visual'>
+                <div class='slide'>
+                    <!-- 상단 이미지 -->
+                    <div class='title'>
+                        <span>Q & A</span>
+                    </div>
+                </div>
+
                 <div id="app">
                     <a href="./addBoard.html" class='btn'><button v-if="loginId != null">글쓰기</button></a>
+
                     <table class='table'>
                         <thead>
                             <tr>
@@ -32,7 +40,7 @@
                                 <th>조회수</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class='tbody'>
 
                             <tr v-for='board in info'>
                                 <td>{{board.bdID}}</td>
