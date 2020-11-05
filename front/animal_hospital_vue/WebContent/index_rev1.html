@@ -277,7 +277,7 @@
             </section>
         </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
         <footer include-html='./source/footer.html'>
         </footer>
         <script>
@@ -320,12 +320,13 @@
                     } //reservation
                 }, //methods
                 mounted() {
-                    console.log("mount")
+
                     axios
                         .get("http://127.0.0.1:7000/mijung/getAllReservation")
                         .then(response => {
                             this.info = response.data
                             localStorage.setItem("revInfo", JSON.stringify(this.info))
+                            console.log("mount")
                         })
                         .catch(error => {
                             console.log(error);
