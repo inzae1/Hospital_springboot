@@ -58,9 +58,9 @@ public class BoardController {
 		return new ResponseEntity(board.getBdView(),HttpStatus.OK);
 	}
 
-	@GetMapping("getAllBoard")
-	public ResponseEntity<List<Board>> getAllBoard() throws Exception{
-		List<Board> boards = service.getAllBoard();
+	@GetMapping("getAllBoard/{page}")
+	public ResponseEntity<List<Board>> getAllBoard(@PathVariable int page) throws Exception{
+		List<Board> boards = service.getAllBoard((page-1)*5);
 		if(boards.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(boards, HttpStatus.OK);
 	}
@@ -70,6 +70,12 @@ public class BoardController {
 		Board board = service.getBoard(bdID);
 		if(board==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(board,HttpStatus.OK);
+	}
+	
+	@GetMapping("countBoard")
+	public ResponseEntity countBoard() throws Exception{
+		int maxPage = service.countBoard();
+		return new ResponseEntity(maxPage, HttpStatus.OK);
 	}
 	
 	@GetMapping("searchBoardByTitle/{title}")
