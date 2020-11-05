@@ -71,5 +71,19 @@ public class BoardController {
 		if(board==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(board,HttpStatus.OK);
 	}
+	
+	@GetMapping("searchBoardByTitle/{title}")
+	public ResponseEntity searchBoardByTitle(@PathVariable String title)throws Exception{
+		List<Board> boards = service.searchBoardByTitle(title);
+		if(boards.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(boards, HttpStatus.OK);
+	}
+	
+	@GetMapping("searchBoardByContent/{content}")
+	public ResponseEntity searchBoardByContent(@PathVariable String content)throws Exception{
+		List<Board> boards = service.searchBoardByContent(content);
+		if(boards.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(boards, HttpStatus.OK);
+	}
 
 }

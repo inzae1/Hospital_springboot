@@ -50,4 +50,15 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.getBoard(bdID);
 	}
 
+	@Override
+	public List<Board> searchBoardByTitle(String title) throws Exception {
+		return boardDAO.searchBoardByTitle(title);
+	}
+
+	@Override
+	public List<Board> searchBoardByContent(String content) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDAO.searchBoardByContent(content);
+	}
+
 }
