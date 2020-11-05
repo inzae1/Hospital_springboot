@@ -59,4 +59,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return false;
 	}
 
+	@Override
+	public Customer getNameById(String custId) throws Exception {
+		return sqlSesstion.selectOne(ns + "getNameById", custId);
+	}
+
 }

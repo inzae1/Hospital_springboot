@@ -19,7 +19,6 @@ table.type05 {
     border-top: 1px solid #ccc;
     margin: auto;
     border-radius: 5px;
-    width: 300px;
 }
 
 table.type05 th {
@@ -35,7 +34,7 @@ table.type05 th {
 }
 
 table.type05 td {
-    width: 100px;
+    width: 50px;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }

@@ -133,19 +133,18 @@
                 }],
 
                 eventClick: function(arg) {
-                    if (arg.event.id == "revPossible") {
-                        if (localStorage.getItem("animal_admin") == null) {
-                            var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
-                            if (loginLocation) {
-                                location.href = "login.html"
-                            }
-                        } else {
-                            revData.$data.revDoctor = arg.event.title;
-                            revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
+                    if (localStorage.getItem("animal_admin") == null) {
+                        var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
+                        if (loginLocation) {
+                            return location.href = "login.html"
                         }
+                    } else if (arg.event.id == "revPossible") {
+                        revData.$data.revDoctor = arg.event.title;
+                        revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
                     } else {
                         alert("이미 예약된 날짜입니다. 다른 날짜를 선택해주세요.")
                     }
+
                 },
             });
 
@@ -249,7 +248,7 @@
                             </thead>
                             <tr>
                                 <th scope="row">예약날짜</th>
-                                <td>{{revDate}}</td>
+                                <td><b>{{revDate}}</b></td>
                             </tr>
                             <tr>
                                 <th scope="row">동물카테고리</th>
@@ -267,7 +266,7 @@
                             <tr>
                                 <th scope="row">담당의사
                                 </th>
-                                <td>{{revDoctor}}</td>
+                                <td><b>{{revDoctor}}</b></td>
                             </tr>
                             <tr>
                                 <th scope="row">증상
@@ -315,7 +314,7 @@
                             }) //post
                             .then(function(response) {
                                 alert("예약 완료되셨습니다.");
-                                location.reload(true)
+                                mounted
                             }) //then
                             .catch(error => {
                                 console.log(error);

@@ -79,5 +79,12 @@ public class CustomerController {
 		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(HttpStatus.OK);
 	}
+	@GetMapping("/getNameById/{custId}")
+	public ResponseEntity getNameById(@PathVariable String custId) throws Exception{
+		Customer customer = new Customer (custId);
+		Customer getNameById = customerService.getNameById(custId);
+		if(getNameById==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(getNameById, HttpStatus.OK);
+	}
 
 }
