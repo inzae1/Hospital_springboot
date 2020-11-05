@@ -6,9 +6,9 @@
     <title>Document</title>
     <script src='./WEB-INF/lib/main.js'></script>
     <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
-    <link rel='stylesheet' href='rev_css.css'>
-    <link rel='stylesheet' href='default_copy.css'>
-    <link rel='stylesheet' href='index.css'>
+    <link rel='stylesheet' href='./css/rev_css.css'>
+    <link rel='stylesheet' href='./css/default_copy.css'>
+    <link rel='stylesheet' href='./css/index.css'>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,7 +19,10 @@
             var calendarEl = document.getElementById('calendar');
             var date = new Date();
             dates = [];
-            var date = new Date();
+            var revInfo = JSON.parse(localStorage.getItem("revInfo"))
+            var revInfoArray = [];
+            var revInfoArrayCover = [];
+
             const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
@@ -27,47 +30,97 @@
             }
 
             var models = new Array();
+            var modelsFalse = new Array();
 
-            for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "윤인재 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                models.push(dateInfo);
+            for (let index = 0; index < revInfo.length; index++) {
+                revInfoArray.push(revInfo[index].revDate + revInfo[index].revDoctor)
             }
 
             for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "지혜수 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "윤인재 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "윤인재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "윤인재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
 
-                models.push(dateInfo);
+                    modelsFalse.push(dateInfo);
+                }
+
+            }
+            for (let index = 0; index < dates.length; index++) {
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "지혜수 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "지혜수 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "지혜수 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+
+                    modelsFalse.push(dateInfo);
+                }
+            }
+            for (let index = 0; index < dates.length; index++) {
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "나현재 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "나현재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "나현재 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+
+                    modelsFalse.push(dateInfo);
+                }
+            }
+            for (let index = 0; index < dates.length; index++) {
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "방은호 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "방은호 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "방은호 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+
+                    modelsFalse.push(dateInfo);
+                }
             }
 
             for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "나현재 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "김태형 원장") == false) {
+                    var dateInfo = new Object();
+                    dateInfo.title = "김태형 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+                    dateInfo.id = "revPossible"
+                    models.push(dateInfo);
+                } else {
+                    var dateInfo = new Object();
+                    dateInfo.title = "김태형 원장";
+                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
 
-                models.push(dateInfo);
-            }
-
-            for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "방은호 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                models.push(dateInfo);
-            }
-
-            for (let index = 0; index < dates.length; index++) {
-                var dateInfo = new Object();
-                dateInfo.title = "김태형 원장";
-                dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                models.push(dateInfo);
+                    modelsFalse.push(dateInfo);
+                }
             }
             var date = new Date();
+
+
+
+            // for (let index = 0; index < revInfo.length; index++) {
+            //     console.log(revInfo[index].revDate + "," + revInfo[index].revDoctor)
+            // }
+
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: "2020-11-04",
@@ -76,18 +129,29 @@
                 selectable: false,
                 businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
-                eventBorderColor: "#3788d8",
-                events: models,
+                eventSources: [{
+                    events: modelsFalse,
+                    color: "red",
+                }, {
+                    events: models,
+                    color: "#3788d8",
+                    id: "revPossible"
+                }],
+
 
                 eventClick: function(arg) {
-                    if (localStorage.getItem("animal_admin") == null) {
-                        var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
-                        if (loginLocation) {
-                            location.href = "login.html"
+                    if (arg.event.id == "revPossible") {
+                        if (localStorage.getItem("animal_admin") == null) {
+                            var loginLocation = confirm('로그인 이후 사용 가능합니다. 로그인 하시겠습니까?')
+                            if (loginLocation) {
+                                location.href = "login.html"
+                            }
+                        } else {
+                            revData.$data.revDoctor = arg.event.title;
+                            revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
                         }
                     } else {
-                        revData.$data.revDoctor = arg.event.title;
-                        revData.$data.revDate = (arg.event.start.getFullYear() + "-" + ("0" + (Number(arg.event.start.getMonth()) + 1)).slice(-2) + "-" + ("0" + arg.event.start.getDate()).slice(-2));
+                        alert("이미 예약된 날짜입니다. 다른 날짜를 선택해주세요.")
                     }
                 },
             });
@@ -96,7 +160,7 @@
         });
 
         function locationBack() {
-            location.reload(true);
+            location.reload()
         }
     </script>
 </head>
@@ -147,7 +211,7 @@
                     </ul>
                     <ul class=' ' v-if="isLogin">
                         <li class=' '>
-                            <a href="#" @click="logout">
+                            <a href="index.html" @click="logout">
                                 <h2>로그아웃</h2>
                             </a>
                         </li>
@@ -275,11 +339,12 @@
                     } //reservation
                 }, //methods
                 mounted() {
+                    console.log("mount")
                     axios
                         .get("http://127.0.0.1:7000/mijung/getAllReservation")
                         .then(response => {
                             this.info = response.data
-
+                            localStorage.setItem("revInfo", JSON.stringify(this.info))
                         })
                         .catch(error => {
                             console.log(error);
