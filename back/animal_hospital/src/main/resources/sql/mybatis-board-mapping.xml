@@ -45,20 +45,30 @@
 	FROM board
 	WHERE bd_ID=#{bdID}
 </select>
-<select id="searchBoardByTitle" parameterType="string" resultType="board">
-	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
-	FROM board
-	WHERE bd_title LIKE '%' #{VALUE} '%'
-	ORDER BY bd_ID desc
-</select>
-<select id="searchBoardByContent" parameterType="string" resultType="board">
-	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
-	FROM board
-	WHERE bd_content LIKE '%' #{VALUE} '%'
-	ORDER BY bd_ID desc
-</select>
 <select id="countBoard" resultType="int">
 	SELECT COUNT(bd_ID) FROM board
+</select>
+<select id="searchBoardByTitle" parameterType="search" resultType="board">
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	FROM board
+	WHERE bd_title LIKE '%' #{searchContent} '%'
+	ORDER BY bd_ID desc
+	LIMIT #{page}, 5
+</select>
+<select id="countBoardByTitle" resultType="int" parameterType="string">
+	SELECT COUNT(bd_ID) FROM board
+	WHERE bd_title LIKE '%' #{VALUE} '%'
+</select>
+<select id="searchBoardByContent" parameterType="search" resultType="board">
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	FROM board
+	WHERE bd_content LIKE '%' #{searchContent} '%'
+	ORDER BY bd_ID desc
+	LIMIT #{page}, 5
+</select>
+<select id="countBoardByContent" resultType="int" parameterType="string">
+	SELECT COUNT(bd_ID) FROM board
+	WHERE bd_content LIKE '%' #{VALUE} '%'
 </select>
 
 </mapper>

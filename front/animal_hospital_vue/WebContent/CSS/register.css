@@ -26,79 +26,40 @@
     background-position-y: -610px;
 }
 
-.submenu {
-    text-align: center;
-}
-
-.submenu ul li {
-    list-style-type: none;
-    display: inline-block;
-    padding-left: 30px;
-    padding-right: 30px;
-    font-size: 18px;
-}
-
-.submenu ul li a:hover {
-    font-weight: 500;
-}
-
-.content {
-    height: 500px;
-    width: 1200px;
+#registerapp {
+    height: 300px;
+    width: 900px;
     margin-left: auto;
     margin-right: auto;
-    /* background-color: aqua; */
+    border-top: 3px solid silver;
+    border-bottom: 3px solid silver;
+}
+
+#login-form {
+    width: 700px;
+    margin: 50px auto;
+    padding: 15px;
+}
+
+#login-form table {
+    position: absolute;
+    padding-left: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-form tr th {
+    /* background-color: skyblue; */
     font-size: 15px;
+    padding: 5px 0 5px 0;
 }
 
-.content .table {
-    padding: 50px 0 0 80px
+#login-form tr td {
+    /* background-color: skyblue; */
+    font-size: 15px;
+    padding: 5px 0 5px 10px;
 }
 
-.content table {
-    padding: 10px;
-    border-top: 3px solid;
-    border-bottom: 3px solid;
-}
-
-.content th {
-    height: 400px;
-    width: 300px;
-    /* background-color: brown; */
-}
-
-.content th img {
-    max-height: 400px;
-    height: 400px;
-    width: 300px;
-}
-
-.content td.tdnone {
-    /* background-color: rgb(0, 255, 191); */
-    width: 20px;
-}
-
-.content td.tduse {
-    /* background-color: rgb(255, 7, 123); */
-    width: 1100px;
-}
-
-.spec {
-    padding-left: 30px;
-}
-
-.spec li {
-    padding-top: 10px;
-    font-weight: 600;
-    font-size: 20px;
-    color: rgb(238, 113, 29);
-}
-
-.spec span {
-    font-size: 18px;
-    font-weight: 200;
-}
-
-.spec span.doctorName {
-    font-size: 60px;
+#login-form tr td.tabol {
+    border: 1px solid;
 }

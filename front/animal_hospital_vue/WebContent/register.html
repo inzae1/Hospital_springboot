@@ -14,6 +14,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
+<<<<<<< HEAD
+=======
+    <style>
+        /* #login-form {
+            width: 500px;
+            margin: 100px auto;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 15px;
+        } */
+        /* inline이였던 요소들을 block으로 바꿈 */
+        /* #login-form input,
+        #login-form label {
+            display: block;
+        }
+        
+        #login-form label {
+            margin-top: 10px;
+        }
+        
+        #login-form input {
+            margin-top: 5px;
+        }
+        /* 애트리뷰트 선택자 */
+        /* #login-form input[type='image'] {
+            margin: 10px auto;
+        }
+         */
+    </style>
+>>>>>>> 9512b00025275b2cbe6d3d1e75036ac42f620ed5
 </head>
 
 <body>
@@ -118,37 +148,38 @@
                         </div>
                     </div>
                 </div>
+                <br><br><br>
                 <div id="registerapp">
                     <form action="#" method="POST" @submit.prevent="register" id="login-form">
                         <table>
                             <tr>
                                 <th>아이디(이메일)</th>
                                 <td><input type="email" name="custId" id="custId" v-model="custId" placeholder="ex) abc@abc.com" @blur="idCheck" /></td>
-                                <td><span v-if="custIdCheck">이미 사용중인 아이디입니다</span></td>
+                                <td class='tabol'><span v-if="custIdCheck">이미 사용중인 아이디입니다</span></td>
                             </tr>
                             <tr>
                                 <th>비밀번호</th>
-                                <td><input type="password" name="custPassword1" id="custPassword1" v-model="custPassword1" /></td>
-                                <td></td>
+                                <td class='tabol'><input type="password" name="custPassword1" id="custPassword1" v-model="custPassword1" /></td>
+
                             </tr>
                             <tr>
                                 <th>비밀번호 확인</th>
                                 <td><input type="password" name="custPassword2" id="custPassword2" v-model="custPassword2" @keyup="pwCheck" /></td>
-                                <td><span v-if="!custPwCheck">위 비밀번호와 일치하지 않습니다.</span></td>
+                                <td class='tabol'><span v-if="!custPwCheck">위 비밀번호와 일치하지 않습니다.</span></td>
                             </tr>
                             <tr>
                                 <th>이름</th>
-                                <td><input type="text" name="custName" id="custName" v-model="custName" /></td>
-                                <td></td>
+                                <td class='tabol'><input type="text" name="custName" id="custName" v-model="custName" /></td>
+
                             </tr>
                             <tr>
                                 <th>전화번호</th>
-                                <td><input type="tel" name="custPhone" id="custPhone" v-model="custPhone"></td>
-                                <td></td>
+                                <td class='tabol'><input type="tel" name="custPhone" id="custPhone" v-model="custPhone"></td>
+
                             </tr>
                             <tr>
                                 <td colspan="2" style="height: 50px; text-align: center;">
-                                    <button type="submit" name="button" :disabled="custIdCheck||!custPwCheck">회원가입</button>
+                                    <button type="submit" name="button" :disabled="custIdCheck||!custPwCheck" class='button'>회원가입</button>
                                 </td>
                                 <td></td>
                             </tr>

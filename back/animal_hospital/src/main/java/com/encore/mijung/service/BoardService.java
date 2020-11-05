@@ -3,6 +3,7 @@ package com.encore.mijung.service;
 import java.util.List;
 
 import com.encore.mijung.domain.Board;
+import com.encore.mijung.domain.Search;
 
 public interface BoardService {
 	public void addBoard(Board board) throws Exception;
@@ -19,9 +20,13 @@ public interface BoardService {
 
 	public Board getBoard(int bdID) throws Exception;
 	
-	public List<Board> searchBoardByTitle (String title) throws Exception;
+	public List<Board> searchBoardByTitle (Search search) throws Exception;
 	
-	public List<Board> searchBoardByContent(String content) throws Exception;
+	public List<Board> searchBoardByContent(Search search) throws Exception;
 	
 	public int countBoard() throws Exception;
+	
+	public int countBoardByTitle(String title) throws Exception;
+	
+	public int countBoardByContent(String content) throws Exception;
 }
