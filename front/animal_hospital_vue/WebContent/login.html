@@ -7,7 +7,7 @@
     <title>Document</title>
     <script src='./WEB-INF/lib/main.js'></script>
     <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
-    <link rel='stylesheet' href='./CSS/rev_css.css'>
+    <link rel='stylesheet' href='./CSS/login.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
     <link rel='stylesheet' href='./CSS/intro.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
@@ -112,7 +112,7 @@
                 <br><br><br><br><br>
                 <div id="loginapp">
                     <form action="#" method="POST" @submit.prevent="login" id="login-form">
-                        <table>
+                        <table class="type01">
                             <tr>
                                 <th>아이디(이메일)</th>
                                 <td><input type="email" name="custId" id="custId" v-model="custId" /></td>
