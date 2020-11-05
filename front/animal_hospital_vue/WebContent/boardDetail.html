@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel='stylesheet' href='./CSS/default.css'>
-    <link rel='stylesheet' href='./CSS/boadrDatail.css'>
+    <link rel='stylesheet' href='./CSS/boardIndex.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
     <script src="./source/isLogin.js"></script>
@@ -18,8 +18,14 @@
             <header include-html='./source/header.html'></header>
             <br><br><br><br><br>
             <section class='visual'>
+                <div class='slide'>
+                    <!-- 상단 이미지 -->
+                    <div class='title'>
+                        <span>Q & A</span>
+                    </div>
+                </div>
                 <div id="app">
-                    <table>
+                    <table class='table'>
                         <thead>
                             <th>제목</th>
                             <td>{{info.bdTitle}}</td>

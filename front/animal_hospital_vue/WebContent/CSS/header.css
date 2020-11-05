@@ -37,6 +37,39 @@ header .header-left img {
     padding-right: 30px;
 }
 
+header .header-center li {
+    display: inline-block;
+}
+
+header .header-center li a {
+    position: relative;
+    height: 80px;
+    padding: 0 35px;
+    font-size: 18px;
+    color: #333;
+    line-height: 80px;
+}
+
+header .header-center li a:hover {
+    color: #333;
+    font-weight: bold;
+}
+
+header .header-center li a span {
+    position: relative;
+}
+
+header .header-center li a:hover span:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -9px;
+    width: 100%;
+    height: 1;
+    background: #333;
+}
+
 header .header-right {
     position: absolute;
     right: 50px;
@@ -71,37 +104,4 @@ header .header-right li:first-child:after {
 
 header .header-right li:last-child a {
     padding-right: 0;
-}
-
-header .header-center li {
-    display: inline-block;
-}
-
-header .header-center li a {
-    position: relative;
-    height: 80px;
-    padding: 0 35px;
-    font-size: 18px;
-    color: #333;
-    line-height: 80px;
-}
-
-header .header-center li a:hover {
-    color: #333;
-    font-weight: bold;
-}
-
-header .header-center li a span {
-    position: relative;
-}
-
-header .header-center li a:hover span:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: -9px;
-    width: 100%;
-    height: 1;
-    background: #333;
 }
