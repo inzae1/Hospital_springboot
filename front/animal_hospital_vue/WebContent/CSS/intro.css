@@ -112,101 +112,11 @@ header .header-center li a:hover span:after {
 }
 
 .visual .con>div {
-    height: 640px;
+    height: 200px;
 }
 
 .visual .con .slide {
-    background: url(./img/slide_one.jpg) no-repeat center;
-}
-
-.visual .prev,
-.visual .next {
-    display: block;
-    position: absolute;
-    top: 50%;
-    width: 25px;
-    height: 47px;
-    transform: translate(-50%);
-    color: transparent;
-    background: url(./img/arrow.png) no-repeat;
-    color: transparent;
-}
-
-.vusual .prev {
-    left: 82px;
-}
-
-.visual.next {
-    right: 82px;
-}
-
-.visual .control {
-    position: absolute;
-    left: 0;
-    bottom: 55px;
-    width: 100%;
-    text-align: center;
-}
-
-.visual .control>div {
-    display: inline-block;
-    position: relative;
-    padding: 0 45px 0 0;
-}
-
-.visual .control>div>div {
-    position: absolute;
-    right: 0;
-}
-
-.visual .control>div>div>a {
-    overflow: hidden;
-    display: inline-block;
-    width: 8px;
-    height: 9px;
-}
-
-.visual .control>div>div>a img {
-    display: inline-block;
-    max-height: 30px;
-    width: auto;
-    padding-right: 30px;
-}
-
-.visaul .control ul {
-    display: inline-block;
-    font-size: 0;
-    position: relative;
-    top: -7px;
-}
-
-.visual .control li {
-    display: inline-block;
-    padding: 0.3px;
-}
-
-.visual .control li .on a {
-    background: #fff;
-}
-
-.visual .control li a {
-    display: block;
-    width: 50px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.5);
-    border: none;
-}
-
-.visual .control a {
-    color: transparent;
-}
-
-.visual .con>div {
-    height: 640px;
-}
-
-.visual .con .slide {
-    background: url(./img/slide_one.jpg) no-repeat center;
+    background: url(../img/slide_one.jpg) no-repeat center;
     color: #333;
     font-size: 32px;
     line-height: 46px;
@@ -224,6 +134,24 @@ header .header-center li a:hover span:after {
     top: 175px;
 }
 
+.visual .submenu .intro {
+    background-color: wheat;
+    font-size: 15px;
+    text-align: center;
+    list-style-type: none;
+    margin-left: 400px;
+}
+
+.visual .submenu .intro ul li {
+    float: left;
+    width: 25%;
+    height: 100%;
+    line-height: 80px;
+    text-align: center;
+    content: '';
+    border-left: 1px solid #666;
+}
+
 .footer {
     text-align: center;
     position: relative;
@@ -235,6 +163,15 @@ header .header-center li a:hover span:after {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+#footer .on {
+    color: rgb(255, 255, 255);
+}
+
+#footer .on:hover {
+    color: #333;
+    font-weight: 300;
 }
 
 #footer>a>img {
