@@ -26,9 +26,10 @@ body .container .half {
 }
 
 body .container .half.bg {
-    background-image: url("../img/slide_nine.jpg");
+    background-image: url("../img/slide_ten.jpg");
     background-size: 400px;
     background-repeat: no-repeat;
+    background-position-x: center;
 }
 
 body .container h1 {
@@ -134,6 +135,7 @@ body .container .content input.inpt {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
+    margin-left: 1%;
 }
 
 body .container .content input.inpt::-webkit-input-placeholder {
@@ -170,6 +172,7 @@ body .container .content input.submit {
     display: block;
     width: 20%;
     margin-bottom: 5%;
+    margin-left: 1%;
     height: 42px;
     cursor: pointer;
     vertical-align: middle;
@@ -246,8 +249,9 @@ body .container .content .submit-wrap {
 
 body .container .content .submit-wrap a {
     font-size: 12px;
+    margin-left: 5%;
+    margin-bottom: 3%;
     display: block;
-    margin-top: 20px;
     text-decoration: none;
     color: #999999;
 }
