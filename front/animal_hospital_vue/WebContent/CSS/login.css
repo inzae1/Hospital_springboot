@@ -307,3 +307,29 @@ body .container .content .signup-cont {
     font-weight: 700;
     text-decoration: none;
 }
+
+.visual {
+    position: relative;
+    /* padding: 0 50px; */
+}
+
+.visual .con>div {
+    height: 20px;
+}
+
+.visual .con .slide {
+    background: #f58d04;
+    color: #333;
+    background-position-y: -750px;
+}
+
+.visual .con .slideTwo {
+    background: #f58d04;
+    color: #333;
+    background-position-y: -750px;
+    padding-top: 10px;
+}
+
+.inpt {
+    back
+}
