@@ -5,51 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' href='./css/default.css'>
-    <link rel='stylesheet' href='./css/index.css'>
-</head>
-
-<body>
-    <header include-html='../source/header.html'></header>
-    <br><br><br><br><br>
-    <div id="app">
-        <a href="./addBoard.html"><button v-if="loginId != null">글쓰기</button></a>
-        <table>
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>답변여부</th>
-                    <th>제목</th>
-                    <th>글쓰니</th>
-                    <th>날짜</th>
-                    <th>조회수</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr v-for='board in info'>
-                    <td>{{board.bdID}}</td>
-                    <td v-if="board.bdReply!=null">Y</td>
-                    <td v-else>N</td>
-                    <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}}**</td>
-                    <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
-                    <td>{{board.custId}}</td>
-                    <td>{{board.bdDate}}</td>
-                    <td>{{board.bdView}}</td><br>
-                </tr>
-
-            </tbody>
-        </table>
-
-    </div>
-    <footer include-html='./source/footer.html'></footer>
+    <link rel='stylesheet' href='./CSS/default.css'>
+    <link rel='stylesheet' href='./CSS/boardIndex.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
-    <script src="./source/isLogin.js"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class='inner-wrapper'>
+            <header include-html='./source/header.html'></header>
+            <br><br><br><br><br>
+            <section class='visual'>
+                <div id="app">
+                    <a href="./addBoard.html" class='btn'><button v-if="loginId != null">글쓰기</button></a>
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>답변여부</th>
+                                <th>제목</th>
+                                <th>글쓰니</th>
+                                <th>날짜</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr v-for='board in info'>
+                                <td>{{board.bdID}}</td>
+                                <td v-if="board.bdReply!=null">Y</td>
+                                <td v-else>N</td>
+                                <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}}**</td>
+                                <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
+                                <td>{{board.custId}}</td>
+                                <td>{{board.bdDate}}</td>
+                                <td>{{board.bdView}}</td><br>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <footer include-html='./source/footer.html'></footer>
+        </div>
+    </div>
     <script>
-        includeHTML();
-        isLogin();
         new Vue({
             el: "#app",
             data() {
@@ -104,6 +107,10 @@
 
         });
     </script>
+
 </body>
+<script>
+    includeHTML();
+</script>
 
 </html>

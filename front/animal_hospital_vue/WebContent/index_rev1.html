@@ -6,9 +6,18 @@
     <title>Document</title>
     <script src='./WEB-INF/lib/main.js'></script>
     <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
+<<<<<<< HEAD
     <link rel='stylesheet' href='./css/rev_css.css'>
     <link rel='stylesheet' href='./css/default_copy.css'>
     <link rel='stylesheet' href='./css/index.css'>
+=======
+    <link rel='stylesheet' href='rev_css.css'>
+    <link rel='stylesheet' href='./CSS/default.css'>
+    <link rel='stylesheet' href='./CSS/intro.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./source/includeHTML.js"></script>
+    <script src="./source/isLogin.js"></script>
+>>>>>>> 947bbe9def73919a3b35bed482b428861dec7e5b
     <script src="https://unpkg.com/vue"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -168,6 +177,7 @@
 <body>
     <div class="wrapper">
         <div class='inner-wrapper'>
+<<<<<<< HEAD
             <header class="header">
                 <!-- 로고 부분 -->
                 <div class='header-left'>
@@ -223,6 +233,9 @@
                     </ul>
                 </div>
             </header>
+=======
+            <header include-html='./source/header.html'></header>
+>>>>>>> 947bbe9def73919a3b35bed482b428861dec7e5b
             <br><br><br><br><br>
             <section class='visual'>
                 </header>
@@ -273,11 +286,15 @@
                             </tr>
                         </table>
                     </form>
-
-
                 </div>
+            </section>
         </div>
+
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<<<<<<< HEAD
+
+        <footer include-html='./source/footer.html'></footer>
+=======
         <footer class='footer '>
             <div id='footer'>
                 <a href="#"><img src='img/upper_arrow.png' alt='대메뉴 바로가기'></a>
@@ -299,6 +316,7 @@
                 </address>
             </div>
         </footer>
+>>>>>>> 6688c746d4a27a43dcd2d29aeece6a1ba5836bcc
         <script>
             var revData = new Vue({
                 el: "#rev_app ",
@@ -376,6 +394,10 @@
                 }
             });
         </script>
+    </div>
 </body>
+<script>
+    includeHTML();
+</script>
 
 </html>
