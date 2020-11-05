@@ -53,6 +53,12 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return customerDAO.changePassword(customer);
 	}
+
+	@Override
+	public Customer getNameById(String custId) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.getNameById(custId);
+	}
 	
 	
 }
