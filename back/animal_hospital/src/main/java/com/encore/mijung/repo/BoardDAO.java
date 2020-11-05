@@ -18,4 +18,8 @@ public interface BoardDAO {
 	public List<Board> getAllBoard() throws Exception;
 
 	public Board getBoard(int bdID) throws Exception;
+	
+	public List<Board> searchBoardByTitle (String title) throws Exception;
+	
+	public List<Board> searchBoardByContent(String content) throws Exception;
 }

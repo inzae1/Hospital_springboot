@@ -55,4 +55,14 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne(NS + "getBoard", bdID);
 	}
 
+	@Override
+	public List<Board> searchBoardByTitle(String title) throws Exception {
+		return sqlSession.selectList(NS + "searchBoardByTitle", title);
+	}
+
+	@Override
+	public List<Board> searchBoardByContent(String content) throws Exception {
+		return sqlSession.selectList(NS + "searchBoardByContent", content);
+	}
+
 }
