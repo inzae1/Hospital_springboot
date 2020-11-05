@@ -116,7 +116,7 @@ header .header-center li a:hover span:after {
 }
 
 .visual .con .slide {
-    background: url(./img/slide_one.jpg) no-repeat center;
+    background: url(../img/slide_one.jpg) no-repeat center;
     color: #333;
     font-size: 32px;
     line-height: 46px;
@@ -132,6 +132,24 @@ header .header-center li a:hover span:after {
     position: absolute;
     left: 1300px;
     top: 175px;
+}
+
+.visual .submenu .intro {
+    background-color: wheat;
+    font-size: 15px;
+    text-align: center;
+    list-style-type: none;
+    margin-left: 400px;
+}
+
+.visual .submenu .intro ul li {
+    float: left;
+    width: 25%;
+    height: 100%;
+    line-height: 80px;
+    text-align: center;
+    content: '';
+    border-left: 1px solid #666;
 }
 
 .footer {

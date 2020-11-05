@@ -1,0 +1,295 @@
+header {
+    position: relative;
+    text-align: center;
+    height: 80px;
+}
+
+header .header-left {
+    position: absolute;
+    left: 50px;
+    top: 0;
+    padding: 14px 0 0;
+}
+
+header .header-left a {
+    display: block;
+    width: 110px;
+    height: 80px;
+    color: transparent;
+}
+
+header .header-left span {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 18px;
+    color: #1b1b1b;
+    font-weight: 300;
+}
+
+header .header-left span strong {
+    color: #dc5f0d;
+}
+
+header .header-left img {
+    display: inline-block;
+    max-height: 80px;
+    width: auto;
+    padding-right: 30px;
+}
+
+header .header-right {
+    position: absolute;
+    right: 50px;
+    top: 0;
+}
+
+header .header-right li {
+    float: left;
+}
+
+header .header-right li:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 7px;
+    background: #333;
+    transform: translateY(-50%)
+}
+
+header .header-right li a {
+    display: block;
+    height: 80px;
+    padding: 0 10px;
+    line-height: 80px;
+}
+
+header .header-right li:first-child:after {
+    display: none;
+}
+
+header .header-right li:last-child a {
+    padding-right: 0;
+}
+
+header .header-center li {
+    display: inline-block;
+}
+
+header .header-center li a {
+    position: relative;
+    height: 80px;
+    padding: 0 35px;
+    font-size: 18px;
+    color: #333;
+    line-height: 80px;
+}
+
+header .header-center li a:hover {
+    color: #333;
+    font-weight: bold;
+}
+
+header .header-center li a span {
+    position: relative;
+}
+
+header .header-center li a:hover span:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -9px;
+    width: 100%;
+    height: 1;
+    background: #333;
+}
+
+.visual {
+    position: relative;
+    padding: 0 50px;
+}
+
+.visual .prev,
+.visual .next {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 25px;
+    height: 47px;
+    transform: translate(-50%);
+    color: transparent;
+    background: url(./img/arrow.png) no-repeat;
+    color: transparent;
+}
+
+.vusual .prev {
+    left: 82px;
+}
+
+.visual.next {
+    right: 82px;
+}
+
+.visual .control {
+    position: absolute;
+    left: 0;
+    bottom: 55px;
+    width: 100%;
+    text-align: center;
+}
+
+.visual .control>div {
+    display: inline-block;
+    position: relative;
+    padding: 0 45px 0 0;
+}
+
+.visual .control>div>div {
+    position: absolute;
+    right: 0;
+}
+
+.visual .control>div>div>a {
+    overflow: hidden;
+    display: inline-block;
+    width: 8px;
+    height: 9px;
+}
+
+.visual .control>div>div>a img {
+    display: inline-block;
+    max-height: 30px;
+    width: auto;
+    padding-right: 30px;
+}
+
+.visaul .control ul {
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+    top: -7px;
+}
+
+.visual .control li {
+    display: inline-block;
+    padding: 0.3px;
+}
+
+.visual .control li .on a {
+    background: #fff;
+}
+
+.visual .control li a {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.visual .control a {
+    color: transparent;
+}
+
+.visual .con>div {
+    height: 640px;
+}
+
+.visual .con .slide img {
+    height: 640px;
+    width: 100%;
+}
+
+.visual .con .slide {
+    background: url(../img/slide_one.jpg) no-repeat center;
+    color: #333;
+    font-size: 32px;
+    line-height: 46px;
+}
+
+.visual .con .slide p {
+    padding: 19px 0 0;
+    line-height: 100%;
+    font-size: 20px;
+}
+
+.visual .con .slide .txt {
+    position: absolute;
+    left: 1300px;
+    top: 175px;
+}
+
+.footer {
+    text-align: center;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#footer>a {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#footer .on {
+    color: rgb(255, 255, 255);
+}
+
+#footer .on:hover {
+    color: #333;
+    font-weight: 300;
+}
+
+#footer>a>img {
+    max-height: 35px;
+    width: auto;
+}
+
+.footer img {
+    display: inline-block;
+    max-height: 80px;
+    width: auto;
+    padding-right: 30px;
+    padding: 42px 0 26px;
+}
+
+.footer .nav li {
+    display: inline-block;
+    position: relative;
+    padding: 0 15px;
+}
+
+.footer .nav li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 14px;
+    background: #b2b2b2;
+}
+
+.footer .nav li:first-child:after {
+    display: none;
+}
+
+.footer .nav li a {
+    font-size: 13.5px;
+    color: #333
+}
+
+.footer address {
+    padding: 25px 0 0;
+    font-size: 13.5px;
+    color: #666;
+}
+
+.footer address em {
+    display: block;
+    padding: 25px 0 0;
+    font-size: 12.5;
+    color: #999;
+}

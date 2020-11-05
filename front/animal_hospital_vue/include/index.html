@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='default.css'>
+    <link rel='stylesheet' href='index.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="includeHTML.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class='inner-wrapper'>
+            <!--header-->
+
+            <header include-html='header.html'></header>
+            <br><br><br><br><br>
+
+            <!--section-->
+            <section include-html='section.html'></section>
+
+            <!--footer-->
+            <footer include-html='footer.html'></footer>
+        </div>
+
+
+    </div>
+    <div>
+
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            },
+            methods: {
+                logout() {
+                    let con_logout = confirm("로그아웃 하시겠습니까");
+                    if (con_logout) {
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        location.reload(true);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+<script>
+    includeHTML();
+</script>
+
+</html>
