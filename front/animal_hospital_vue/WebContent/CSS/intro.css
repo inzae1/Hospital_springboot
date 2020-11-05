@@ -26,20 +26,32 @@
     background-position-y: -750px;
 }
 
-.visual .submenu .intro {
-    background-color: wheat;
-    font-size: 15px;
+.submenu {
     text-align: center;
-    list-style-type: none;
-    margin-left: 400px;
 }
 
-.visual .submenu .intro ul li {
-    float: left;
-    width: 25%;
-    height: 100%;
-    line-height: 80px;
-    text-align: center;
-    content: '';
-    border-left: 1px solid #666;
+.submenu ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+}
+
+.submenu ul li a:hover {
+    font-weight: 500;
+}
+
+.content {
+    height: 500px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: aqua;
+}
+
+.content .content th {
+    height: 500px;
+    width: 300px;
+    background-color: brown;
 }
