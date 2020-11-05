@@ -1,0 +1,30 @@
+#app {
+    /* background-color: silver; */
+    height: 640px;
+}
+
+#app a.btn {
+    display: inline-block;
+    max-height: 80px;
+    width: auto;
+    padding: 0 0 20px 420px;
+}
+
+#app .table {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    height: 90%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+}
+
+#app .table thead {
+    font-size: 18px;
+}
+
+#app .table tbody {
+    font-size: 14px;
+}
