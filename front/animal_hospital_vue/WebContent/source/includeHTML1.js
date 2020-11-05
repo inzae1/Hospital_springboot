@@ -30,6 +30,6 @@ function includeHTML(callback) {
         }
     }
     setTimeout(function() {
-        callback();
+        callback;
     }, 0);
 }
