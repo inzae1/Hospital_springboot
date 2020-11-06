@@ -1,17 +1,11 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-* {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
 body .container {
     position: relative;
     overflow: hidden;
     width: 700px;
     height: 500px;
-    margin: 80px auto 0;
+    margin: 150px auto 0;
     background-color: #ffffff;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -23,13 +17,16 @@ body .container .half {
     width: 50%;
     height: 100%;
     padding: 58px 40px 0;
+    box-sizing: border-box;
 }
 
 body .container .half.bg {
     background-image: url("../img/slide_ten.jpg");
     background-size: 400px;
     background-repeat: no-repeat;
-    background-position-x: center;
+    background-position-x: -50px;
+    background-position-y: -35px;
+    box-sizing: border-box;
 }
 
 body .container h1 {
@@ -125,7 +122,7 @@ body .container .content label:not([for='remember']) {
 body .container .content input.inpt {
     font-size: 14px;
     display: block;
-    width: 20%;
+    width: 100%;
     height: 42px;
     margin-bottom: 12px;
     padding: 16px 13px;
@@ -136,6 +133,7 @@ body .container .content input.inpt {
     -webkit-border-radius: 2px;
     border-radius: 2px;
     margin-left: 1%;
+    box-sizing: border-box;
 }
 
 body .container .content input.inpt::-webkit-input-placeholder {
@@ -170,7 +168,7 @@ body .container .content input.submit {
     font-size: 12px;
     line-height: 42px;
     display: block;
-    width: 20%;
+    width: 100%;
     margin-bottom: 5%;
     margin-left: 1%;
     height: 42px;
@@ -310,26 +308,19 @@ body .container .content .signup-cont {
 
 .visual {
     position: relative;
-    /* padding: 0 50px; */
-}
-
-.visual .con>div {
-    height: 20px;
+    padding: 0 50px;
 }
 
 .visual .con .slide {
     background: #f58d04;
     color: #333;
-    background-position-y: -750px;
+    height: 8px;
 }
 
 .visual .con .slideTwo {
+    display: absolute;
     background: #f58d04;
     color: #333;
-    background-position-y: -750px;
-    padding-top: 10px;
-}
-
-.inpt {
-    back
+    height: 3px;
+    margin-top: 3px;
 }
