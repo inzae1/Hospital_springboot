@@ -50,7 +50,6 @@ public class CustomerController {
 	
 	@GetMapping("/idCheck/{custId}")
 	public ResponseEntity idCheck(@PathVariable String custId) throws Exception{
-		System.out.println("idcheck");
 		return new ResponseEntity(customerService.idCheck(custId), HttpStatus.OK);
 	}
 	
@@ -85,6 +84,12 @@ public class CustomerController {
 		Customer getNameById = customerService.getNameById(custId);
 		if(getNameById==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(getNameById, HttpStatus.OK);
+	}
+	
+	@GetMapping("/phoneCheck/{custPhone}")
+	public ResponseEntity phoneCheck(@PathVariable String custPhone) throws Exception{
+		System.out.println("phoneCheck");
+		return new ResponseEntity(customerService.phoneCheck(custPhone), HttpStatus.OK);
 	}
 
 }

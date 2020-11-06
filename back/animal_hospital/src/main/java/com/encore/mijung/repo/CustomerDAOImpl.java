@@ -64,4 +64,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return sqlSesstion.selectOne(ns + "getNameById", custId);
 	}
 
+	@Override
+	public int phoneCheck(String custPhone) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSesstion.selectOne(ns + "phoneCheck", custPhone);
+	}
+
 }

@@ -59,6 +59,12 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return customerDAO.getNameById(custId);
 	}
+
+	@Override
+	public int phoneCheck(String custPhone) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.phoneCheck(custPhone);
+	}
 	
 	
 }

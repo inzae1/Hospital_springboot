@@ -95,17 +95,18 @@
                             <div class="content" id="registerapp">
                                 <div class="signin-cont cont">
                                     <form action="#" method="post" enctype="multipart/form-data" @submit.prevent="register">
-                                        ID<input type="email" @blur="idCheck" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="이메일을 입력해주세요">
+                                        ID<input type="email" @keyup="idCheck" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="이메일을 입력해주세요">
                                         <span v-if="custIdCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">이미 사용중인 아이디입니다<br></span> Password
                                         <input type="password" name="custPassword1" id="custPassword1" v-model="custPassword1" class="inpt" required="required" placeholder="비밀번호를 입력해주세요"> Confirm Password<input type="password" @keyup="pwCheck" name="custPassword2"
                                             id="custPassword2" v-model="custPassword2" class="inpt" required="required" placeholder="비밀번호 재확인">
                                         <span v-if="!custPwCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">위 비밀번호와 일치하지 않습니다.<br></span> Name
                                         <input type="text" name="custName" id="custName" v-model="custName" class="inpt" required="required" placeholder="이름을 입력해주세요">
-                                        <label for="name">Your name</label> Phone Number<input type="text" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="핸드폰번호를 입력해주세요">
+                                        <label for="name">Your name</label> Phone Number<input type="text" @keyup="phoneCheck" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="핸드폰번호를 입력해주세요">
                                         <label for="phone">Your phone number</label>
+                                        <span v-if="custPhoneCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">이미 사용중인 전화번호입니다<br></span>
 
                                         <div class="submit-wrap">
-                                            <input type="submit" value="Sign up" class="submit">
+                                            <input type="submit" value="Sign up" class="submit" :disabled="custIdCheck||!custPwCheck||custPhoneCheck">
                                         </div>
                                     </form>
                                 </div>
@@ -203,6 +204,7 @@
                     custName: "",
                     custPhone: "",
                     custIdCheck: false,
+                    custPhoneCheck: false,
                     custPwCheck: true
                 }
             },
@@ -243,6 +245,16 @@
                     axios
                         .get("http://localhost:7000/mijung/idCheck/" + this.custId)
                         .then(response => (this.custIdCheck = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.empEmpty = false)
+                },
+                phoneCheck() {
+                    axios
+                        .get("http://localhost:7000/mijung/phoneCheck/" + this.custPhone)
+                        .then(response => (this.custPhoneCheck = response.data))
                         .catch(error => {
                             console.log(error);
                             this.errored = true

@@ -42,6 +42,9 @@
 		FROM customer 
 		WHERE cust_id = #{VALUE}
     </select>
+    <select id="phoneCheck" parameterType="string" resultType="int">
+      	SELECT COUNT(cust_id) FROM customer WHERE cust_phone=#{VALUE}  
+    </select>
 </mapper>
 
 
