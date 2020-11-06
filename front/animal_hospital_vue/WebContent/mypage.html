@@ -207,7 +207,7 @@
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
-                                localStorage.removeItem("onceRev");
+
                             })
                             .catch(e => {
                                 console.log(e);
@@ -216,6 +216,16 @@
                             .finally(() => {
                                 this.loading = false;
                             })
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
+                            .then(response => {
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
                     }
                 }
 
