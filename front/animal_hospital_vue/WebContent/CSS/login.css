@@ -321,11 +321,6 @@ body .container .content .signup-cont {
     display: absolute;
     background: #f58d04;
     color: #333;
-<<<<<<< HEAD
-    height: 3px;
-    margin-top: 3px;
-=======
     background-position-y: -750px;
     padding-top: 10px;
->>>>>>> 34036b4e0ee8c33e74cc974a6a81e6e6b79a96ed
 }
