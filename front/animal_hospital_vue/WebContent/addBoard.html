@@ -120,11 +120,19 @@
                 return {
                     title: '',
                     content: '',
+                    custName: '',
                     bdIsSecret: 0,
                     secretKey: false,
                     loading: true,
                     errored: false
                 }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:7000/mijung/getNameById/" + localStorage.getItem('animal_login'))
+                    .then(result => {
+                        this.custName = result.data.custName;
+                    })
             },
             methods: {
                 addBoard() {
@@ -133,7 +141,8 @@
                         bdContent: this.content,
                         bdView: 0,
                         bdIsSecret: this.bdIsSecret,
-                        custId: localStorage.getItem('animal_login')
+                        custId: localStorage.getItem('animal_login'),
+                        custName: this.custName
                     };
                     axios
                         .post("http://localhost:7000/mijung/addBoard/", board)
