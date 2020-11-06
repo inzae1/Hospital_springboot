@@ -38,6 +38,22 @@
     font-size: 18px;
 }
 
+.submenu ul li a:before {
+    content: '';
+    display: block;
+    border-bottom: 2px solid silver;
+    width: 110px;
+    padding-bottom: 3px;
+}
+
+.submenu ul li a:after {
+    content: '';
+    display: block;
+    border-bottom: 2px solid silver;
+    width: 110px;
+    padding-bottom: 3px;
+}
+
 .submenu ul li a:hover {
     font-weight: 500;
 }
@@ -63,9 +79,9 @@
 .doctors ul li:after {
     content: '';
     display: block;
-    width: 110px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 5px;
+    width: 90px;
+    border-bottom: 2px solid silver;
+    padding-bottom: 3px;
 }
 
 .doctors ul li a {

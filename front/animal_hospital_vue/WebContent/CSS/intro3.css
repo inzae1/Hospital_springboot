@@ -38,6 +38,22 @@
     font-size: 18px;
 }
 
+.submenu ul li a:before {
+    content: '';
+    display: block;
+    border-bottom: 2px solid silver;
+    width: 110px;
+    padding-bottom: 3px;
+}
+
+.submenu ul li a:after {
+    content: '';
+    display: block;
+    border-bottom: 2px solid silver;
+    width: 110px;
+    padding-bottom: 3px;
+}
+
 .submenu ul li a:hover {
     font-weight: 500;
 }
