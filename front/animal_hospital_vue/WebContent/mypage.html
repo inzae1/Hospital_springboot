@@ -180,10 +180,10 @@
             },
             methods: {
                 dropCustomer() {
-                    let con_drop = confirm("정말 탈퇴하시겠습니까 ");
+                    let con_drop = confirm("정말 탈퇴하시겠습니까?");
                     if (con_drop) {
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/ " + id)
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
                             .then(() => {
                                 localStorage.removeItem("onceRev ");
                             })
@@ -195,7 +195,7 @@
                                 this.loading = false;
                             }),
                             axios
-                            .delete("http://localhost:7000/mijung/dropCustomer/ " + id)
+                            .delete("http://localhost:7000/mijung/dropCustomer/" + id)
                             .then(() => {
                                 alert("탈퇴하셨습니다. ");
                                 localStorage.removeItem("info ");
@@ -215,12 +215,12 @@
                     }
                 },
                 cancelReservation() {
-                    let con_cancel = confirm("예약을 취소하시겠습니까 ")
+                    let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/ " + id)
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
                             .then(() => {
-                                alert("예약을 취소하였습니다 ");
+                                alert("예약을 취소하였습니다");
                                 location.reload(true);
 
                             })
@@ -232,7 +232,7 @@
                                 this.loading = false;
                             })
                         axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/ " + id)
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
                             .then(response => {
                                 localStorage.removeItem("onceRev ");
                             })
