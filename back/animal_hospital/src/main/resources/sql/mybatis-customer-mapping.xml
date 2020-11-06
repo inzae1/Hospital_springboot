@@ -12,7 +12,7 @@
 		VALUES(#{custId}, #{custPassword}, #{custName}, #{custPhone})
     </insert>
     <select id="login" parameterType="customer" resultType="customer">
-		SELECT cust_id, cust_name, cust_phone, cust_admin
+		SELECT cust_id, cust_name, cust_phone, cust_admin, cust_can_rev
 		FROM customer
 		WHERE cust_id=#{custId} AND cust_password=#{custPassword}
     </select>
@@ -23,7 +23,7 @@
       	SELECT COUNT(cust_id) FROM customer WHERE cust_id=#{VALUE}  
     </select>
     <select id="findId" parameterType="customer" resultType="customer">
-    	SELECT cust_id, cust_password, cust_name, cust_phone
+    	SELECT cust_id, cust_password, cust_name, cust_phone, 
     	FROM customer
     	WHERE cust_name=#{custName} AND cust_phone=#{custPhone}
     </select>
@@ -44,6 +44,21 @@
     </select>
     <select id="phoneCheck" parameterType="string" resultType="int">
       	SELECT COUNT(cust_id) FROM customer WHERE cust_phone=#{VALUE}  
+    </select>
+    <update id = "changeCustRev0" parameterType="string">
+    	UPDATE customer 
+    	SET cust_can_rev=0
+    	WHERE cust_id=#{custId}
+    </update>
+    <update id = "changeCustRev1" parameterType="string">
+    	UPDATE customer 
+    	SET cust_can_rev=1
+    	WHERE cust_id=#{custId}
+    </update>
+    <select id="getCustRev" parameterType="String" resultType="int">
+    	SELECT cust_can_rev 
+    	FROM customer
+    	WHERE cust_id=#{VALUE}
     </select>
 </mapper>
 

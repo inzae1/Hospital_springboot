@@ -21,7 +21,10 @@
                 <!-- 로고 부분 -->
                 <div class='header-left'>
                     <a href=' index.html'>
-                        <img src='img/logo.png ' alt='logo '>
+                        <img src='img/logo2.png ' alt='logo '>
+
+                        <span>미정이네<br>
+                            <strong>동물병원</strong></span>
                     </a>
                 </div>
                 <!-- 메뉴 부분 -->
@@ -113,67 +116,208 @@
                     </div>
                 </div>
                 <br><br><br>
-                <div class='doctors'>
-                    <div class='bor'>
-                        <ul>
-                            <li>
-                                <a href='#'>내과
-                                    <span></span>
-                                </a>
-                            </li>
-                            <li><a href='#'>외과
-                                <span></span>
-                            </a>
-                            </li>
-                            <li><a href='#'>안과
-                                <span></span>
-                            </a>
-                            </li>
-                            <li><a href='#'>고양이과
-                                <span></span>
-                            </a>
-                            </li>
-                            <li><a href='#'>영상의학과
-                                <span></span>
-                            </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class='content'>
-                    <div class='table'>
-                        <table>
-                            <tr>
-                                <th>
-
-                                </th>
-                                <td class='tdnone'></td>
-                                <td class='tduse'>
-                                    <ul class='spec'>
-                                        <li>일반 내과 소개</li>
-                                        <span>
-                                            아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은 환자에 대한 정확한 이해와 진단이<br>
-                                            있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해 환자의 임상 증상을 최소화하고<br>
-                                            삶의 질을 개선하는 것을 목표로 합니다.
-                                        </span>
-                                        <li>진료과목 안내</li>
-                                        <span>
-                                            비뇨/생식기 내과<br>
-                                            내분기 내과<br>
-                                            호흡기 내과<br>
-                                            소화기 내과<br>
-                                            면역질환 내과<br>
-                                            감염 내과<br>
-                
-                                        </span>
-
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
+                <div id='doctors'>
+                    <div class='doctors'>
+                        <div class='bor'>
+                            <ul>
+                                <li>
+                                    <a href='#' @click='onclick(0)'>내과
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li><a href='#' @click='onclick(1)'>외과
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li><a href='#' @click='onclick(2)'>안과
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li><a href='#' @click='onclick(3)'>고양이과
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li><a href='#' @click='onclick(4)'>영상의학과
+                                        <span></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
+                    <div class='content'>
+                        <div class='table' v-if="doctor == 0">
+                            <table>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>일반 내과 소개</li>
+                                            <span>
+                                                아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은 환자에 대한 정확한 이해와
+                                                진단이<br>
+                                                있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해 환자의 임상 증상을
+                                                최소화하고<br>
+                                                삶의 질을 개선하는 것을 목표로 합니다.
+                                            </span>
+                                            <li>진료과목 안내</li>
+                                            <span>
+                                                비뇨/생식기 내과<br>
+                                                내분기 내과<br>
+                                                호흡기 내과<br>
+                                                소화기 내과<br>
+                                                면역질환 내과<br>
+                                                감염 내과<br>
+
+                                            </span>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if="doctor == 1">
+                            <table>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>일반 외과 소개</li>
+                                            <span>
+                                                아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은 환자에 대한 정확한 이해와
+                                                진단이<br>
+                                                있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해 환자의 임상 증상을
+                                                최소화하고<br>
+                                                삶의 질을 개선하는 것을 목표로 합니다.
+                                            </span>
+                                            <li>진료과목 안내</li>
+                                            <span>
+                                                비뇨/생식기 내과<br>
+                                                내분기 내과<br>
+                                                호흡기 내과<br>
+                                                소화기 내과<br>
+                                                면역질환 내과<br>
+                                                감염 내과<br>
+
+                                            </span>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if="doctor == 2">
+                            <table>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>일반 안과 소개</li>
+                                            <span>
+                                                아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은 환자에 대한 정확한
+                                                이해와
+                                                진단이<br>
+                                                있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해 환자의 임상
+                                                증상을
+                                                최소화하고<br>
+                                                삶의 질을 개선하는 것을 목표로 합니다.
+                                            </span>
+                                            <li>진료과목 안내</li>
+                                            <span>
+                                                비뇨/생식기 내과<br>
+                                                내분기 내과<br>
+                                                호흡기 내과<br>
+                                                소화기 내과<br>
+                                                면역질환 내과<br>
+                                                감염 내과<br>
+
+                                            </span>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if="doctor == 3">
+                            <table>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>일반 고양이과 소개</li>
+                                            <span>
+                                                아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은 환자에 대한
+                                                정확한
+                                                이해와 진단이<br>
+                                                있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해 환자의
+                                                임상
+                                                증상을 최소화하고<br>
+                                                삶의 질을 개선하는 것을 목표로 합니다.
+                                            </span>
+                                            <li>진료과목 안내</li>
+                                            <span>
+                                                비뇨/생식기 내과<br>
+                                                내분기 내과<br>
+                                                호흡기 내과<br>
+                                                소화기 내과<br>
+                                                면역질환 내과<br>
+                                                감염 내과<br>
+
+                                            </span>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if="doctor == 4">
+                            <table>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>일반 영상의학과 소개</li>
+                                            <span>
+                                                아픈 곳을 직접 설명하고 표현하지 못하는 반려 동물의 특성 상 겉으로 드러나지 않는 내과 질환은
+                                                환자에 대한
+                                                정확한 이해와 진단이<br>
+                                                있어야 최상의 치료를 할 수 있습니다. 치료 계획의 수립 이 후에는 적절한 장기적 모니터링을 통해
+                                                환자의
+                                                임상 증상을 최소화하고<br>
+                                                삶의 질을 개선하는 것을 목표로 합니다.
+                                            </span>
+                                            <li>진료과목 안내</li>
+                                            <span>
+                                                비뇨/생식기 내과<br>
+                                                내분기 내과<br>
+                                                호흡기 내과<br>
+                                                소화기 내과<br>
+                                                면역질환 내과<br>
+                                                감염 내과<br>
+
+                                            </span>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </section>
             <footer include-html='./source/footer.html'></footer>
@@ -197,10 +341,24 @@
                 logout() {
                     let con_logout = confirm("로그아웃 하시겠습니까");
                     if (con_logout) {
+                        localStorage.removeItem("info");
+                        localStorage.removeItem("animal_name");
                         localStorage.removeItem("animal_login");
                         localStorage.removeItem("animal_admin");
+                        localStorage.removeItem("onceRev");
                         location.reload(true);
                     }
+                }
+            }
+        });
+        new Vue({
+            el: "#doctors",
+            data: {
+                doctor: 0
+            },
+            methods: {
+                onclick(doctor) {
+                    this.doctor = doctor;
                 }
             }
         });
