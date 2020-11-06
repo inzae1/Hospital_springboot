@@ -114,7 +114,6 @@
                         <tbody class='tbody'>
 
                             <tr v-for='board in info'>
-
                                 <td>{{board.bdID}}</td>
                                 <td v-if="board.bdReply!=null">Y</td>
                                 <td v-else>N</td>
@@ -123,7 +122,6 @@
                                 <td>{{board.custName}}</td>
                                 <td>{{board.bdDate}}</td>
                                 <td>{{board.bdView}}</td><br>
-
                             </tr>
 
                         </tbody>
@@ -141,7 +139,7 @@
                             <tr>
                                 <td>
                                     <select name="searchSelectBox" v-model="searchSelect">
-                                    <option value="title" class='searchTitle'>제목</option>
+                                    <option value="title">제목</option>
                                     <option value="content">내용</option>
                                 </select>
                                 </td>
@@ -149,7 +147,7 @@
                                     <input type="text" name="search" id="search" v-model="searchContent">
                                 </td>
                                 <td>
-                                    <button type="button" @click="searchBoard" class='search'>검색</button>
+                                    <button type="button" @click="searchBoard">검색</button>
                                 </td>
                             </tr>
                         </table>
@@ -256,81 +254,21 @@
                         alert("검색어를 입력해주세요");
                         return;
                     } else if (this.searchSelect == "title") {
-                        this.search = 1;
-                        this.page = 1;
-                        axios
-                            .get("http://localhost:7000/mijung/countBoardByTitle/" + this.searchContent)
-                            .then(response => {
-                                this.countBoard = response.data;
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => this.loading = false);
-                        axios
-                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
-                            .then(response => {
-                                this.info = response.data;
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => this.loading = false);
+                        localStorage.setItem("animal_search", JSON.stringify({
+                            isTitle: 1,
+                            search: this.searchContent
+                        }));
                     } else {
-                        this.page = 1;
-                        this.search = 1;
-                        axios
-                            .get("http://localhost:7000/mijung/countBoardByContent/" + this.searchContent)
-                            .then(response => {
-                                this.countBoard = response.data;
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => this.loading = false);
-                        axios
-                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
-                            .then(response => {
-                                this.info = response.data;
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => this.loading = false);
+                        localStorage.setItem("animal_search", JSON.stringify({
+                            isTitle: 0,
+                            search: this.searchContent
+                        }));
                     }
+                    location.href = "boardSearch.html?page=1";
                 },
                 pageMove(p) {
                     this.page = p;
-                    if (this.search == 0) {
-                        location.href = "boardIndex.html?page=" + this.page;
-                    } else if (this.search == 1) {
-                        axios
-                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
-                            .then(response => {
-                                this.info = response.data;
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => this.loading = false);
-                    } else {
-                        axios
-                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
-                            .then(response => {
-                                this.info = response.data;
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => this.loading = false);
-                    }
-
+                    location.href = "boardIndex.html?page=" + this.page;
                 }
             }
 
