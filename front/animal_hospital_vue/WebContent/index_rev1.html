@@ -216,9 +216,14 @@
                                 <h2>로그아웃</h2>
                             </a>
                         </li>
-                        <li class=' '>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 0">
                             <a href='mypage.html'>
                                 <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 1">
+                            <a href='Adminpage.html'>
+                                <h2>관리자페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -248,7 +253,7 @@
                     <form action="#" method="POST" name="frmForm" id="_frmForm" @submit.prevent="reservation" v-else>
                         <table class="type04">
                             <thead>
-                                <h2 id="thead04"> 예약 상세조회<button id="button2" onclick="locationBack()">Back</button></h2><br>
+                                <h2 id="thead04"> 예약 상세조회<button id="buttonBack" onclick="locationBack()">Back</button></h2><br>
 
                             </thead>
 
@@ -280,7 +285,7 @@
                                 <td><textarea placeholder="   반려동물의 증상을 200자 이내로 입력해주세요." cols="40" rows="8" style="border-radius: 6px;" v-model="revComment"></textarea></td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="text-align: center;"><button id="button" type="submit">예약하기</button></td>
+                                <td colspan="2" style="text-align: center;"><button id="buttonRev" type="submit">예약하기</button></td>
                             </tr>
                         </table>
                     </form>

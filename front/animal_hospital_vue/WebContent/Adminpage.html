@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' href='./CSS/default.css'>
+    <script src='./WEB-INF/lib/main.js'></script>
+    <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
+    <link rel='stylesheet' href='./CSS/rev_css.css'>
+    <link rel='stylesheet' href='./CSS/default_copy.css'>
+    <link rel='stylesheet' href='./CSS/intro.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
-    <link rel='stylesheet' href='./CSS/footer.css'>
-    <link rel='stylesheet' href='./CSS/addBoard.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
 </head>
@@ -16,7 +19,7 @@
 <body>
     <div class="wrapper">
         <div class='inner-wrapper'>
-            <header>
+            <header class="header">
                 <!-- 로고 부분 -->
                 <div class='header-left'>
                     <a href=' index.html'>
@@ -49,7 +52,7 @@
                     </ul>
                 </div>
                 <!-- 로그인 부분 -->
-                <div class='header-right' id='loginApp'>
+                <div class='header-right' id='loginapp'>
                     <ul class=' ' v-if="!isLogin">
                         <li class=' '>
                             <a href='login.html'>
@@ -81,36 +84,44 @@
                     </ul>
                 </div>
             </header>
-            <br><br><br>
-            <section class='visual'>
-                <div class='slide'>
-                    <!-- 상단 이미지 -->
-                    <div class='title'>
-                        <span>Q & A</span>
-                    </div>
+            <div id="app">
+
+                <table class="type05" v-if="info">
+                    <thead>
+                        <h2 style="text-align: center;">예약 상세조회</h2>
+                    </thead>
+                    <tr>
+                        <th scope="row">예약날짜</th>
+                        <td>{{info.revDate}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">진료 동물</th>
+                        <td>{{info.revAnimalType}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">담당의사</th>
+                        <td>{{info.revDoctor}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">증상</th>
+                        <td>{{info.revComment}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;"><button id="button" type="button" @click="cancelReservation">예약 취소</button></td>
+                    </tr>
+                </table>
+                <div v-else>
+                    <h2>예약 내역이 없습니다.</h2>
                 </div>
-                <br><br>
-                <div id="app">
-                    <div class=''>
-                        <div class='question'>
-                            <h1>질문 등록하기</h1>
-                        </div>
-                    </div>
-                    <br><br>
-                    <form action="" method="POST" name="frm" @submit.prevent="addBoard" class='write'>
-                        제목: <br><input type="text" id="title" v-model='title'><br><br> 내용: <textarea id="content" v-model='content'></textarea><br><br> 비밀글 <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
-                        <br><br>
-                        <input type="submit" value="등록" id='upload'>
-                    </form>
-                </div>
-            </section>
-            <footer include-html='./source/footer.html'></footer>
+                <button id="custExit" type="button" @click="dropCustomer">회원 탈퇴</button>
+            </div>
+            <footer include-html='./source/footer.html'>
+            </footer>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script>
-        new Vue({
-            el: "#loginApp",
+        let navapp = new Vue({
+            el: "#loginapp",
             data: {
                 isLogin: false
             },
@@ -127,67 +138,67 @@
                         localStorage.removeItem("animal_name");
                         localStorage.removeItem("animal_login");
                         localStorage.removeItem("animal_admin");
-                        location.reload(true);
+                        location.href = "index.html";
                     }
                 }
             }
         });
-        new Vue({
+        let id = localStorage.getItem("animal_login");
+        console.log(id);
+        let app = new Vue({
             el: "#app",
             data() {
                 return {
-                    title: '',
-                    content: '',
-                    custName: '',
-                    bdIsSecret: 0,
-                    secretKey: false,
+                    info: [],
+                    custId: id,
                     loading: true,
                     errored: false
                 }
             },
             mounted() {
                 axios
-                    .get("http://localhost:7000/mijung/getNameById/" + localStorage.getItem('animal_login'))
-                    .then(result => {
-                        this.custName = result.data.custName;
+                    .get("http://localhost:7000/mijung/getReservation/" + id)
+                    .then(response => {
+                        this.info = response.data;
                     })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
             },
             methods: {
-                addBoard() {
-                    const board = {
-                        bdTitle: this.title,
-                        bdContent: this.content,
-                        bdView: 0,
-                        bdIsSecret: this.bdIsSecret,
-                        custId: localStorage.getItem('animal_login'),
-                        custName: this.custName
-                    };
-                    axios
-                        .post("http://localhost:7000/mijung/addBoard/", board)
-                        .then(() => {
-                            alert("글쓰기 성공");
-                            location.href = "./boardIndex.html";
-                        })
-                        .catch(e => {
-                            console.log(e);
-                            this.errored = true;
-                        })
-                        .finally(() => this.loading = false)
+                dropCustomer() {
+                    let con_drop = confirm("정말 탈퇴하시겠습니까");
+                    if (con_drop) {
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        location.href = "index.html";
+                    }
                 },
-                check() {
-                    let checked = document.getElementById('secretKey');
-                    if (checked.checked) {
-                        this.bdIsSecret = 1;
-                    } else {
-                        this.bdIsSecret = 0;
+                cancelReservation() {
+                    let con_cancel = confirm("예약을 취소하시겠습니까")
+                    if (con_cancel) {
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .then(() => {
+                                alert("예약을 취소하였습니다");
+                                location.reload(true);
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
                     }
                 }
-            }
-        });
+
+            },
+        })
     </script>
 </body>
-<script>
-    includeHTML();
-</script>
 
 </html>

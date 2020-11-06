@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://rawgit.com/beaver71/Chart.PieceLabel.js/master/build/Chart.PieceLabel.min.js"></script>
+</head>
+
+<body>
+    <p>
+        <왜 미정이네인가요?>
+    </p>
+    <p>늘어나는 반려동물 양육가구!</p>
+    <canvas id="myChart" width="500" height="400"></canvas>
+    <span>출처 : 검역본부</span>
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2010년', '2012년', '2015년', '2017년', '2018년', '2019년'],
+                datasets: [{
+                    label: '양육가구 비율(단위:%)',
+                    data: [17.4, 17.9, 21.8, 28.1, 23.7, 26.4],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)'
+
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '우리나라 반려동물 양육가구 비율',
+                    fontSize: 15,
+                    fontStyle: 'bold'
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                responsive: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    <p>하지만 반려동물을 제대로 케어해주는 동물병원은 턱없이 부족합니다.</p>
+    <canvas id="MyDoughnutChart" width="500" height="400"></canvas>
+    <span>출처 : 한국소비자연맹</span>
+    <script>
+        var dtx = document.getElementById('MyDoughnutChart');
+        data = {
+            datasets: [{
+                backgroundColor: ["#c0504e", "#f79546", "#9bba57", "#4f81bb", "#aaaaaa", "#5f497a", "#41774e", "#003663", "#a94069", "#ff5f34", "#49acc5", "#c0504e"],
+
+
+                data: [56.4, 24.7, 3.5, 2.8, 12.6]
+            }],
+            labels: ['상해', '계약, 서비스 불만', '가격', '분실', '기타']
+        }
+        var myDoughnutChart = new Chart(dtx, {
+            type: 'pie',
+            data: data,
+            options: {
+                title: {
+                    display: true,
+                    text: '반려동물 서비스 관련 소비자 불만',
+                    fontSize: 15,
+                    fontStyle: 'bold'
+                },
+                pieceLabel: {
+                    render: function(args) {
+                        const label = args.label,
+                            value = args.value,
+                            percentage = args.percentage;
+                        return label + ' - ' + value;
+                    },
+                    fontColor: '#000',
+                    position: 'outside',
+                    segment: true
+                },
+                responsive: false
+            }
+        });
+    </script>
+    <p>미정이네 동물병원은 최고의 실력을 갖춘 의료진이 예약제 시스템으로 원장마다 하루 한 건만을 진료함으로써 최고의 의료서비스를 제공합니다.</p>
+    <p>>>>>뭔가 동물과 사람이 행복하게 웃는 사진 넣어줘</p>
+    <p>미정이네 동물병원에서 당신의 반려동물을 위한 완벽한 케어를 경험해보세요!</p>
+</body>
+
+</html>
