@@ -54,7 +54,7 @@ public class CustomerController {
 		return new ResponseEntity(customerService.idCheck(custId), HttpStatus.OK);
 	}
 	
-	@PostMapping("/findId/{custName}/{custPhone}")
+	@GetMapping("/findId/{custName}/{custPhone}")
 	public ResponseEntity findId(@PathVariable String custName, @PathVariable String custPhone) throws Exception {
 		Customer customer = new Customer (custName, custPhone);
 		Customer findCustomer = customerService.findId(customer);
