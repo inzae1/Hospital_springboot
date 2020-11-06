@@ -86,12 +86,38 @@
                     </ul>
                 </div>
             </header>
+            <div id="appInfo">
+                <table class="type06">
+                    <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">회원 정보관리</h2>
+                    <br>
+                    <tr>
+                        <th>ID</th>
+                        <td>{{info.custId}}</td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호 변경</th>
+                        <td><button id="buttonTable1" type="button">비밀번호 변경</button></td>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <td>{{info.custName}}</td>
+                    </tr>
+                    <tr>
+                        <th>연락처</th>
+                        <td>{{info.custPhone}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button id="buttonTable1" @click="dropCustomer()" type="button" style="text-align: center;">회원 탈퇴</button></td>
+                    </tr>
+                </table>
+            </div>
             <div id="app">
                 <div v-if="info!=[]">
                     <table class="type05">
                         <div>
                             <thead>
-                                <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">예약 상세내역</h2>
+                                <h2 style="text-align: center; margin-top: 5%; font-size: 25px;">예약 상세내역</h2>
                             </thead><br>
                             <tr>
                                 <th>No</th>
@@ -110,7 +136,7 @@
                                 <td>{{rev.revComment}}</td>
                                 <td>{{rev.revAnimalType}}</td>
                                 <td>{{rev.custId}}</td>
-                                <td><input id="buttonBack" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
+                                <td><input id="buttonTable1" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
                             </tr>
                         </div>
                     </table>
@@ -122,7 +148,8 @@
                     </center>
                 </div>
             </div>
-            <button id="custExit " type="button " @click="dropCustomer ">회원 탈퇴</button>
+
+
         </div>
         <footer include-html='./source/footer.html'>
         </footer>
@@ -154,9 +181,8 @@
             }
         });
         let id = localStorage.getItem("animal_login");
-        console.log(id);
         let app = new Vue({
-            el: "#app ",
+            el: "#app",
             data() {
                 return {
                     info: [],
@@ -170,7 +196,6 @@
                     .get("http://localhost:7000/mijung/getReservation/" + id)
                     .then(response => {
                         this.info = response.data.reverse();
-                        console.log(this.info)
                     })
                     .catch(e => {
                         console.log(e);
@@ -179,41 +204,6 @@
                     .finally(() => this.loading = false)
             },
             methods: {
-                dropCustomer() {
-                    let con_drop = confirm("정말 탈퇴하시겠습니까?");
-                    if (con_drop) {
-                        axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
-                            .then(() => {
-                                localStorage.removeItem("onceRev ");
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => {
-                                this.loading = false;
-                            }),
-                            axios
-                            .delete("http://localhost:7000/mijung/dropCustomer/" + id)
-                            .then(() => {
-                                alert("탈퇴하셨습니다. ");
-                                localStorage.removeItem("info ");
-                                localStorage.removeItem("animal_name ");
-                                localStorage.removeItem("animal_login ");
-                                localStorage.removeItem("animal_admin ");
-                                localStorage.removeItem("onceRev ");
-                                location.href = "index.html ";
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => {
-                                this.loading = false;
-                            })
-                    }
-                },
                 cancelReservation() {
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
@@ -269,6 +259,73 @@
                 }
             }
         });
+        new Vue({
+            el: "#appInfo",
+            data() {
+                return {
+                    info: null,
+                    custName: JSON.parse(localStorage.getItem("info")).custName,
+                    custPhone: JSON.parse(localStorage.getItem("info")).custPhone,
+                    custId: JSON.parse(localStorage.getItem("info")).custId,
+                    errored: false,
+                    resultIdFail: false
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:7000/mijung/findId/" + this.custName + "/" + this.custPhone)
+                    .then(response => {
+                        console.log(response.data)
+                        this.info = response.data
+
+                    })
+                    .catch(error => {
+                        this.errored = true
+                    })
+            },
+            methods: {
+                dropCustomer() {
+                    let con_drop1 = confirm("탈퇴하시겠습니까?");
+                    if (!con_drop1) {
+                        return;
+                    }
+                    let con_drop = confirm("정말로 탈퇴하시겠습니까?");
+                    if (con_drop) {
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .then(() => {
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            }),
+                            axios
+                            .delete("http://localhost:7000/mijung/dropCustomer/" + id)
+                            .then(() => {
+                                alert("탈퇴하셨습니다.");
+                                localStorage.removeItem("info");
+                                localStorage.removeItem("animal_name");
+                                localStorage.removeItem("animal_login");
+                                localStorage.removeItem("animal_admin");
+                                localStorage.removeItem("onceRev");
+                                location.href = "index.html";
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
+                    }
+                }
+            }
+        });
+    </script>
     </script>
 </body>
 

@@ -173,6 +173,11 @@
                     .get("http://localhost:7000/mijung/getAllReservation/")
                     .then(response => {
                         this.info = response.data.reverse();
+                        console.log(this.info[0].custId)
+                        for (let index = 0; index < this.info.length; index++) {
+                            localStorage.setItem("revId", this.info[index].custId)
+                        }
+
                     })
                     .catch(e => {
                         console.log(e);
@@ -189,6 +194,7 @@
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
+
                                 localStorage.removeItem("onceRev");
                             })
                             .catch(e => {
@@ -198,6 +204,16 @@
                             .finally(() => {
                                 this.loading = false;
                             })
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
+                            .then(response => {
+                                localStorage.removeItem("onceRev ");
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
                     }
                 }
 
