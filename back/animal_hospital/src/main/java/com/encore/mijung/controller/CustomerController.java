@@ -78,6 +78,7 @@ public class CustomerController {
 		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(HttpStatus.OK);
 	}
+	
 	@GetMapping("/getNameById/{custId}")
 	public ResponseEntity getNameById(@PathVariable String custId) throws Exception{
 		Customer customer = new Customer (custId);
@@ -88,8 +89,25 @@ public class CustomerController {
 	
 	@GetMapping("/phoneCheck/{custPhone}")
 	public ResponseEntity phoneCheck(@PathVariable String custPhone) throws Exception{
-		System.out.println("phoneCheck");
 		return new ResponseEntity(customerService.phoneCheck(custPhone), HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/getCustRev/{custId}")
+	public ResponseEntity getCustRev(@PathVariable String custId) throws Exception{
+		return new ResponseEntity(customerService.getCustRev(custId), HttpStatus.OK);
+	}
+	
+	@PutMapping("changeCustRev0/{custId}")
+	public ResponseEntity changeCustRev0(@PathVariable String custId) throws Exception{
+		boolean result = customerService.changeCustRev0(custId);
+		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@PutMapping("changeCustRev1/{custId}")
+	public ResponseEntity changeCustRev1(@PathVariable String custId) throws Exception{
+		boolean result = customerService.changeCustRev1(custId);
+		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		else return new ResponseEntity(HttpStatus.OK);
+	}
 }

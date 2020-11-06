@@ -136,6 +136,7 @@
                         localStorage.removeItem("animal_name");
                         localStorage.removeItem("animal_login");
                         localStorage.removeItem("animal_admin");
+                        localStorage.removeItem("onceRev");
                         location.href = "index.html";
                     }
                 }
@@ -169,9 +170,36 @@
                 dropCustomer() {
                     let con_drop = confirm("정말 탈퇴하시겠습니까");
                     if (con_drop) {
-                        localStorage.removeItem("animal_login");
-                        localStorage.removeItem("animal_admin");
-                        location.href = "index.html";
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .then(() => {
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            }),
+                            axios
+                            .delete("http://localhost:7000/mijung/dropCustomer/" + id)
+                            .then(() => {
+                                alert("탈퇴하셨습니다.");
+                                localStorage.removeItem("info");
+                                localStorage.removeItem("animal_name");
+                                localStorage.removeItem("animal_login");
+                                localStorage.removeItem("animal_admin");
+                                localStorage.removeItem("onceRev");
+                                location.href = "index.html";
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
                     }
                 },
                 cancelReservation() {
@@ -182,7 +210,7 @@
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
-                                localStorage.removeItem("onceRev");
+
                             })
                             .catch(e => {
                                 console.log(e);
@@ -191,6 +219,16 @@
                             .finally(() => {
                                 this.loading = false;
                             })
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
+                            .then(response => {
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
                     }
                 }
 

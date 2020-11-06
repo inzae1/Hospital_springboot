@@ -219,9 +219,14 @@
                                 <h2>로그아웃</h2>
                             </a>
                         </li>
-                        <li class=' '>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 0">
                             <a href='mypage.html'>
                                 <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 1">
+                            <a href='Adminpage.html'>
+                                <h2>관리자페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -325,7 +330,7 @@
                                 alert("예약 완료되셨습니다.");
                                 location.reload()
                                 localStorage.setItem("reLoad", 1);
-                                localStorage.setItem("onceRev", 1);
+
 
                             }) //then
                             .catch(error => {
@@ -333,6 +338,16 @@
                                 this.errored = true
                                 alert("예약 실패하셨습니다.");
                             }) //catch
+                            .finally(() => this.loading = false)
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev0/" + this.custId)
+                            .then(response => {
+                                localStorage.setItem("onceRev", 1);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
                             .finally(() => this.loading = false)
                     } //reservation
                 }, //methods
@@ -374,6 +389,7 @@
                             localStorage.removeItem("animal_name");
                             localStorage.removeItem("animal_login");
                             localStorage.removeItem("animal_admin");
+                            localStorage.removeItem("onceRev");
                             location.reload(true);
                         }
                     }

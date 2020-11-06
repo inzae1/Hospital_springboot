@@ -73,9 +73,14 @@
                                 <h2>로그아웃</h2>
                             </a>
                         </li>
-                        <li class=' '>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 0">
                             <a href='mypage.html'>
                                 <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 1">
+                            <a href='Adminpage.html'>
+                                <h2>관리자페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -111,67 +116,192 @@
                     </div>
                 </div>
                 <br><br><br>
-                <div class='doctors'>
-                    <div class='bor'>
-                        <ul>
-                            <li>
-                                <a href='#'>윤인재
+                <div id='doctors'>
+                    <div class='doctors'>
+                        <div class='bor'>
+                            <ul>
+                                <li>
+                                    <a href='#' @click='onclick(0)'>윤인재
                                     <span>원장</span>
                                 </a>
-                            </li>
-                            <li><a href='#'>지혜수
-                                <span>원장</span>
-                            </a>
-                            </li>
-                            <li><a href='#'>나현재
-                                <span>원장</span>
-                            </a>
-                            </li>
-                            <li><a href='#'>김태형
-                                <span>원장</span>
-                            </a>
-                            </li>
-                            <li><a href='#'>방은호
-                                <span>원장</span>
-                            </a>
-                            </li>
-                        </ul>
+                                </li>
+                                <li><a href='#' @click='onclick(1)'>지혜수
+                                    <span>원장</span>
+                                </a>
+                                </li>
+                                <li><a href='#' @click='onclick(2)'>나현재
+                                    <span>원장</span>
+                                </a>
+                                </li>
+                                <li><a href='#' @click='onclick(3)'>김태형
+                                    <span>원장</span>
+                                </a>
+                                </li>
+                                <li><a href='#' @click='onclick(4)'>방은호
+                                    <span>원장</span>
+                                </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class='content'>
-                    <div class='table'>
-                        <table>
-                            <tr>
-                                <th>
-                                    <img src='./img/doctor.jpg' alt='image'>
-                                </th>
-                                <td class='tdnone'></td>
-                                <td class='tduse'>
-                                    <ul class='spec'>
-                                        <li>이름</li>
-                                        <span class='doctorName'>
+                    <div class='content'>
+                        <div class='table' v-if="doctor == 0">
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img src='./img/doctor.jpg' alt='image'>
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>이름</li>
+                                            <span class='doctorName'>
                                             윤 인 재
                                         </span>
-                                        <li>진료과목</li>
-                                        <span>
+                                            <li>진료과목</li>
+                                            <span>
                                             일반임상, 예방의학<br>
-                                            전북대학교 수의과대학 학사 졸업<br>
+                                            The University of Nottingham<br>
                                             현) 이리온 동물병원 청담점 진료수의사
                                         </span>
-                                        <li>경력</li>
-                                        <span>
-                                            
+                                            <li>경력</li>
+                                            <span>
+
                                             2014 서울 수의임상 학회 참석<br>
                                             2019 서울 수의임상 학회 참석<br>
                                             서울시 임상 수의사회 정회원
                                         </span>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if='doctor == 1'>
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img src='./img/doctor.jpg' alt='image'>
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>이름</li>
+                                            <span class='doctorName'>
+                                            지 혜 수
+                                        </span>
+                                            <li>진료과목</li>
+                                            <span>
+                                            일반임상, 예방의학<br>
+                                            Royal Veterinary College, University of London<br>
+                                            현) 이리온 동물병원 청담점 진료수의사
+                                        </span>
+                                            <li>경력</li>
+                                            <span>
 
+                                            2014 서울 수의임상 학회 참석<br>
+                                            2019 서울 수의임상 학회 참석<br>
+                                            서울시 임상 수의사회 정회원
+                                        </span>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if='doctor == 2'>
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img src='./img/doctor.jpg' alt='image'>
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>이름</li>
+                                            <span class='doctorName'>
+                                            나 현 재
+                                        </span>
+                                            <li>진료과목</li>
+                                            <span>
+                                            일반임상, 예방의학<br>
+                                            Cornell University<br>
+                                            현) 이리온 동물병원 청담점 진료수의사
+                                        </span>
+                                            <li>경력</li>
+                                            <span>
+
+                                            2014 서울 수의임상 학회 참석<br>
+                                            2019 서울 수의임상 학회 참석<br>
+                                            서울시 임상 수의사회 정회원
+                                        </span>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if='doctor == 3'>
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img src='./img/doctor.jpg' alt='image'>
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>이름</li>
+                                            <span class='doctorName'>
+                                            김 태 형
+                                        </span>
+                                            <li>진료과목</li>
+                                            <span>
+                                            일반임상, 예방의학<br>
+                                            University of California, Davis<br>
+                                            현) 이리온 동물병원 청담점 진료수의사
+                                        </span>
+                                            <li>경력</li>
+                                            <span>
+
+                                            2014 서울 수의임상 학회 참석<br>
+                                            2019 서울 수의임상 학회 참석<br>
+                                            서울시 임상 수의사회 정회원
+                                        </span>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='table' v-if='doctor == 4'>
+                            <table>
+                                <tr>
+                                    <th>
+                                        <img src='./img/doctor.jpg' alt='image'>
+                                    </th>
+                                    <td class='tdnone'></td>
+                                    <td class='tduse'>
+                                        <ul class='spec'>
+                                            <li>이름</li>
+                                            <span class='doctorName'>
+                                            방 은 호
+                                        </span>
+                                            <li>진료과목</li>
+                                            <span>
+                                            일반임상, 예방의학<br>
+                                            University of California, Davis<br>
+                                            현) 이리온 동물병원 청담점 진료수의사
+                                        </span>
+                                            <li>경력</li>
+                                            <span>
+
+                                            2014 서울 수의임상 학회 참석<br>
+                                            2017 꼬미 언니로 임명<br>
+                                            서울시 임상 수의사회 정회원
+                                        </span>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </section>
             <footer include-html='./source/footer.html'></footer>
@@ -184,7 +314,7 @@
         new Vue({
             el: "#app",
             data: {
-                isLogin: false
+                isLogin: false,
             },
             mounted() {
                 if (localStorage.getItem("animal_login") != null) {
@@ -195,10 +325,24 @@
                 logout() {
                     let con_logout = confirm("로그아웃 하시겠습니까");
                     if (con_logout) {
+                        localStorage.removeItem("info");
+                        localStorage.removeItem("animal_name");
                         localStorage.removeItem("animal_login");
                         localStorage.removeItem("animal_admin");
+                        localStorage.removeItem("onceRev");
                         location.reload(true);
                     }
+                }
+            }
+        });
+        new Vue({
+            el: "#doctors",
+            data: {
+                doctor: 0
+            },
+            methods: {
+                onclick(doctor) {
+                    this.doctor = doctor;
                 }
             }
         });

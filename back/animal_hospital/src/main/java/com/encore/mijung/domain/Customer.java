@@ -6,6 +6,7 @@ public class Customer {
 	String custName;
 	String custPhone;
 	int custAdmin;
+	int custCanRev;
 	
 	public Customer() {}
 	
@@ -16,14 +17,23 @@ public class Customer {
 		this.custPhone = custPhone;
 	}
 
-	public Customer(String custId, String custPassword, String custName, String custPhone, int custAdmin) {
+	public Customer(String custId, String custPassword, String custName, String custPhone, int custAdmin, int custCanRev) {
 		this.custId = custId;
 		this.custPassword = custPassword;
 		this.custName = custName;
 		this.custPhone = custPhone;
 		this.custAdmin = custAdmin;
+		this.custCanRev = custCanRev;
 	}
 	
+	public int getCustCanRev() {
+		return custCanRev;
+	}
+
+	public void setCustCanRev(int custCanRev) {
+		this.custCanRev = custCanRev;
+	}
+
 	public Customer(String custName, String custPhone) {
 		this.custName = custName;
 		this.custPhone = custPhone;

@@ -71,9 +71,14 @@
                                 <h2>로그아웃</h2>
                             </a>
                         </li>
-                        <li class=' '>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 0">
                             <a href='mypage.html'>
                                 <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 1">
+                            <a href='Adminpage.html'>
+                                <h2>관리자페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -104,12 +109,13 @@
                                             id="custPassword2" v-model="custPassword2" class="inpt" required="required" placeholder="비밀번호 재확인">
                                         <span v-if="!custPwCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">위 비밀번호와 일치하지 않습니다.<br></span> Name
                                         <input type="text" name="custName" id="custName" v-model="custName" class="inpt" required="required" placeholder="이름을 입력해주세요">
-                                        <label for="name">Your name</label> Phone Number<input type="text" @keyup="phoneCheck" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="핸드폰번호를 입력해주세요">
+                                        <label for="name">Your name</label> Phone Number<input type="text" @keyup="phoneCheck" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="' - ' 없이 핸드폰번호를 입력해주세요">
                                         <label for="phone">Your phone number</label>
                                         <span v-if="custPhoneCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">이미 사용중인 전화번호입니다<br></span>
+                                        <span v-if="custPhoneHyphenCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">' - '를 제거해주세요<br></span>
 
                                         <div class="submit-wrap">
-                                            <input type="submit" value="Sign up" class="submit" :disabled="custIdCheck||!custPwCheck||custPhoneCheck">
+                                            <input type="submit" value="Sign up" class="submit">
                                         </div>
                                     </form>
                                 </div>
@@ -190,6 +196,7 @@
                         localStorage.removeItem("animal_name");
                         localStorage.removeItem("animal_login");
                         localStorage.removeItem("animal_admin");
+                        localStorage.removeItem("onceRev");
                         location.href = "index.html";
                     }
                 }
@@ -208,7 +215,8 @@
                     custPhone: "",
                     custIdCheck: false,
                     custPhoneCheck: false,
-                    custPwCheck: true
+                    custPwCheck: true,
+                    custPhoneHyphenCheck: false
                 }
             },
 
@@ -226,6 +234,10 @@
                         return alert("중복된 아이디를 입력하셨습니다.")
                     } else if (this.custPwCheck == false) {
                         return alert("비밀번호를 다시 확인해주세요.")
+                    } else if (this.custPhoneCheck) {
+                        return alert("이미 가입된 전화번호입니다.")
+                    } else if (this.custPhoneHyphenCheck) {
+                        return alert("전화번호에 '-'를 제거해주세요.")
                     }
                     axios
                         .post("http://localhost:7000/mijung/register", {
@@ -255,6 +267,11 @@
                         .finally(() => this.empEmpty = false)
                 },
                 phoneCheck() {
+                    if (this.custPhone.indexOf('-') != -1) {
+                        this.custPhoneHyphenCheck = true;
+                    } else {
+                        this.custPhoneHyphenCheck = false;
+                    }
                     axios
                         .get("http://localhost:7000/mijung/phoneCheck/" + this.custPhone)
                         .then(response => (this.custPhoneCheck = response.data))
@@ -265,7 +282,6 @@
                         .finally(() => this.empEmpty = false)
                 },
                 pwCheck() {
-                    console.log("aa");
                     if (this.custPassword1 != this.custPassword2) {
                         this.custPwCheck = false;
                     } else {

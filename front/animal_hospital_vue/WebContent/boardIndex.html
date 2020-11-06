@@ -75,9 +75,14 @@
                                 <h2>로그아웃</h2>
                             </a>
                         </li>
-                        <li class=' '>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 0">
                             <a href='mypage.html'>
                                 <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 1">
+                            <a href='Adminpage.html'>
+                                <h2>관리자페이지</h2>
                             </a>
                         </li>
                     </ul>
@@ -171,6 +176,7 @@
                         localStorage.removeItem("animal_name");
                         localStorage.removeItem("animal_login");
                         localStorage.removeItem("animal_admin");
+                        localStorage.removeItem("onceRev");
                         location.reload(true);
                     }
                 }
