@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>로그인 화면</title>
     <link rel='stylesheet' href='./CSS/login.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
@@ -105,27 +105,13 @@
                                 <div class="content">
                                     <div class="signin-cont cont">
                                         <form action="#" method="post" @submit.prevent="login" enctype="multipart/form-data">
-                                            <input type="email" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="Your email">
-                                            <label for="email">Your email</label>
+                                            ID<input type="email" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="Your email"> Password
+
                                             <input type="password" name="custPassword" id="custPassword" v-model="custPassword" class="inpt" required="required" placeholder="Your password">
-                                            <label for="password">Your password</label>
+
                                             <div class="submit-wrap">
                                                 <input type="submit" value="Sign in" class="submit">
-                                                <a href="#" class="more">Forgot your ID / password?</a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="signup-cont cont">
-                                        <form action="#" method="post" enctype="multipart/form-data">
-                                            <input type="email" name="email" id="name" class="inpt" required="required" placeholder="Your name">
-                                            <label for="name">Your name</label>
-                                            <input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email">
-                                            <label for="email">Your email</label>
-                                            <input type="password" name="password" id="custPassword" class="inpt" required="required" placeholder="Your password">
-                                            <label for="password">Your password</label>
-                                            <div class="submit-wrap">
-                                                <input type="submit" value="Sign up" class="submit">
-                                                <a href="#" class="more">Terms and conditions</a>
+                                                <a href="findIdPassword.html" class="more">Forgot your ID / password?</a>
                                             </div>
                                         </form>
                                     </div>
@@ -159,6 +145,8 @@
                     logout() {
                         let con_logout = confirm("로그아웃 하시겠습니까");
                         if (con_logout) {
+                            localStorage.removeItem("info");
+                            localStorage.removeItem("animal_name");
                             localStorage.removeItem("animal_login");
                             localStorage.removeItem("animal_admin");
                             location.href = "index.html";
@@ -173,7 +161,9 @@
                         loading: true,
                         errored: false,
                         custId: "",
-                        custPassword: ""
+                        custPassword: "",
+                        custName: "",
+                        info: []
 
                     }
                 },
@@ -198,9 +188,12 @@
                                     alert("로그인에 실패했습니다.");
 
                                 } else {
-                                    //this.info = response.data.;
-                                    localStorage.setItem("animal_login", this.custId);
-                                    localStorage.setItem("animal_admin", response.data.custAdmin);
+                                    this.info = response.data
+                                        //this.info = response.data.;
+                                    localStorage.setItem("info", JSON.stringify(this.info));
+                                    localStorage.setItem("animal_login", this.info.custId);
+                                    localStorage.setItem("animal_name", this.info.custName);
+                                    localStorage.setItem("animal_admin", this.info.custAdmin);
                                     alert(response.data.custName + "님이 로그인하였습니다.");
                                     location.href = "index.html";
                                 }

@@ -4,13 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src='./WEB-INF/lib/main.js'></script>
-    <link href='./WEB-INF/lib/main.css' rel='stylesheet' />
+    <title>회원가입</title>
     <link rel='stylesheet' href='./CSS/register1.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
-    <link rel='stylesheet' href='./CSS/register.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
@@ -80,36 +77,45 @@
                 </div>
             </header>
             <br><br><br>
-            <div id="loginapp">
-                <section class="container">
-                    <article class="half">
-                        <h1>회원가입</h1>
-                        <div class="tabs">
-
+            <section class='visual'>
+                <div class='con'>
+                    <div class='slide'>
+                        <div class='title'>
+                            <span>?</span>
                         </div>
-                        <div class="content" id="registerapp">
-                            <div class="signin-cont cont">
-                                <form action="#" method="post" enctype="multipart/form-data" @submit.prevent="register">
-                                    <input type="email" @blur="idCheck" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="이메일을 입력해주세요">
-                                    <td><span v-if="custIdCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">이미 사용중인 아이디입니다</span></td>
-                                    <input type="password" name="custPassword1" id="custPassword1" v-model="custPassword1" class="inpt" required="required" placeholder="비밀번호를 입력해주세요">
-                                    <input type="password" @keyup="pwCheck" name="custPassword2" id="custPassword2" v-model="custPassword2" class="inpt" required="required" placeholder="비밀번호 재확인">
-                                    <td><span v-if="!custPwCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">위 비밀번호와 일치하지 않습니다.</span></td>
-                                    <input type="text" name="custName" id="custName" v-model="custName" class="inpt" required="required" placeholder="이름을 입력해주세요">
-                                    <label for="name">Your name</label>
-                                    <input type="text" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="핸드폰번호를 입력해주세요">
-                                    <label for="phone">Your phone number</label>
+                    </div>
+                </div>
+                <div id="loginapp">
+                    <section class="container">
+                        <article class="half">
+                            <h1>회원가입</h1>
+                            <div class="tabs">
 
-                                    <div class="submit-wrap">
-                                        <input type="submit" value="Sign up" class="submit">
-                                    </div>
-                                </form>
                             </div>
-                        </div>
-                    </article>
-                    <div class="half bg"></div>
-                </section>
-                <!-- <section class='visual'>
+                            <div class="content" id="registerapp">
+                                <div class="signin-cont cont">
+                                    <form action="#" method="post" enctype="multipart/form-data" @submit.prevent="register">
+                                        ID<input type="email" @blur="idCheck" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="이메일을 입력해주세요">
+                                        <span v-if="custIdCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">이미 사용중인 아이디입니다<br></span> Password
+                                        <input type="password" name="custPassword1" id="custPassword1" v-model="custPassword1" class="inpt" required="required" placeholder="비밀번호를 입력해주세요"> Confirm Password<input type="password" @keyup="pwCheck" name="custPassword2"
+                                            id="custPassword2" v-model="custPassword2" class="inpt" required="required" placeholder="비밀번호 재확인">
+                                        <span v-if="!custPwCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">위 비밀번호와 일치하지 않습니다.<br></span> Name
+                                        <input type="text" name="custName" id="custName" v-model="custName" class="inpt" required="required" placeholder="이름을 입력해주세요">
+                                        <label for="name">Your name</label> Phone Number<input type="text" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="핸드폰번호를 입력해주세요">
+                                        <label for="phone">Your phone number</label>
+
+                                        <div class="submit-wrap">
+                                            <input type="submit" value="Sign up" class="submit">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="half bg"></div>
+                    </section>
+                </div>
+            </section>
+            <!-- <section class='visual'>
 
                 <div class='con'>
                     <div class='slide'>
@@ -157,98 +163,105 @@
                     </form>
                 </div>
             </section> -->
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <footer include-html='./source/footer.html'>
-                </footer>
-            </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <footer include-html='./source/footer.html'>
+            </footer>
         </div>
-        <script>
-            let navapp = new Vue({
-                el: "#app",
-                data: {
-                    isLogin: false
-                },
-                mounted() {
-                    if (localStorage.getItem("animal_login") != null) {
-                        this.isLogin = true;
-                    }
-                },
-                methods: {
-                    logout() {
-                        let con_logout = confirm("로그아웃 하시겠습니까");
-                        if (con_logout) {
-                            localStorage.removeItem("animal_login");
-                            localStorage.removeItem("animal_admin");
-                            location.href = "index.html";
-                        }
+    </div>
+    <script>
+        let navapp = new Vue({
+            el: "#app",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            },
+            methods: {
+                logout() {
+                    let con_logout = confirm("로그아웃 하시겠습니까");
+                    if (con_logout) {
+                        localStorage.removeItem("info");
+                        localStorage.removeItem("animal_name");
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        location.href = "index.html";
                     }
                 }
-            });
-            let app = new Vue({
-                el: '#registerapp',
-                data() {
-                    return {
-                        loading: true,
-                        errored: false,
-                        custId: "",
-                        custPassword1: "",
-                        custPassword2: "",
-                        custName: "",
-                        custPhone: "",
-                        custIdCheck: false,
-                        custPwCheck: true
-                    }
-                },
-
-                methods: {
-                    register() {
-                        if (this.custId == "") {
-                            alert("아이디를 입력하세요");
-                            return;
-                        }
-                        if (this.custPassword == "") {
-                            alert("비밀번호를 입력하세요");
-                            return;
-                        }
-                        axios
-                            .post("http://localhost:7000/mijung/register", {
-                                custId: this.custId,
-                                custPassword: this.custPassword1,
-                                custName: this.custName,
-                                custPhone: this.custPhone
-                            })
-                            .then(response => {
-                                alert(`${this.custName}님, 가입을 축하드립니다.`);
-                                location.href = "index.html"
-                            })
-                            .catch(error => {
-                                console.log(error);
-                                this.errored = true
-                            })
-                            .finally(() => this.loading = false)
-                    },
-                    idCheck() {
-                        axios
-                            .get("http://localhost:7000/mijung/idCheck/" + this.custId)
-                            .then(response => (this.custIdCheck = response.data))
-                            .catch(error => {
-                                console.log(error);
-                                this.errored = true
-                            })
-                            .finally(() => this.empEmpty = false)
-                    },
-                    pwCheck() {
-                        console.log("aa");
-                        if (this.custPassword1 != this.custPassword2) {
-                            this.custPwCheck = false;
-                        } else {
-                            this.custPwCheck = true;
-                        }
-                    }
-
+            }
+        });
+        let app = new Vue({
+            el: '#registerapp',
+            data() {
+                return {
+                    loading: true,
+                    errored: false,
+                    custId: "",
+                    custPassword1: "",
+                    custPassword2: "",
+                    custName: "",
+                    custPhone: "",
+                    custIdCheck: false,
+                    custPwCheck: true
                 }
-            });
-        </script>
+            },
+
+            methods: {
+                register() {
+                    if (this.custId == "") {
+                        alert("아이디를 입력하세요");
+                        return;
+                    }
+                    if (this.custPassword == "") {
+                        alert("비밀번호를 입력하세요");
+                        return;
+                    }
+                    if (this.custIdCheck) {
+                        return alert("중복된 아이디를 입력하셨습니다.")
+                    } else if (this.custPwCheck == false) {
+                        return alert("비밀번호를 다시 확인해주세요.")
+                    }
+                    axios
+                        .post("http://localhost:7000/mijung/register", {
+                            custId: this.custId,
+                            custPassword: this.custPassword1,
+                            custName: this.custName,
+                            custPhone: this.custPhone
+                        })
+                        .then(response => {
+                            alert(`${this.custName}님, 가입을 축하드립니다.`);
+                            location.href = "index.html"
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.loading = false)
+                },
+                idCheck() {
+                    axios
+                        .get("http://localhost:7000/mijung/idCheck/" + this.custId)
+                        .then(response => (this.custIdCheck = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true
+                        })
+                        .finally(() => this.empEmpty = false)
+                },
+                pwCheck() {
+                    console.log("aa");
+                    if (this.custPassword1 != this.custPassword2) {
+                        this.custPwCheck = false;
+                    } else {
+                        this.custPwCheck = true;
+                    }
+                }
+
+            }
+        });
+    </script>
     </div>
 </body>
 <script>
