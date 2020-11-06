@@ -12,4 +12,7 @@ public interface CustomerDAO {
 	public boolean changePassword(Customer customer) throws Exception;
 	public Customer getNameById(String custId) throws Exception;
 	public int phoneCheck(String custPhone) throws Exception;
+	public boolean changeCustRev0(String custId) throws Exception;
+	public boolean changeCustRev1(String custId) throws Exception;
+	public int getCustRev(String custId) throws Exception;
 }
