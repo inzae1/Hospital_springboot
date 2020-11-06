@@ -105,9 +105,9 @@
                                 <div class="content">
                                     <div class="signin-cont cont">
                                         <form action="#" method="post" @submit.prevent="login" enctype="multipart/form-data">
-                                            ID<input type="email" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="Your email"> Password
+                                            ID<input type="email" name="custId" id="custId" v-model="custId" class="inpt" required="required" placeholder="아이디를 입력해주세요"> Password
 
-                                            <input type="password" name="custPassword" id="custPassword" v-model="custPassword" class="inpt" required="required" placeholder="Your password">
+                                            <input type="password" name="custPassword" id="custPassword" v-model="custPassword" class="inpt" required="required" placeholder="비밀번호를 입력해주세요">
 
                                             <div class="submit-wrap">
                                                 <input type="submit" value="Sign in" class="submit">
@@ -192,7 +192,6 @@
                                         //this.info = response.data.;
                                     localStorage.setItem("info", JSON.stringify(this.info));
                                     localStorage.setItem("animal_login", this.info.custId);
-                                    localStorage.setItem("animal_name", this.info.custName);
                                     localStorage.setItem("animal_admin", this.info.custAdmin);
                                     alert(response.data.custName + "님이 로그인하였습니다.");
                                     location.href = "index.html";

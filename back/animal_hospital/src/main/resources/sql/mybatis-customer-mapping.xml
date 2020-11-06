@@ -12,7 +12,7 @@
 		VALUES(#{custId}, #{custPassword}, #{custName}, #{custPhone})
     </insert>
     <select id="login" parameterType="customer" resultType="customer">
-		SELECT cust_id, cust_password, cust_name, cust_phone, cust_admin
+		SELECT cust_id, cust_name, cust_phone, cust_admin
 		FROM customer
 		WHERE cust_id=#{custId} AND cust_password=#{custPassword}
     </select>
