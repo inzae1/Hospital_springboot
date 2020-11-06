@@ -38,7 +38,7 @@ public class ReservationController {
 	
 	@GetMapping("/getReservation/{custId}")
 	public ResponseEntity getReservation(@PathVariable String custId) throws Exception{
-		Reservation getReservation = reservationService.getReservation(custId);
+		List<Reservation> getReservation = reservationService.getReservation(custId);
 		if(getReservation==null)return new ResponseEntity(HttpStatus.NO_CONTENT);
 		return new ResponseEntity(getReservation,HttpStatus.OK);
 	}

@@ -14,7 +14,7 @@
     <select id="getReservation" parameterType="string" resultType="reservation">
 		SELECT rev_id, rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id
 		FROM reservation
-		WHERE cust_id=#{VALUE} AND rev_date>now() LIMIT 1
+		WHERE cust_id = #{VALUE} 
     </select>
     <delete id="cancelReservation" parameterType="string">
         DELETE FROM reservation WHERE cust_id=#{VALUE} AND rev_date > now()

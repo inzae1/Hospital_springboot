@@ -139,7 +139,7 @@
                         if (loginLocation) {
                             return location.href = "login.html"
                         }
-                    } else if (localStorage.getItem("onceRev") == 1) {
+                    } else if (localStorage.getItem("info").cust == 1) {
                         return alert("하나 이상의 예약을 할 수 없습니다.")
                     } else if (arg.event.id == "revPossible") {
                         revData.$data.revDoctor = arg.event.title;
@@ -169,9 +169,8 @@
                 <div class='header-left'>
                     <a href=' index.html'>
                         <img src='img/logo2.png ' alt='logo '>
-
                         <span>미정이네<br>
-                            <strong>동물병원</strong></span>
+                        <strong>동물병원</strong></span>
                     </a>
                 </div>
                 <!-- 메뉴 부분 -->
@@ -331,23 +330,12 @@
                                 location.reload()
                                 localStorage.setItem("reLoad", 1);
 
-
                             }) //then
                             .catch(error => {
                                 console.log(error);
                                 this.errored = true
                                 alert("예약 실패하셨습니다.");
                             }) //catch
-                            .finally(() => this.loading = false)
-                        axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev0/" + this.custId)
-                            .then(response => {
-                                localStorage.setItem("onceRev", 1);
-                            })
-                            .catch(error => {
-                                console.log(error);
-                                this.errored = true
-                            })
                             .finally(() => this.loading = false)
                     } //reservation
                 }, //methods
@@ -389,7 +377,6 @@
                             localStorage.removeItem("animal_name");
                             localStorage.removeItem("animal_login");
                             localStorage.removeItem("animal_admin");
-                            localStorage.removeItem("onceRev");
                             location.reload(true);
                         }
                     }

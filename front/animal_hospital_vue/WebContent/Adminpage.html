@@ -21,7 +21,9 @@
                 <!-- 로고 부분 -->
                 <div class='header-left'>
                     <a href=' index.html'>
-                        <img src='img/logo.png ' alt='logo '>
+                        <img src='img/logo2.png ' alt='logo '>
+                        <span>미정이네<br>
+                        <strong>동물병원</strong></span>
                     </a>
                 </div>
                 <!-- 메뉴 부분 -->
@@ -105,7 +107,8 @@
                         <td>{{rev.revComment}}</td>
                         <td>{{rev.revAnimalType}}</td>
                         <td>{{rev.custId}}</td>
-                        <td><input id="buttonBack" type="button" @click="cancelReservation" value="취소"></td>
+                        <td><input id="buttonBack" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
+                        <td v-else>지난예약</td>
                     </tr>
                 </table>
                 <div v-else>
@@ -170,10 +173,6 @@
                     .get("http://localhost:7000/mijung/getAllReservation/")
                     .then(response => {
                         this.info = response.data.reverse();
-                        var now = new Date();
-                        console.log(this.info[0].revDate)
-                        console.log(now.getFullYear() + "-" + Number(now.getMonth() + 1) + "-" + now.getDate() > this.info[0].revDate)
-                        console.log(now.getFullYear() + "-" + Number(now.getMonth() + 1) + "-" + now.getDate())
                     })
                     .catch(e => {
                         console.log(e);
@@ -182,7 +181,6 @@
                     .finally(() => this.loading = false)
             },
             methods: {
-                oldReservationCheck() {},
                 cancelReservation() {
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {

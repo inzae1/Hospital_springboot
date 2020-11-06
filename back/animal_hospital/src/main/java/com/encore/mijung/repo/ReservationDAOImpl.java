@@ -23,9 +23,9 @@ public class ReservationDAOImpl implements ReservationDAO{
 	}
 
 	@Override
-	public Reservation getReservation(String custId) throws Exception {
+	public List<Reservation> getReservation(String custId) throws Exception {
 		
-		return sqlSession.selectOne(ns+"getReservation", custId);
+		return sqlSession.selectList(ns+"getReservation", custId);
 	}
 
 	@Override

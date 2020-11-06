@@ -20,7 +20,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public Reservation getReservation(String custId) throws Exception {
+	public List<Reservation> getReservation(String custId) throws Exception {
 		// TODO Auto-generated method stub
 		return reservationDAO.getReservation(custId);
 	}
