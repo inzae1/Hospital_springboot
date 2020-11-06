@@ -54,9 +54,9 @@ public class CustomerController {
 		return new ResponseEntity(customerService.idCheck(custId), HttpStatus.OK);
 	}
 	
-	@PostMapping("/findId")
-	public ResponseEntity findId(@RequestBody Customer customer) throws Exception {
-//		Customer customer = new Customer (custName, custPhone);
+	@PostMapping("/findId/{custName}/{custPhone}")
+	public ResponseEntity findId(@PathVariable String custName, @PathVariable String custPhone) throws Exception {
+		Customer customer = new Customer (custName, custPhone);
 		Customer findCustomer = customerService.findId(customer);
 		if(findCustomer==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(findCustomer, HttpStatus.OK);

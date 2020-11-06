@@ -22,10 +22,10 @@
     <select id="idCheck" parameterType="string" resultType="int">
       	SELECT COUNT(cust_id) FROM customer WHERE cust_id=#{VALUE}  
     </select>
-    <select id="findId" parameterType="customer" resultType="customer">
+    <select id="findId" parameterType="string custName; string custPhone" resultType="customer">
     	SELECT cust_id, cust_password, cust_name, cust_phone
     	FROM customer
-    	WHERE cust_name=#{custName} AND cust_phone=#{custPhone}
+    	WHERE cust_name=#{custName;} AND cust_phone=#{custPhone}
     </select>
     <select id="findPassword" parameterType="customer" resultType="customer">
     	SELECT cust_id, cust_password, cust_name, cust_phone
