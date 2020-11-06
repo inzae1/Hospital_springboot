@@ -166,9 +166,35 @@
                 dropCustomer() {
                     let con_drop = confirm("정말 탈퇴하시겠습니까");
                     if (con_drop) {
-                        localStorage.removeItem("animal_login");
-                        localStorage.removeItem("animal_admin");
-                        location.href = "index.html";
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .then(() => {
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            }),
+                            axios
+                            .delete("http://localhost:7000/mijung/dropCustomer/" + id)
+                            .then(() => {
+                                alert("탈퇴하셨습니다.");
+                                localStorage.removeItem("info");
+                                localStorage.removeItem("animal_login");
+                                localStorage.removeItem("animal_admin");
+                                location.href = "index.html";
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
+
                     }
                 },
                 cancelReservation() {
