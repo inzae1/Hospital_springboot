@@ -4,16 +4,21 @@
     width: 100%;
     margin-top: 20%;
     background-color: #f5f5f7;
+    border-top: 1px solid rgba(51, 51, 51, 0.2)
+}
+
+#footer {
+    margin-right: 8%;
 }
 
 #footer>a {
     position: absolute;
-    right: 0;
+    right: 15%;
     top: 0;
 }
 
 #footer .on {
-    color: rgb(255, 255, 255);
+    color: #f5f5f7;
 }
 
 #footer .on:hover {
@@ -31,7 +36,35 @@
     max-height: 80px;
     width: auto;
     padding-right: 30px;
-    padding: 42px 0 26px;
+    padding: 60px 0 26px;
+}
+
+#footer .hosName {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 25px;
+    color: #1b1b1b;
+    font-weight: 300;
+    margin-left: -40px;
+    margin-top: 3.8%;
+}
+
+#footer .hosName strong {
+    padding-left: 85px;
+    color: #dc5f0d;
+}
+
+#footer .hosName {
+    position: absolute;
+    display: inline-block;
+    color: #333;
+    font-size: 22px;
+    font-weight: 600;
+    width: 200px;
+}
+
+#footer ul {
+    margin-left: 8%;
 }
 
 .footer .nav li {
@@ -61,6 +94,7 @@
 
 .footer address {
     padding: 25px 0 0;
+    margin-left: 8%;
     font-size: 13.5px;
     color: #666;
 }

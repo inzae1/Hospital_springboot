@@ -21,7 +21,9 @@
                 <!-- 로고 부분 -->
                 <div class='header-left'>
                     <a href=' index.html'>
-                        <img src='img/logo.png ' alt='logo '>
+                        <img src='img/logo2.png ' alt='logo '>
+                        <span>미정이네<br>
+                        <strong>동물병원</strong></span>
                     </a>
                 </div>
                 <!-- 메뉴 부분 -->
@@ -52,7 +54,7 @@
                 </div>
                 <!-- 로그인 부분 -->
                 <div class='header-right' id='app'>
-                    <ul class=' ' v-if="!isLogin">
+                    <ul class='log' v-if="!isLogin">
                         <li class=' '>
                             <a href='login.html'>
                                 <h2>로그인</h2>
@@ -64,7 +66,7 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class=' ' v-if="isLogin">
+                    <ul class='log' v-if="isLogin">
                         <li class=' '>
                             <a href="#" @click="logout">
                                 <h2>로그아웃</h2>
