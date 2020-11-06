@@ -194,36 +194,58 @@
                     searchSelect: 'title',
                     searchContent: '',
                     page: '1',
-                    countBoard: '',
-                    search: 0
+                    countBoard: ''
                 }
             },
             mounted() {
+                let searchBoard = JSON.parse(localStorage.getItem("animal_search"));
                 if (location.href.indexOf('?') != -1) {
                     this.page = location.href.split('?')[1].split('=')[1];
                 }
-                this.loginId = localStorage.getItem('animal_login');
-                this.admin = localStorage.getItem('animal_admin');
-                axios
-                    .get("http://localhost:7000/mijung/countBoard")
-                    .then(response => {
-                        this.countBoard = response.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                        this.errored = true;
-                    })
-                    .finally(() => this.loading = false);
-                axios
-                    .get("http://localhost:7000/mijung/getAllBoard/" + this.page)
-                    .then(response => {
-                        this.info = response.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                        this.errored = true;
-                    })
-                    .finally(() => this.loading = false);
+                if (searchBoard.isTitle == 1) {
+                    axios
+                        .get("http://localhost:7000/mijung/countBoardByTitle/" + searchBoard.search)
+                        .then(response => {
+                            this.countBoard = response.data;
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false);
+                    axios
+                        .get("http://localhost:7000/mijung/searchBoardByTitle/" + searchBoard.search + "/" + this.page)
+                        .then(response => {
+                            this.info = response.data;
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false);
+                } else {
+                    this.searchContent = localStorage.getItem("titleSearch");
+                    axios
+                        .get("http://localhost:7000/mijung/countBoardByContent/" + searchBoard.search)
+                        .then(response => {
+                            this.countBoard = response.data;
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false);
+                    axios
+                        .get("http://localhost:7000/mijung/searchBoardByContent/" + searchBoard.search + "/" + this.page)
+                        .then(response => {
+                            this.info = response.data;
+                        })
+                        .catch(e => {
+                            console.log(e);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false);
+                }
             },
             methods: {
                 getBoard(board) {
@@ -266,13 +288,67 @@
                     }
                     location.href = "boardSearch.html?page=1";
                 },
+                // searchBoard() {
+                //     if (this.searchContent == '') {
+                //         alert("검색어를 입력해주세요");
+                //         return;
+                //     } else if (this.searchSelect == "title") {
+                //         this.search = 1;
+                //         this.page = 1;
+                //         axios
+                //             .get("http://localhost:7000/mijung/countBoardByTitle/" + this.searchContent)
+                //             .then(response => {
+                //                 this.countBoard = response.data;
+                //             })
+                //             .catch(e => {
+                //                 console.log(e);
+                //                 this.errored = true;
+                //             })
+                //             .finally(() => this.loading = false);
+                //         axios
+                //             .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
+                //             .then(response => {
+                //                 this.info = response.data;
+                //             })
+                //             .catch(e => {
+                //                 console.log(e);
+                //                 this.errored = true;
+                //             })
+                //             .finally(() => this.loading = false);
+                //     } else {
+                //         this.page = 1;
+                //         this.search = 1;
+                //         axios
+                //             .get("http://localhost:7000/mijung/countBoardByContent/" + this.searchContent)
+                //             .then(response => {
+                //                 this.countBoard = response.data;
+                //             })
+                //             .catch(e => {
+                //                 console.log(e);
+                //                 this.errored = true;
+                //             })
+                //             .finally(() => this.loading = false);
+                //         axios
+                //             .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
+                //             .then(response => {
+                //                 this.info = response.data;
+                //             })
+                //             .catch(e => {
+                //                 console.log(e);
+                //                 this.errored = true;
+                //             })
+                //             .finally(() => this.loading = false);
+                //     }
+                // },
                 pageMove(p) {
                     this.page = p;
-                    location.href = "boardIndex.html?page=" + this.page;
+                    location.href = "boardSearch.html?page=" + this.page;
                 }
-            }
 
-        });
+            }
+        })
+
+        ;
         includeHTML();
     </script>
 

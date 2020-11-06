@@ -8,7 +8,7 @@
     <link rel='stylesheet' href='./CSS/default.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <link rel='stylesheet' href='./CSS/footer.css'>
-    <link rel='stylesheet' href='./CSS/boardIndex.css'>
+    <link rel='stylesheet' href='./CSS/boardDetail.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
@@ -91,32 +91,71 @@
                         <span>Q & A</span>
                     </div>
                 </div>
+                <br><br><br>
                 <div id="app">
-                    <table class='table'>
-                        <thead>
-                            <th>제목</th>
-                            <td>{{info.bdTitle}}</td>
-                            <th>조회수</th>
-                            <td>{{info.bdView}}</td>
-                        </thead>
+                    <div class='app'>
+                        <table class='table'>
+                            <tr>
+                                <thead>
+                                    <th>제목</th>
+                                    <td>{{info.bdTitle}}</td>
+                                    <th>조회수</th>
+                                    <td>{{info.bdView}}</td>
+                                </thead>
+                            </tr>
+                            <tr>
+                                <tbody>
+                                    <th>내용</th>
+                                    <td colspan="3"><span cols="50" rows="10" border='1'>{{info.bdContent}}</span><br></td>
+                                </tbody>
+                            </tr>
+                        </table>
 
-                    </table>
-                    내용<br>
-                    <span cols="50" rows="10" border='1'>{{info.bdContent}}</span><br>
-                    <div v-if='checkWriter()'>
-                        <button @click='updateBoard'>수정하기</button><br>
-                        <button @click='deleteteBoard'>삭제하기</button><br>
+                        <br>
+
+                        <div v-if='checkWriter()'>
+                            <div class='editor'>
+                                <button @click='updateBoard'>수정하기</button>&emsp;
+                                <button @click='deleteteBoard'>삭제하기</button>
+                            </div>
+                        </div>
+                        <div><br><br><br>
+                            <div v-if='checkReply()' class='reply'>
+
+                                <span class='replay'>답변달기</span>
+                                <form method="POST" name="frm" @submit.prevent="addReply">
+                                    <textarea id="reply" v-model="reply"></textarea>
+                                    <br><input type="submit" value="확인" class='upload'>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <div v-if='checkReply()'>
-                        댓글달기
-                        <form method="POST" name="frm" @submit.prevent="addReply">
-                            <textarea id="reply" v-model="reply"></textarea>
-                            <input type="submit" value="확인">
-                        </form>
-                    </div>
-                    <div v-if="info.bdReply != null">
-                        답변 {{info.bdReply}}
+
+
+                    <br><br>
+                    <div>
+                        <table class='table-2'>
+                            <thead>
+                                <tr>
+                                    <th>
+
+                                        <div v-if="info.bdReply != null">
+                                            <div>
+                                                답변<br>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span>{{info.bdReply}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
             </section>
