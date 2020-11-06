@@ -9,6 +9,9 @@ public class Board {
 	private int bdIsSecret;
 	private String bdReply;
 	private String custId;
+	private String custName;
+
+	
 
 	public Board() {
 
@@ -20,12 +23,13 @@ public class Board {
 		this.bdIsSecret = bdIsSecret;
 	}
 
-	public Board(String bdTitle, String bdContent, int bdView, int bdIsSecret, String custId) {
+	public Board(String bdTitle, String bdContent, int bdView, int bdIsSecret, String custId, String custName) {
 		this.bdTitle = bdTitle;
 		this.bdContent = bdContent;
 		this.bdView = bdView;
 		this.bdIsSecret = bdIsSecret;
 		this.custId = custId;
+		this.custName = custName;
 	}
 
 	public int getBdID() {
@@ -91,12 +95,22 @@ public class Board {
 	public void setCustId(String custId) {
 		this.custId = custId;
 	}
+	
+	public String getCustName() {
+		return custName;
+	}
+
+	public void setCustName(String custName) {
+		this.custName = custName;
+	}
 
 	@Override
 	public String toString() {
 		return "Board [bdID=" + bdID + ", bdTitle=" + bdTitle + ", bdContent=" + bdContent + ", bdView=" + bdView
 				+ ", bdDate=" + bdDate + ", bdIsSecret=" + bdIsSecret + ", bdReply=" + bdReply + ", custId=" + custId
-				+ "]";
+				+ ", custName=" + custName + "]";
 	}
+
+	
 
 }

@@ -8,8 +8,9 @@
     <link rel='stylesheet' href='./CSS/default.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <link rel='stylesheet' href='./CSS/footer.css'>
-    <link rel='stylesheet' href='./CSS/boardIndex.css'>
+    <link rel='stylesheet' href='./CSS/addBoard.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./source/includeHTML.js"></script>
 </head>
 
 <body>
@@ -75,14 +76,26 @@
                     </ul>
                 </div>
             </header>
-            <br><br><br><br><br>
+            <br><br><br>
             <section class='visual'>
+                <div class='slide'>
+                    <!-- 상단 이미지 -->
+                    <div class='title'>
+                        <span>Q & A</span>
+                    </div>
+                </div>
+                <br><br>
                 <div id="app">
-                    <form action="" method="POST" name="frm" @submit.prevent="addBoard">
-                        제목: <input type="text" id="title" v-model='title'><br> 내용:
-                        <textarea id="content" v-model='content'></textarea> 비밀글
-                        <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
-                        <input type="submit" value="등록">
+                    <div class=''>
+                        <div class='question'>
+                            <h1>질문 등록하기</h1>
+                        </div>
+                    </div>
+                    <br><br>
+                    <form action="" method="POST" name="frm" @submit.prevent="addBoard" class='write'>
+                        제목: <br><input type="text" id="title" v-model='title'><br><br> 내용: <textarea id="content" v-model='content'></textarea><br><br> 비밀글 <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
+                        <br><br>
+                        <input type="submit" value="등록" id='upload'>
                     </form>
                 </div>
             </section>
@@ -120,11 +133,19 @@
                 return {
                     title: '',
                     content: '',
+                    custName: '',
                     bdIsSecret: 0,
                     secretKey: false,
                     loading: true,
                     errored: false
                 }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:7000/mijung/getNameById/" + localStorage.getItem('animal_login'))
+                    .then(result => {
+                        this.custName = result.data.custName;
+                    })
             },
             methods: {
                 addBoard() {
@@ -133,7 +154,8 @@
                         bdContent: this.content,
                         bdView: 0,
                         bdIsSecret: this.bdIsSecret,
-                        custId: localStorage.getItem('animal_login')
+                        custId: localStorage.getItem('animal_login'),
+                        custName: this.custName
                     };
                     axios
                         .post("http://localhost:7000/mijung/addBoard/", board)
@@ -157,8 +179,10 @@
                 }
             }
         });
-        includeHTML();
     </script>
 </body>
+<script>
+    includeHTML();
+</script>
 
 </html>

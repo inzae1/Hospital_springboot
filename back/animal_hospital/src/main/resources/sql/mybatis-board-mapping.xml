@@ -7,8 +7,8 @@
 
 <insert id="addBoard" parameterType="board">
 	INSERT board
-	(bd_title, bd_content, bd_view, bd_is_Secret, cust_id)
-	VALUES (#{bdTitle}, #{bdContent},#{bdView},#{bdIsSecret},#{custId})
+	(bd_title, bd_content, bd_view, bd_is_Secret, cust_id, cust_name)
+	VALUES (#{bdTitle}, #{bdContent},#{bdView},#{bdIsSecret},#{custId},#{custName})
 </insert>
 
 <update id="updateBoard" parameterType="board">
@@ -34,14 +34,14 @@
 </select>
 
 <select id="getAllBoard" resultType="board" parameterType="int">
-	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id, cust_name
 	FROM board
 	ORDER BY bd_ID desc
 	LIMIT #{VALUE}, 5
 </select>
 
 <select id="getBoard" parameterType="int" resultType="board">
-	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id, cust_name
 	FROM board
 	WHERE bd_ID=#{bdID}
 </select>
