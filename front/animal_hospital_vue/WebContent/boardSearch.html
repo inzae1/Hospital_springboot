@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='./CSS/default.css'>
+    <link rel='stylesheet' href='./CSS/header.css'>
+    <link rel='stylesheet' href='./CSS/footer.css'>
+    <link rel='stylesheet' href='./CSS/boardIndex.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./source/includeHTML.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class='inner-wrapper'>
+            <header>
+                <!-- 로고 부분 -->
+                <div class='header-left'>
+                    <a href=' index.html'>
+                        <img src='img/logo2.png ' alt='logo '>
+
+                        <span>미정이네<br>
+                            <strong>동물병원</strong></span>
+                    </a>
+                </div>
+                <!-- 메뉴 부분 -->
+                <div class='header-center '>
+                    <ul class=''>
+                        <li class=''>
+                            <a href='intro.html'>
+                                <span>병원소개</span>
+                                <!-- <ul class=''>
+                        <li class=''><a href=''>나와라</a></li>
+                        <li class=''><a href=''>나와라</a></li>
+                        <li class=''><a href=''>나와라</a></li>
+                    </ul> -->
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='index_rev1.html'>
+                                <span>진료예약</span>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='boardIndex.html'>
+                                <span>Q & A</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 로그인 부분 -->
+                <div class='header-right' id='loginApp'>
+                    <ul class=' ' v-if="!isLogin">
+                        <li class=' '>
+                            <a href='login.html'>
+                                <h2>로그인</h2>
+                            </a>
+                        </li>
+                        <li class=' '>
+                            <a href='register.html'>
+                                <h2>회원가입</h2>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class=' ' v-if="isLogin">
+                        <li class=' '>
+                            <a href="#" @click="logout">
+                                <h2>로그아웃</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 0">
+                            <a href='mypage.html'>
+                                <h2>마이페이지</h2>
+                            </a>
+                        </li>
+                        <li class=' ' v-if="localStorage.getItem('animal_admin') == 1">
+                            <a href='Adminpage.html'>
+                                <h2>관리자페이지</h2>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <br><br><br>
+            <section class='visual'>
+                <div class='slide'>
+                    <!-- 상단 이미지 -->
+                    <div class='title'>
+                        <span>Q & A</span>
+                    </div>
+                </div>
+
+                <div id="app">
+                    <a href="./addBoard.html" class='btn'><button v-if="loginId != null">글쓰기</button></a>
+
+                    <table class='table table-hover'>
+                        <thead>
+                            <tr>
+                                <th width='8%'>번호</th>
+                                <th width='12%'>답변여부</th>
+                                <th width='40%'>제목</th>
+                                <th width='15%'>글쓴이</th>
+                                <th width='10%'>날짜</th>
+                                <th width='15%'>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody class='tbody'>
+
+                            <tr v-for='board in info'>
+                                <td>{{board.bdID}}</td>
+                                <td v-if="board.bdReply!=null">Y</td>
+                                <td v-else>N</td>
+                                <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}}**</td>
+                                <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
+                                <td>{{board.custName}}</td>
+                                <td>{{board.bdDate}}</td>
+                                <td>{{board.bdView}}</td><br>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <center>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#" v-for="p in Math.ceil(countBoard/5)" @click="pageMove(p)">{{p}}</a></li>
+                            </ul>
+                        </nav>
+                    </center>
+                    <center>
+                        <table>
+                            <tr>
+                                <td>
+                                    <select name="searchSelectBox" v-model="searchSelect">
+                                    <option value="title">제목</option>
+                                    <option value="content">내용</option>
+                                </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="search" id="search" v-model="searchContent">
+                                </td>
+                                <td>
+                                    <button type="button" @click="searchBoard">검색</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </section>
+            <footer include-html='./source/footer.html'></footer>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#loginApp",
+            data: {
+                isLogin: false
+            },
+            mounted() {
+                if (localStorage.getItem("animal_login") != null) {
+                    this.isLogin = true;
+                }
+            },
+            methods: {
+                logout() {
+                    let con_logout = confirm("로그아웃 하시겠습니까");
+                    if (con_logout) {
+                        localStorage.removeItem("info");
+                        localStorage.removeItem("animal_name");
+                        localStorage.removeItem("animal_login");
+                        localStorage.removeItem("animal_admin");
+                        localStorage.removeItem("onceRev");
+                        location.reload(true);
+                    }
+                }
+            }
+        });
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    info: [],
+                    admin: 0,
+                    loginId: null,
+                    loading: true,
+                    errored: false,
+                    searchSelect: 'title',
+                    searchContent: '',
+                    page: '1',
+                    countBoard: '',
+                    search: 0
+                }
+            },
+            mounted() {
+                if (location.href.indexOf('?') != -1) {
+                    this.page = location.href.split('?')[1].split('=')[1];
+                }
+                this.loginId = localStorage.getItem('animal_login');
+                this.admin = localStorage.getItem('animal_admin');
+                axios
+                    .get("http://localhost:7000/mijung/countBoard")
+                    .then(response => {
+                        this.countBoard = response.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false);
+                axios
+                    .get("http://localhost:7000/mijung/getAllBoard/" + this.page)
+                    .then(response => {
+                        this.info = response.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false);
+            },
+            methods: {
+                getBoard(board) {
+                    // 비밀글일 경우 작성자만 볼 수 있도록 해야함.
+                    if (board.bdIsSecret === 1) {
+                        if ((board.custId === this.loginId) || (localStorage.getItem('animal_admin') === '1')) {
+                            location.href = "./boardDetail.html?bdID=" + board.bdID;
+                            board.bdView += 1;
+                            axios
+                                .put("http://localhost:7000/mijung/updateBoard", board);
+                        } else {
+                            alert("작성자만 볼 수 있습니다. 로그인 하세요");
+                            return;
+                        }
+                    } else {
+                        location.href = "./boardDetail.html?bdID=" + board.bdID;
+                        board.bdView += 1;
+                        axios
+                            .put("http://localhost:7000/mijung/updateBoard", board);
+                    }
+                },
+                isSecret(board) {
+                    if (board.bdIsSecret === 1) return true;
+                    else return false;
+                },
+                searchBoard() {
+                    if (this.searchContent == '') {
+                        alert("검색어를 입력해주세요");
+                        return;
+                    } else if (this.searchSelect == "title") {
+                        this.search = 1;
+                        this.page = 1;
+                        axios
+                            .get("http://localhost:7000/mijung/countBoardByTitle/" + this.searchContent)
+                            .then(response => {
+                                this.countBoard = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                    } else {
+                        this.page = 1;
+                        this.search = 1;
+                        axios
+                            .get("http://localhost:7000/mijung/countBoardByContent/" + this.searchContent)
+                            .then(response => {
+                                this.countBoard = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                    }
+                },
+                pageMove(p) {
+                    this.page = p;
+                    if (this.search == 0) {
+                        location.href = "boardIndex.html?page=" + this.page;
+                    } else if (this.search == 1) {
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByTitle/" + this.searchContent + "/" + this.page)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                    } else {
+                        axios
+                            .get("http://localhost:7000/mijung/searchBoardByContent/" + this.searchContent + "/" + this.page)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false);
+                    }
+
+                }
+            }
+
+        });
+        includeHTML();
+    </script>
+
+</body>
+
+</html>
