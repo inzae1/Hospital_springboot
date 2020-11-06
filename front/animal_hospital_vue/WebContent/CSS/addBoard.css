@@ -34,30 +34,47 @@
     padding: 20px 0 20px 1100px;
 }
 
-#app .table {
-    text-align: center;
+#app .write {
     margin: auto;
     width: 65%;
-    height: 100px;
+    height: 80%;
     max-height: 90%;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-top: 1px solid silver;
+    padding-top: 40px;
+    padding-bottom: 5px;
+    border-top: 2px solid silver;
     border-bottom: 1px solid silver;
-}
-
-#app .table thead {
     font-size: 16px;
 }
 
-#app .table tr th {
+#app input {
+    font-size: 16px;
+}
+
+#title {
+    width: 50%
+}
+
+#app textarea {
+    height: 50%
+}
+
+#upload {
+    font-size: 13.333px;
+    float: right;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 1px 6px;
+    margin-right: 50px;
+    background-color: #efefef;
+    color: #000;
+}
+
+#upload:hover {
+    border-style: inset;
+    background-color: rgba(59, 59, 59, 0.3);
+}
+
+#app .question {
     text-align: center;
-}
-
-#app .table .tbody {
-    font-size: 14px;
-}
-
-#app .table .tbody {
-    border-bottom: 1px solid silver;
+    font-size: 18px;
 }
