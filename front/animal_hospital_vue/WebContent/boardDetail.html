@@ -8,7 +8,7 @@
     <link rel='stylesheet' href='./CSS/default.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <link rel='stylesheet' href='./CSS/footer.css'>
-    <link rel='stylesheet' href='./CSS/boardIndex.css'>
+    <link rel='stylesheet' href='./CSS/boardDetail.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
@@ -91,146 +91,187 @@
                         <span>Q & A</span>
                     </div>
                 </div>
+                <br><br><br>
                 <div id="app">
-                    <table class='table'>
-                        <thead>
-                            <th>제목</th>
-                            <td>{{info.bdTitle}}</td>
-                            <th>조회수</th>
-                            <td>{{info.bdView}}</td>
-                        </thead>
+                    <div class='app'>
+                        <table class='table'>
+                            <tr>
+                                <thead>
+                                    <th>제목</th>
+                                    <td>{{info.bdTitle}}</td>
+                                    <th>조회수</th>
+                                    <td>{{info.bdView}}</td>
+                                </thead>
+                            </tr>
+                            <tr>
+                                <tbody>
+                                    <th>내용</th>
+                                    <td colspan="3"><span cols="50" rows="10" border='1'>{{info.bdContent}}</span><br></td>
+                                </tbody>
+                            </tr>
+                        </table>
 
-                    </table>
-                    내용<br>
-                    <span cols="50" rows="10" border='1'>{{info.bdContent}}</span><br>
-                    <div v-if='checkWriter()'>
-                        <button @click='updateBoard'>수정하기</button><br>
-                        <button @click='deleteteBoard'>삭제하기</button><br>
+                        <br>
+
+                        <div v-if='checkWriter()'>
+                            <div class='editor'>
+                                <button @click='updateBoard'>수정하기</button>&emsp;
+                                <button @click='deleteteBoard'>삭제하기</button>
+                            </div>
+                        </div>
+
+
+                        <br><br>
+                        <div>
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th>
+
+                                            <div v-if="info.bdReply != null">
+                                                <div>
+                                                    답변<br>
+                                                </div>
+
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span>{{info.bdReply}}</span>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>답변달기</th>
+                                        <td>
+                                            <div v-if='checkReply()'>
+                                                <form method="POST" name="frm" @submit.prevent="addReply">
+                                                    <textarea id="reply" v-model="reply"></textarea>
+                                                    <br><input type="submit" value="확인" class='upload'>
+                                                </form>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
-                    <br>
-                    <div v-if='checkReply()'>
-                        댓글달기
-                        <form method="POST" name="frm" @submit.prevent="addReply">
-                            <textarea id="reply" v-model="reply"></textarea>
-                            <input type="submit" value="확인">
-                        </form>
-                    </div>
-                    <div v-if="info.bdReply != null">
-                        답변 {{info.bdReply}}
-                    </div>
-                </div>
             </section>
             <footer include-html='./source/footer.html'></footer>
-        </div>
+            </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        <script>
-            new Vue({
-                el: "#loginApp",
-                data: {
-                    isLogin: false
-                },
-                mounted() {
-                    if (localStorage.getItem("animal_login") != null) {
-                        this.isLogin = true;
-                    }
-                },
-                methods: {
-                    logout() {
-                        let con_logout = confirm("로그아웃 하시겠습니까");
-                        if (con_logout) {
-                            localStorage.removeItem("info");
-                            localStorage.removeItem("animal_name");
-                            localStorage.removeItem("animal_login");
-                            localStorage.removeItem("animal_admin");
-                            localStorage.removeItem("onceRev");
-                            location.reload(true);
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            <script>
+                new Vue({
+                    el: "#loginApp",
+                    data: {
+                        isLogin: false
+                    },
+                    mounted() {
+                        if (localStorage.getItem("animal_login") != null) {
+                            this.isLogin = true;
                         }
-                    }
-                }
-            });
-            const app = new Vue({
-                el: "#app",
-                data() {
-                    return {
-                        info: null,
-                        reply: '',
-                        loading: true,
-                        errored: false
-                    }
-                },
-                mounted() {
-                    let bdID = location.href.split('?')[1].split('=')[1];
-
-                    axios
-                        .get("http://localhost:7000/mijung/getBoard/" + bdID)
-                        .then(response => {
-                            this.info = response.data;
-                        })
-                        .catch(e => {
-                            console.log(e);
-                            this.errored = true;
-                        })
-                        .finally(() => this.loading = false)
-                },
-                methods: {
-                    updateBoard() {
-                        location.href = "./boardUpdate.html?bdID=" + app.info.bdID;
                     },
-                    addReply() {
-                        const board = {
-                            bdReply: this.reply,
-                            bdID: this.info.bdID,
-                        };
-
-                        axios
-                            .put("http://localhost:7000/mijung/replyBoard", board)
-                            .then(() => {
-
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => {
-                                this.info.bdReply = this.reply;
-                                this.loading = false;
-                                // location.reload();
-                            })
-                    },
-                    deleteteBoard() {
-                        axios
-                            .delete("http://localhost:7000/mijung/deleteBoard/" + app.info.bdID)
-                            .then(() => {
-                                alert("삭제 성공");
-                                location.href = './boardIndex.html';
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => {
-                                this.loading = false;
-                            })
-                    },
-                    checkWriter() {
-                        if (this.info.custId === localStorage.getItem('animal_login')) return true;
-                        else return false;
-                    },
-                    checkReply() {
-                        // admin만 가능, 답글이 없어야 가능
-                        if (localStorage.getItem('animal_admin') === '1') {
-                            if (this.info.bdReply === null) {
-                                return true;
+                    methods: {
+                        logout() {
+                            let con_logout = confirm("로그아웃 하시겠습니까");
+                            if (con_logout) {
+                                localStorage.removeItem("info");
+                                localStorage.removeItem("animal_name");
+                                localStorage.removeItem("animal_login");
+                                localStorage.removeItem("animal_admin");
+                                localStorage.removeItem("onceRev");
+                                location.reload(true);
                             }
                         }
-                        return false;
                     }
-                }
-            });
-            includeHTML();
-        </script>
+                });
+                const app = new Vue({
+                    el: "#app",
+                    data() {
+                        return {
+                            info: null,
+                            reply: '',
+                            loading: true,
+                            errored: false
+                        }
+                    },
+                    mounted() {
+                        let bdID = location.href.split('?')[1].split('=')[1];
+
+                        axios
+                            .get("http://localhost:7000/mijung/getBoard/" + bdID)
+                            .then(response => {
+                                this.info = response.data;
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => this.loading = false)
+                    },
+                    methods: {
+                        updateBoard() {
+                            location.href = "./boardUpdate.html?bdID=" + app.info.bdID;
+                        },
+                        addReply() {
+                            const board = {
+                                bdReply: this.reply,
+                                bdID: this.info.bdID,
+                            };
+
+                            axios
+                                .put("http://localhost:7000/mijung/replyBoard", board)
+                                .then(() => {
+
+                                })
+                                .catch(e => {
+                                    console.log(e);
+                                    this.errored = true;
+                                })
+                                .finally(() => {
+                                    this.info.bdReply = this.reply;
+                                    this.loading = false;
+                                    // location.reload();
+                                })
+                        },
+                        deleteteBoard() {
+                            axios
+                                .delete("http://localhost:7000/mijung/deleteBoard/" + app.info.bdID)
+                                .then(() => {
+                                    alert("삭제 성공");
+                                    location.href = './boardIndex.html';
+                                })
+                                .catch(e => {
+                                    console.log(e);
+                                    this.errored = true;
+                                })
+                                .finally(() => {
+                                    this.loading = false;
+                                })
+                        },
+                        checkWriter() {
+                            if (this.info.custId === localStorage.getItem('animal_login')) return true;
+                            else return false;
+                        },
+                        checkReply() {
+                            // admin만 가능, 답글이 없어야 가능
+                            if (localStorage.getItem('animal_admin') === '1') {
+                                if (this.info.bdReply === null) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                    }
+                });
+                includeHTML();
+            </script>
 </body>
 
 </html>
