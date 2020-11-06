@@ -10,7 +10,7 @@ body .container {
     position: relative;
     overflow: hidden;
     width: 700px;
-    height: 670px;
+    height: 500px;
     margin: 80px auto 0;
     background-color: #ffffff;
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -25,12 +25,18 @@ body .container .half {
     padding: 58px 40px 0;
 }
 
+body .container .half2 {
+    float: right;
+    width: 50%;
+    height: 100%;
+    padding: 58px 40px 0;
+}
+
 body .container .half.bg {
-    background-image: url("../img/register.png");
-    background-size: 500px;
+    background-image: url("../img/slide_ten.jpg");
+    background-size: 400px;
     background-repeat: no-repeat;
     background-position-x: center;
-    margin-top: 10%;
 }
 
 body .container h1 {
@@ -83,7 +89,7 @@ body .container .tabs .tab.active {
 
 body .container .content form {
     position: relative;
-    height: 1000px;
+    height: 287px;
 }
 
 body .container .content label:first-of-type,
@@ -110,22 +116,6 @@ body .container .content .more:nth-of-type(3) {
     animation: slideIn 0.6s cubic-bezier(0.37, 0.82, 0.2, 1);
 }
 
-body .container .content label:nth-of-type(4),
-body .container .content input:nth-of-type(4),
-body .container .content .more:nth-of-type(4) {
-    -moz-animation: slideIn 0.7s cubic-bezier(0.37, 0.82, 0.2, 1);
-    -webkit-animation: slideIn 0.7s cubic-bezier(0.37, 0.82, 0.2, 1);
-    animation: slideIn 0.7s cubic-bezier(0.37, 0.82, 0.2, 1);
-}
-
-body .container .content label:nth-of-type(5),
-body .container .content input:nth-of-type(5),
-body .container .content .more:nth-of-type(5) {
-    -moz-animation: slideIn 0.8s cubic-bezier(0.37, 0.82, 0.2, 1);
-    -webkit-animation: slideIn 0.8s cubic-bezier(0.37, 0.82, 0.2, 1);
-    animation: slideIn 0.8s cubic-bezier(0.37, 0.82, 0.2, 1);
-}
-
 body .container .content label {
     font-size: 12px;
     color: #263238;
@@ -144,8 +134,7 @@ body .container .content input.inpt {
     display: block;
     width: 100%;
     height: 42px;
-    margin-bottom: 6px;
-    margin-top: 6px;
+    margin-bottom: 12px;
     padding: 16px 13px;
     color: #999999;
     border: 1px solid #d9d9d9;
@@ -189,9 +178,11 @@ body .container .content input.submit {
     line-height: 42px;
     display: block;
     width: 100%;
-    margin-top: 10%;
+    margin-bottom: 5%;
+    margin-left: 1%;
     height: 42px;
     cursor: pointer;
+    vertical-align: middle;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #263238;
@@ -259,13 +250,14 @@ body .container .content .checkbox:checked+label:before {
 
 body .container .content .submit-wrap {
     position: absolute;
-    margin-bottom: 100%;
+    bottom: 0;
     width: 100%;
 }
 
 body .container .content .submit-wrap a {
     font-size: 12px;
-    margin-left: 5%;
+    margin-left: 20%;
+    margin-bottom: 20%;
     display: block;
     text-decoration: none;
     color: #999999;
