@@ -118,6 +118,7 @@
                                             <input type="password" name="custPassword" id="custPassword" v-model="custPassword" class="inpt" required="required" placeholder="비밀번호를 입력해주세요">
 
                                             <div class="submit-wrap">
+                                                <span v-if="!idCheck" style="margin-left:2%; color: red;">아이디와 비밀번호를 확인해주세요.<br></span>
                                                 <input type="submit" value="Sign in" class="submit">
                                                 <a href="findIdPassword.html" class="more">Forgot your ID / password?</a>
                                             </div>
@@ -173,8 +174,7 @@
                         custPassword: "",
                         custName: "",
                         info: [],
-                        idCheck: true,
-                        pwCheck: true
+                        idCheck: true
 
                     }
                 },
@@ -196,7 +196,7 @@
                             .then(response => {
                                 console.log(response.data);
                                 if (response.data == "") {
-                                    alert("로그인에 실패했습니다.");
+                                    this.idCheck = false
 
                                 } else {
                                     this.info = response.data

@@ -119,6 +119,7 @@
                                 <td v-else>N</td>
                                 <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}} <img src="./img/secret.png" width="15px"></td>
                                 <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
+
                                 <td>{{board.custName}}</td>
                                 <td>{{board.bdDate}}</td>
                                 <td>{{board.bdView}}</td><br>
@@ -230,6 +231,7 @@
                     // 비밀글일 경우 작성자만 볼 수 있도록 해야함.
                     if (board.bdIsSecret === 1) {
                         if ((board.custId === this.loginId) || (localStorage.getItem('animal_admin') === '1')) {
+
                             location.href = "./boardDetail.html?bdID=" + board.bdID;
                             board.bdView += 1;
                             axios

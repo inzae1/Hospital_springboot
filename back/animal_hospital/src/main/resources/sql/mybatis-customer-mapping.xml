@@ -23,7 +23,7 @@
       	SELECT COUNT(cust_id) FROM customer WHERE cust_id=#{VALUE}  
     </select>
     <select id="findId" parameterType="customer" resultType="customer">
-    	SELECT cust_id, cust_name, cust_phone
+    	SELECT cust_id, cust_name, cust_phone, cust_admin, cust_can_rev
     	FROM customer
     	WHERE cust_name=#{custName} AND cust_phone=#{custPhone}
     </select>

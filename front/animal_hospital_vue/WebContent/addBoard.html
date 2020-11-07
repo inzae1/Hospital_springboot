@@ -102,7 +102,7 @@
                     <br><br>
                     <form action="" method="POST" name="frm" @submit.prevent="addBoard" class='write'>
                         제목: <br><input type="text" id="title" v-model='title'><br><br> 내용: <textarea id="content" v-model='content'></textarea><br><br> 비밀글 <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
-                        <br><br>
+                        <label for="secretKey"></label>
                         <input type="submit" value="등록" id='upload'>
                     </form>
                 </div>

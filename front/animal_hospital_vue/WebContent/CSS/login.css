@@ -173,7 +173,6 @@ body .container .content input.submit {
     margin-left: 1%;
     height: 42px;
     cursor: pointer;
-    vertical-align: middle;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #263238;
