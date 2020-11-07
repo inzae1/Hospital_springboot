@@ -18,107 +18,49 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var revInfo = JSON.parse(localStorage.getItem("revInfo"));
             var calendarEl = document.getElementById('calendar');
             var date = new Date();
             dates = [];
-            var revInfo = JSON.parse(localStorage.getItem("revInfo"))
+            doctorList = ["윤인재 원장", "지혜수 원장", "방은호 원장", "나현재 원장", "김태형 원장"];
             var revInfoArray = [];
             var revInfoArrayCover = [];
 
-            const date1 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            const date1 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 1);
             const date2 = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 30);
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
-                dates[index] = new Date(date.getFullYear(), date.getMonth(), date.getDate() + index);
+                dates[index] = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 1 + index);
             }
 
             var models = new Array();
             var modelsFalse = new Array();
-
             for (let index = 0; index < revInfo.length; index++) {
                 revInfoArray.push(revInfo[index].revDate + revInfo[index].revDoctor)
             }
 
-            for (let index = 0; index < dates.length; index++) {
-                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "윤인재 원장") == false) {
-                    var dateInfo = new Object();
-                    dateInfo.title = "윤인재 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                    dateInfo.id = "revPossible"
-                    models.push(dateInfo);
-                } else {
-                    var dateInfo = new Object();
-                    dateInfo.title = "윤인재 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
+            for (let index = 0; index < doctorList.length; index++) {
+                for (let index2 = 0; index2 < dates.length; index2++) {
+                    var revDate = dates[index2].getFullYear() + "-" + ("0" + (Number(dates[index2].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index2].getDate()).slice(-2)
+                    if (revInfoArray.includes(revDate + doctorList[index]) == false) {
+                        var dateInfo = new Object();
+                        dateInfo.title = doctorList[index];
+                        dateInfo.start = revDate + "T16:00:00";
+                        dateInfo.id = "revPossible"
+                        models.push(dateInfo);
+                    } else {
+                        var dateInfo = new Object();
+                        dateInfo.title = doctorList[index];
+                        dateInfo.start = revDate + "T16:00:00";
 
-                    modelsFalse.push(dateInfo);
-                }
+                        modelsFalse.push(dateInfo);
+                    }
 
-            }
-            for (let index = 0; index < dates.length; index++) {
-                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "지혜수 원장") == false) {
-                    var dateInfo = new Object();
-                    dateInfo.title = "지혜수 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                    dateInfo.id = "revPossible"
-                    models.push(dateInfo);
-                } else {
-                    var dateInfo = new Object();
-                    dateInfo.title = "지혜수 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                    modelsFalse.push(dateInfo);
-                }
-            }
-            for (let index = 0; index < dates.length; index++) {
-                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "나현재 원장") == false) {
-                    var dateInfo = new Object();
-                    dateInfo.title = "나현재 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                    dateInfo.id = "revPossible"
-                    models.push(dateInfo);
-                } else {
-                    var dateInfo = new Object();
-                    dateInfo.title = "나현재 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                    modelsFalse.push(dateInfo);
-                }
-            }
-            for (let index = 0; index < dates.length; index++) {
-                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "방은호 원장") == false) {
-                    var dateInfo = new Object();
-                    dateInfo.title = "방은호 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                    dateInfo.id = "revPossible"
-                    models.push(dateInfo);
-                } else {
-                    var dateInfo = new Object();
-                    dateInfo.title = "방은호 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                    modelsFalse.push(dateInfo);
-                }
-            }
-
-            for (let index = 0; index < dates.length; index++) {
-                if (revInfoArray.includes(dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "김태형 원장") == false) {
-                    var dateInfo = new Object();
-                    dateInfo.title = "김태형 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-                    dateInfo.id = "revPossible"
-                    models.push(dateInfo);
-                } else {
-                    var dateInfo = new Object();
-                    dateInfo.title = "김태형 원장";
-                    dateInfo.start = dates[index].getFullYear() + "-" + ("0" + (Number(dates[index].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index].getDate()).slice(-2) + "T16:00:00";
-
-                    modelsFalse.push(dateInfo);
                 }
             }
             var date = new Date();
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialDate: "2020-11-04",
+                initialDate: date.getFullYear() + "-" + ("0" + (Number(date.getMonth()) + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
                 editable: false,
                 selectable: false,
                 businessHours: true,
@@ -139,7 +81,7 @@
                         if (loginLocation) {
                             return location.href = "login.html"
                         }
-                    } else if (localStorage.getItem("info").cust == 1) {
+                    } else if (JSON.parse(localStorage.getItem("info")).custCanRev == "0") {
                         return alert("하나 이상의 예약을 할 수 없습니다.")
                     } else if (arg.event.id == "revPossible") {
                         revData.$data.revDoctor = arg.event.title;
@@ -160,7 +102,7 @@
     </script>
 </head>
 
-<body onload="reload()">
+<body>
 
     <div class="wrapper">
         <div class='inner-wrapper'>
@@ -337,10 +279,28 @@
                                 alert("예약 실패하셨습니다.");
                             }) //catch
                             .finally(() => this.loading = false)
+                        console.log(this.custId)
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev0/" + this.custId)
+                            .then(response => {})
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
+                        axios
+                            .get("http://localhost:7000/mijung/findId/" + JSON.parse(localStorage.getItem("info")).custName + "/" + JSON.parse(localStorage.getItem("info")).custPhone)
+                            .then(response => {
+                                localStorage.setItem("info", JSON.stringify(response.data))
+                            })
+                            .catch(error => {
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
+
                     } //reservation
                 }, //methods
                 mounted() {
-
                     axios
                         .get("http://127.0.0.1:7000/mijung/getAllReservation")
                         .then(response => {
@@ -377,7 +337,7 @@
                             localStorage.removeItem("animal_name");
                             localStorage.removeItem("animal_login");
                             localStorage.removeItem("animal_admin");
-                            location.reload(true);
+                            location.reload();
                         }
                     }
                 }

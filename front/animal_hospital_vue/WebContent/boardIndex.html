@@ -117,7 +117,7 @@
                                 <td>{{board.bdID}}</td>
                                 <td v-if="board.bdReply!=null">Y</td>
                                 <td v-else>N</td>
-                                <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}}**</td>
+                                <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}} <img src="./img/secret.png" width="15px"></td>
                                 <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
                                 <td>{{board.custName}}</td>
                                 <td>{{board.bdDate}}</td>

@@ -109,8 +109,7 @@
                                             id="custPassword2" v-model="custPassword2" class="inpt" required="required" placeholder="비밀번호 재확인">
                                         <span v-if="!custPwCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">위 비밀번호와 일치하지 않습니다.<br></span> Name
                                         <input type="text" name="custName" id="custName" v-model="custName" class="inpt" required="required" placeholder="이름을 입력해주세요">
-                                        <label for="name">Your name</label> Phone Number<input type="text" @keyup="phoneCheck" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="' - ' 없이 핸드폰번호를 입력해주세요">
-                                        <label for="phone">Your phone number</label>
+                                        <label for="name">Your name</label> Phone Number : ' - ' 없이 입력해주세요<input type="tel" @keyup="phoneCheck" name="custPhone" id="custPhone" v-model="custPhone" class="inpt" required="required" placeholder="핸드폰번호를 입력해주세요">
                                         <span v-if="custPhoneCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">이미 사용중인 전화번호입니다<br></span>
                                         <span v-if="custPhoneHyphenCheck" style="margin-left:2%; margin-bottom: 10%; color: red;">' - '를 제거해주세요<br></span>
 

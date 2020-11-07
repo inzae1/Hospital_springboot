@@ -98,6 +98,7 @@
                         <th>동물타입</th>
                         <th>고객아이디</th>
                         <th>예약취소</th>
+                        <th>진료여부</th>
 
                     </tr>
                     <tr v-for="rev in info">
@@ -107,7 +108,10 @@
                         <td>{{rev.revComment}}</td>
                         <td>{{rev.revAnimalType}}</td>
                         <td>{{rev.custId}}</td>
-                        <td><input id="buttonBack" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
+                        <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId)" value="취소" v-if="Date.parse(rev.revDate) > Date.now()">
+                        </td>
+                        <td><input id="buttonBack" type="button" @click="completeReservation(rev.custId)" value="진료완료">
+                        </td>
                         <td v-else>지난예약</td>
                     </tr>
                 </table>
@@ -177,6 +181,7 @@
                         for (let index = 0; index < this.info.length; index++) {
                             localStorage.setItem("revId", this.info[index].custId)
                         }
+                        this.costIds
 
                     })
                     .catch(e => {
@@ -186,11 +191,11 @@
                     .finally(() => this.loading = false)
             },
             methods: {
-                cancelReservation() {
+                cancelReservation(custids) {
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
@@ -205,9 +210,24 @@
                                 this.loading = false;
                             })
                         axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
                             .then(response => {
                                 localStorage.removeItem("onceRev ");
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
+                    }
+                },
+                completeReservation(custids) {
+                    let compRev = confirm("진료가 완료되었습니까?")
+                    if (compRev) {
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
+                            .then(response => {
+                                alert("진료 완료처리되었습니다.")
                             })
                             .catch(error => {
                                 console.log(error);
