@@ -1,0 +1,217 @@
+.visual {
+    position: relative;
+    padding: 0 50px;
+}
+
+.visual .title {
+    width: 250px;
+    text-align: center;
+    font-size: 60px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 5px solid white;
+    font-weight: 600;
+    color: white;
+}
+
+.visual .con>div {
+    height: 250px;
+}
+
+.visual .con .slide {
+    background: url(../img/slide_four.jpg) no-repeat center;
+    color: #333;
+    background-position-y: -750px;
+}
+
+.submenu {
+    text-align: center;
+}
+
+.submenu ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+}
+
+.submenu ul li a:before {
+    content: '';
+    display: block;
+    border-bottom: 2px solid silver;
+    width: 110px;
+    padding-bottom: 3px;
+}
+
+.submenu ul li a:after {
+    content: '';
+    display: block;
+    border-bottom: 2px solid silver;
+    width: 110px;
+    padding-bottom: 3px;
+}
+
+.submenu ul li a:hover {
+    font-weight: 500;
+}
+
+.doctors {
+    text-align: center;
+}
+
+.doctors .bor {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px
+}
+
+.doctors ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0 20px 10px 20px;
+    font-size: 18px;
+}
+
+.doctors ul li:after {
+    content: '';
+    display: block;
+    width: 80px;
+    border-bottom: 2px solid silver;
+    padding-bottom: 3px;
+}
+
+.doctors ul li a {
+    color: #333;
+    font-size: 20px;
+}
+
+.doctors ul li a span {
+    font-size: 15px;
+}
+
+.content {
+    height: 500px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: aqua; */
+    font-size: 15px;
+}
+
+.content .table {
+    padding: 50px 0 0 80px
+}
+
+.content table {
+    padding: 10px;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+}
+
+.content th {
+    height: 0px;
+    width: 0px;
+    /* background-color: brown; */
+}
+
+.content th img {
+    max-height: 400px;
+    height: 400px;
+    width: 300px;
+}
+
+.content td.tdnone {
+    /* background-color: rgb(0, 255, 191); */
+    width: 20px;
+}
+
+.content td.tduse {
+    /* background-color: rgb(255, 7, 123); */
+    width: 1100px;
+}
+
+.spec {
+    padding-left: 30px;
+}
+
+.spec li {
+    padding-top: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgb(238, 113, 29);
+}
+
+.spec span {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.spec span.doctorName {
+    font-size: 60px;
+}
+
+.visual .chart {
+    background-color: rgba(51, 51, 51, 0.1);
+    margin-top: 20px;
+    width: 100%;
+    height: 2100px;
+}
+
+.visual .chart h1 {
+    color: rgb(255, 255, 255, 0.9);
+    font-size: 30px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.visual .chart h1 span {
+    color: rgb(233, 101, 14);
+}
+
+.visual .chart .myChart {
+    background-color: rgba(51, 51, 51, 0.1);
+    width: 80%;
+    padding: 20px 0 20px 0;
+    margin-left: 10%;
+}
+
+.visual .chart .myChart #myChart {
+    /* background-color: white; */
+    margin-left: 27%;
+}
+
+.visual .chart .myChart span {
+    display: inline-block;
+    margin-left: 67%;
+    color: #333;
+}
+
+.visual .chart .MyDoughnutChart {
+    background-color: rgba(51, 51, 51, 0.1);
+    width: 80%;
+    padding: 20px 0 20px 0;
+    margin-left: 10%;
+}
+
+.visual .chart .MyDoughnutChart #MyDoughnutChart {
+    /* background-color: white; */
+    margin-left: 27%;
+}
+
+.visual .chart .MyDoughnutChart span {
+    display: inline-block;
+    margin-left: 62%;
+    color: #333;
+}
+
+.visual .chart .charimg {
+    margin-left: 30%;
+}
