@@ -134,7 +134,7 @@
                 </div>
                 <div id="app">
                     <table class="type05">
-                        <div v-if="JSON.stringify(info)!=[]">
+                        <div v-if="JSON.stringify(info) == '[]'">
                             <thead>
                                 <h2 style="text-align: center; margin-top: 5%; font-size: 25px;">예약 상세내역</h2>
                             </thead><br>
@@ -232,7 +232,9 @@
                 axios
                     .get("http://localhost:7000/mijung/getReservation/" + this.custId)
                     .then(response => {
+                        console.log(response.data.reverse())
                         this.info = response.data.reverse();
+
                     })
                     .catch(e => {
                         console.log(e);
@@ -243,14 +245,15 @@
                     .get("http://localhost:7000/mijung/findReservationHistoryById/" + this.custId)
                     .then(response => {
                         this.hisInfo = response.data.reverse();
-                        console.log(this.hisInfo)
                     })
                     .catch(e => {
                         console.log(e);
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
-                console.log(JSON.stringify(this.info) == [])
+                console.log(JSON.stringify(this.info) != "[]")
+                console.log(JSON.stringify(this.info) == "[]")
+
             },
             methods: {
                 cancelReservation(revId) {
