@@ -8,7 +8,7 @@
     <link rel='stylesheet' href='./CSS/default.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <link rel='stylesheet' href='./CSS/footer.css'>
-    <link rel='stylesheet' href='./CSS/addBoard.css'>
+    <link rel='stylesheet' href='./CSS/boardUpdate.css'>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
     <script src="./source/isLogin.js"></script>
@@ -85,7 +85,7 @@
                     </ul>
                 </div>
             </header>
-            <br><br><br><br><br>
+            <br><br><br>
             <section class='visual'>
                 <div class='slide'>
                     <!-- 상단 이미지 -->
@@ -94,17 +94,21 @@
                     </div>
                 </div>
                 <br>
-                <center>
-                    <div id="app">
-                        <form action="" method="PUT" name="frm" @submit.prevent="updateBoard" style="margin: auto; border: 5px;">
-                            제목: <input type="text" id="title" v-model='info.bdTitle' style="width: 300px; height: 30px;"><br><br> 내용:
-                            <textarea id="content" v-model='info.bdContent' style="width: 500px; height: 300px;"></textarea><br> 비밀글
-                            <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
-                            <label for="secretKey"></label>
-                            <input type="submit" id="buttonTable1" value="수정하기">
-                        </form>
+                <div id="app">
+                    <div class=''>
+                        <div class='question'>
+                            <h1>질문 수정하기</h1>
+                        </div>
                     </div>
-                </center>
+                    <form action="" method="PUT" name="frm" @submit.prevent="updateBoard" class='write'>
+                        제목: <br><input type="text" id="title" v-model='info.bdTitle'><br><br> 내용:<br>
+                        <textarea id="content" v-model='info.bdContent'></textarea><br><br> 비밀글
+                        <input type="checkbox" id="secretKey" @click='check()' v-model="secretKey" checked="secretKey">
+                        <label for="secretKey"></label>
+                        <input type="submit" id="buttonTable1" value="수정하기">
+                    </form>
+                </div>
+
             </section>
             <footer include-html='./source/footer.html'></footer>
         </div>
