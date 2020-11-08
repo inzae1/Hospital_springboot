@@ -84,84 +84,90 @@
                     </ul>
                 </div>
             </header>
-            <div id="appInfo">
-                <table class="type06">
-                    <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">회원 정보관리</h2>
-                    <br>
-                    <tr>
-                        <th>ID</th>
-                        <td>{{info.custId}}</td>
-                    </tr>
-                    <tr>
-                        <th>비밀번호 변경</th>
-                        <td>
-                            <div v-if="changePwButtonClick">
-                                <form action="#" method="post" enctype="multipart/form-data" @submit.prevent="changePassword2">
-                                    New Password<input type="password" name="custPassword1" v-model="custPassword1" id="custPassword1" class="inpt" required="required" placeholder="새로운 비밀번호를 입력해주세요"><br> New Password Confirm<input type="password" name="custPassword2"
-                                        id="custPassword2" v-model="custPassword2" @keyup="pwCheck()" class="inpt" required="required" placeholder="다시 한번 입력해주세요">
-                                    <span style="color: red;" v-if="!custPwCheck">위 비밀번호와 일치하지 않습니다.</span>
-                                    <span style="color: blue;" v-if="custPwCheck && custPassword1 != '' && custPassword2 != ''">위 비밀번호와 일치합니다.</span>
-                                    <div class="submit-wrap">
-                                        <input id="buttonTable1" type="submit" class="submit" value="비밀번호 변경">
-                                        <input id="buttonTable1" type="button" value="Back" onclick="back()">
-                                    </div>
-                                </form>
-                            </div>
-                            <div v-if="!changePwButtonClick">
-                                <button id="buttonTable1" @click="changePassword1()" type="button" style="text-align: center;">비밀번호 변경</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>이름</th>
-                        <td>{{info.custName}}</td>
-                    </tr>
-                    <tr>
-                        <th>연락처</th>
-                        <td>{{info.custPhone}}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><button id="buttonTable1" @click="dropCustomer()" type="button" style="text-align: center;">회원 탈퇴</button></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="app">
-                <div v-if="info!=[]">
-                    <table class="type05">
-                        <div>
-                            <thead>
-                                <h2 style="text-align: center; margin-top: 5%; font-size: 25px;">예약 상세내역</h2>
-                            </thead><br>
-                            <tr>
-                                <th>예약번호</th>
-                                <th>예약날짜</th>
-                                <th>담당의사</th>
-                                <th>진료내용</th>
-                                <th>동물타입</th>
-                                <th>예약취소</th>
-
-                            </tr>
-                            <tr v-for="rev in info">
-                                <td>{{rev.revId}}</td>
-                                <td>{{rev.revDate}}</td>
-                                <td>{{rev.revDoctor}}</td>
-                                <td>{{rev.revComment}}</td>
-                                <td>{{rev.revAnimalType}}</td>
-                                <td><input id="buttonTable1" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
-                            </tr>
-                        </div>
+            <section class='visual'>
+                <div class='slideTwo'>
+                    <div class='title'>
+                        <span></span>
+                    </div>
+                </div>
+                <div id="appInfo">
+                    <table class="type06">
+                        <h2 style="text-align: center; margin-top: 1%; font-size: 25px;">회원 정보관리</h2>
+                        <br>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{info.custId}}</td>
+                        </tr>
+                        <tr>
+                            <th>비밀번호 변경</th>
+                            <td>
+                                <div v-if="changePwButtonClick">
+                                    <form action="#" method="post" enctype="multipart/form-data" @submit.prevent="changePassword2">
+                                        New Password<input type="password" name="custPassword1" v-model="custPassword1" id="custPassword1" class="inpt" required="required" placeholder="새로운 비밀번호를 입력해주세요"><br> New Password Confirm<input type="password"
+                                            name="custPassword2" id="custPassword2" v-model="custPassword2" @keyup="pwCheck()" class="inpt" required="required" placeholder="다시 한번 입력해주세요">
+                                        <span style="color: red;" v-if="!custPwCheck">위 비밀번호와 일치하지 않습니다.</span>
+                                        <span style="color: blue;" v-if="custPwCheck && custPassword1 != '' && custPassword2 != ''">위 비밀번호와 일치합니다.</span>
+                                        <div class="submit-wrap">
+                                            <input id="buttonTable1" type="submit" class="submit" value="비밀번호 변경">
+                                            <input id="buttonTable1" type="button" value="Back" onclick="back()">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div v-if="!changePwButtonClick">
+                                    <button id="buttonTable1" @click="changePassword1()" type="button" style="text-align: center;">비밀번호 변경</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td>{{info.custName}}</td>
+                        </tr>
+                        <tr>
+                            <th>연락처</th>
+                            <td>{{info.custPhone}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button id="buttonTable1" @click="dropCustomer()" type="button" style="text-align: center;">회원 탈퇴</button></td>
+                        </tr>
                     </table>
                 </div>
-                <div v-if="info==[]">
-                    <center>
-                        <img src="https://www.flaticon.com/svg/static/icons/svg/0/49.svg" style="opacity: 0.5; width: 100px; margin-top: 10%; display: block;">
-                        <span style="opacity: 0.5; display: block; ; text-align: center; font-size: 40px;">예약 내역이 없습니다.</span>
-                    </center>
+                <div id="app">
+                    <div v-if="info!=[]">
+                        <table class="type05">
+                            <div>
+                                <thead>
+                                    <h2 style="text-align: center; margin-top: 5%; font-size: 25px;">예약 상세내역</h2>
+                                </thead><br>
+                                <tr>
+                                    <th>예약번호</th>
+                                    <th>예약날짜</th>
+                                    <th>담당의사</th>
+                                    <th>진료내용</th>
+                                    <th>동물타입</th>
+                                    <th>예약취소</th>
+
+                                </tr>
+                                <tr v-for="rev in info">
+                                    <td>{{rev.revId}}</td>
+                                    <td>{{rev.revDate}}</td>
+                                    <td>{{rev.revDoctor}}</td>
+                                    <td>{{rev.revComment}}</td>
+                                    <td>{{rev.revAnimalType}}</td>
+                                    <td><input id="buttonTable1" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
+                                </tr>
+                            </div>
+                        </table>
+                    </div>
+                    <div v-if="info==[]">
+                        <center>
+                            <img src="https://www.flaticon.com/svg/static/icons/svg/0/49.svg" style="opacity: 0.5; width: 100px; margin-top: 10%; display: block;">
+                            <span style="opacity: 0.5; display: block; ; text-align: center; font-size: 40px;">예약 내역이 없습니다.</span>
+                        </center>
+                    </div>
                 </div>
-            </div>
 
-
+            </section>
         </div>
         <footer include-html='./source/footer.html'>
         </footer>

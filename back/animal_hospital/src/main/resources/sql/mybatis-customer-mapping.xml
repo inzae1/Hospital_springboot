@@ -55,11 +55,12 @@
     	SET cust_can_rev=1
     	WHERE cust_id=#{custId}
     </update>
-    <select id="getCustRev" parameterType="String" resultType="int">
+    <select id="getCustRev" parameterType="string" resultType="int">
     	SELECT cust_can_rev 
     	FROM customer
     	WHERE cust_id=#{VALUE}
     </select>
+    
 </mapper>
 
 

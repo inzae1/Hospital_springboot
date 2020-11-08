@@ -20,7 +20,7 @@ table.type05 {
     margin: auto;
     padding: 0;
     border-radius: 5px;
-    width: 1000px;
+    width: auto;
 }
 
 table.type05 th {
@@ -37,10 +37,12 @@ table.type05 th {
 }
 
 table.type05 td {
+    min-width: 100px;
     width: auto;
     padding: 2%;
     border-bottom: 1px solid #ccc;
     text-align: center;
+    max-width: 300px;
 }
 
 table.type04 {
@@ -91,7 +93,6 @@ table.type04 td {
     font-size: 13px;
     padding: 10px 15px;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    margin-left: 23%;
 }
 
 #buttonBack:hover {
@@ -104,7 +105,6 @@ table.type04 td {
     font-size: 13px;
     padding: 10px 15px;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    margin-left: 23%;
 }
 
 #button:hover {
@@ -182,4 +182,34 @@ table.type04 td {
     background: url(../img/slide_nine.jpg) no-repeat center;
     color: #333;
     background-position-y: -650px;
+}
+
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+.active,
+.collapsible:hover {
+    background-color: #ccc;
+}
+
+
+/* Style the collapsible content. Note: hidden by default */
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
 }

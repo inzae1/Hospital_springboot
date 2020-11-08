@@ -84,51 +84,58 @@
                     </ul>
                 </div>
             </header>
-            <div id="app">
-
-                <table class="type05" v-if="!info==[]">
-                    <thead>
-                        <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">예약 전체 조회</h2>
-                    </thead><br>
-                    <tr>
-                        <th>No</th>
-                        <th>예약날짜</th>
-                        <th>담당의사</th>
-                        <th>진료내용</th>
-                        <th>동물타입</th>
-                        <th>고객아이디</th>
-                        <th>예약취소</th>
-                        <th>진료여부</th>
-
-                    </tr>
-                    <tr v-for="rev in info">
-                        <td>{{rev.revId}}</td>
-                        <td>{{rev.revDate}}</td>
-                        <td>{{rev.revDoctor}}</td>
-                        <td>{{rev.revComment}}</td>
-                        <td>{{rev.revAnimalType}}</td>
-                        <td>{{rev.custId}}</td>
-                        <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId)" value="취소" v-if="Date.parse(rev.revDate) > Date.now()">
-                        </td>
-                        <td><input id="buttonBack" type="button" @click="completeReservation(rev.custId)" value="진료완료">
-                        </td>
-                        <td v-else>지난예약</td>
-                    </tr>
-                </table>
-                <div v-else>
-                    <tr>
-                        <th>No</th>
-                        <th>예약날짜</th>
-                        <th>담당의사</th>
-                        <th>진료내용</th>
-                        <th>동물타입</th>
-                        <th>고객아이디</th>
-                    </tr>
-                    <tr>
-                        <td>예약 내용이 없습니다.</td>
-                    </tr>
+            <section class='visual'>
+                <div class='slideTwo'>
+                    <div class='title'>
+                        <span></span>
+                    </div>
                 </div>
-            </div>
+                <div id="app">
+
+                    <table class="type05" v-if="!info==[]">
+                        <thead>
+                            <h2 style="text-align: center; margin-top: 1%; font-size: 25px;">예약 전체 조회</h2>
+                        </thead><br>
+                        <tr>
+                            <th>No</th>
+                            <th>예약날짜</th>
+                            <th>담당의사</th>
+                            <th>진료내용</th>
+                            <th>동물타입</th>
+                            <th>고객아이디</th>
+                            <th>예약취소</th>
+                            <th>진료여부</th>
+
+                        </tr>
+                        <tr v-for="rev in info">
+                            <td>{{rev.revId}}</td>
+                            <td>{{rev.revDate}}</td>
+                            <td>{{rev.revDoctor}}</td>
+                            <td>{{rev.revComment}}</td>
+                            <td>{{rev.revAnimalType}}</td>
+                            <td>{{rev.custId}}</td>
+                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId)" value="취소" v-if="Date.parse(rev.revDate) > Date.now()">
+                            </td>
+                            <td><input id="buttonBack" name="rev.custId" type="button" @click="completeReservation(rev.custId)" value="진료완료">
+                            </td>
+                            <td v-else>지난예약</td>
+                        </tr>
+                    </table>
+                    <div v-else>
+                        <tr>
+                            <th>No</th>
+                            <th>예약날짜</th>
+                            <th>담당의사</th>
+                            <th>진료내용</th>
+                            <th>동물타입</th>
+                            <th>고객아이디</th>
+                        </tr>
+                        <tr>
+                            <td>예약 내용이 없습니다.</td>
+                        </tr>
+                    </div>
+                </div>
+            </section>
             <footer include-html='./source/footer.html'>
             </footer>
         </div>
@@ -169,10 +176,12 @@
                     custId: id,
                     loading: true,
                     errored: false,
-                    oldReservation: false
+                    oldReservation: false,
+                    canRevNumber: 1
                 }
             },
             mounted() {
+
                 axios
                     .get("http://localhost:7000/mijung/getAllReservation/")
                     .then(response => {
@@ -210,7 +219,7 @@
                                 this.loading = false;
                             })
                         axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
                             .then(response => {
                                 localStorage.removeItem("onceRev ");
                             })
@@ -228,6 +237,8 @@
                             .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
                             .then(response => {
                                 alert("진료 완료처리되었습니다.")
+
+                                document.getElementsByName("rev.custId").style.display = "none"
                             })
                             .catch(error => {
                                 console.log(error);
@@ -235,7 +246,8 @@
                             })
                             .finally(() => this.loading = false)
                     }
-                }
+                },
+
 
             },
         })
