@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.encore.mijung.domain.Customer;
 import com.encore.mijung.domain.Reservation;
+import com.encore.mijung.domain.ReservationHistory;
 import com.encore.mijung.service.CustomerService;
 import com.encore.mijung.service.ReservationService;
 
@@ -57,4 +58,33 @@ public class ReservationController {
 		if(revs.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		return new ResponseEntity(revs,HttpStatus.OK);
 	}
+	
+	@PostMapping("/addReservationHistory")
+	public ResponseEntity addReservationHistory(@RequestBody ReservationHistory reservationHistory) throws Exception{
+		reservationService.addReservationHistory(reservationHistory);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteReservationHistory/{revHisId}")
+	public ResponseEntity deleteReservationHistory(@PathVariable int revHisId) throws Exception{
+		System.out.println("cancel");
+		boolean result = reservationService.deleteReservationHistory(revHisId);
+		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/findAllReservationHistory")
+	public ResponseEntity<List<Reservation>> findAllReservationHistory() throws Exception{
+		List<Reservation> revs = reservationService.findAllReservationHistory();
+		if(revs.isEmpty()) return new ResponseEntity(HttpStatus.NO_CONTENT);
+		return new ResponseEntity(revs,HttpStatus.OK);
+	}
+	
+	@GetMapping("/findReservationHistoryById/{custId}")
+	public ResponseEntity findReservationHistoryById(@PathVariable String custId) throws Exception{
+		List<Reservation> getReservation = reservationService.findReservationHistoryById(custId);
+		if(getReservation==null)return new ResponseEntity(HttpStatus.NO_CONTENT);
+		return new ResponseEntity(getReservation,HttpStatus.OK);
+	}
+	
 }

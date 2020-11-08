@@ -69,6 +69,15 @@
     line-height: 30px;
 }
 
+#app .table .tbody #boardTitle {
+    color: #666666;
+}
+
+#app .table .tbody #boardTitle:hover {
+    text-decoration: underline;
+    color: #666666;
+}
+
 #app .table td {
     border-bottom: 1px solid rgba(51, 51, 51, 0.3);
 }

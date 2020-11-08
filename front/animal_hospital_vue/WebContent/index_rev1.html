@@ -254,7 +254,10 @@
                         revAnimalType: "",
                         custId: localStorage.getItem("animal_login"),
                         title: "",
-                        reInfo: []
+                        revHisDate: "",
+                        revHisDoctor: "",
+                        revHisComment: "",
+                        revHisAnimalType: ""
                     } //return 
                 }, //date
 
@@ -280,10 +283,9 @@
                                 alert("예약 실패하셨습니다.");
                             }) //catch
                             .finally(() => this.loading = false)
-                        console.log(this.custId)
                         axios
                             .put("http://127.0.0.1:7000/mijung/changeCustRev0/" + this.custId)
-                            .then(response => {})
+                            .then(function(response) {})
                             .catch(error => {
                                 console.log(error);
                                 this.errored = true
@@ -293,10 +295,27 @@
                             .get("http://localhost:7000/mijung/findId/" + JSON.parse(localStorage.getItem("info")).custName + "/" + JSON.parse(localStorage.getItem("info")).custPhone)
                             .then(response => {
                                 localStorage.setItem("info", JSON.stringify(response.data))
+                                location.reload()
                             })
                             .catch(error => {
                                 this.errored = true
                             })
+                            .finally(() => this.loading = false)
+                        axios
+                            .post("http://127.0.0.1:7000/mijung/addReservationHistory", {
+                                revHisDate: this.revDate,
+                                revHisDoctor: this.revDoctor,
+                                revHisComment: this.revComment,
+                                revHisAnimalType: this.revAnimalType,
+                                custId: this.custId
+                            }) //post
+                            .then(function(response) {
+                                location.reload()
+                            }) //then
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            }) //catch
                             .finally(() => this.loading = false)
 
                     } //reservation

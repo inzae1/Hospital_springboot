@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.encore.mijung.domain.Reservation;
+import com.encore.mijung.domain.ReservationHistory;
 
 @Repository
 public class ReservationDAOImpl implements ReservationDAO{
@@ -38,6 +39,26 @@ public class ReservationDAOImpl implements ReservationDAO{
 	public List<Reservation> getAllReservation() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(ns+"getAllReservation");
+	}
+
+	@Override
+	public void addReservationHistory(ReservationHistory reservationHistory) throws Exception {
+		sqlSession.insert(ns + "addReservationHistory", reservationHistory);
+	}
+
+	@Override
+	public boolean deleteReservationHistory(int revHisId) throws Exception {
+		return sqlSession.delete(ns + "deleteReservationHistory", revHisId) ==1;
+	}
+
+	@Override
+	public List<Reservation> findReservationHistoryById(String custId) throws Exception {
+		return sqlSession.selectList(ns + "findReservationHistoryById", custId);
+	}
+
+	@Override
+	public List<Reservation> findAllReservationHistory() throws Exception {
+		return sqlSession.selectList(ns + "findAllReservationHistory");
 	}
 	
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.encore.mijung.domain.Reservation;
+import com.encore.mijung.domain.ReservationHistory;
 import com.encore.mijung.repo.ReservationDAO;
 
 @Service
@@ -35,6 +36,27 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<Reservation> getAllReservation() throws Exception {
 		// TODO Auto-generated method stub
 		return reservationDAO.getAllReservation();
+	}
+
+	@Override
+	public void addReservationHistory(ReservationHistory reservationHistory) throws Exception {
+		reservationDAO.addReservationHistory(reservationHistory);
+		
+	}
+
+	@Override
+	public boolean deleteReservationHistory(int revHisId) throws Exception {
+		return reservationDAO.deleteReservationHistory(revHisId);
+	}
+
+	@Override
+	public List<Reservation> findReservationHistoryById(String custId) throws Exception {
+		return reservationDAO.findReservationHistoryById(custId);
+	}
+
+	@Override
+	public List<Reservation> findAllReservationHistory() throws Exception {
+		return reservationDAO.findAllReservationHistory();
 	}
 	
 	

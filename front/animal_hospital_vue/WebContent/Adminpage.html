@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>미정이네 관리자페이지</title>
     <link rel='stylesheet' href='./CSS/adminpage.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
     <link rel='stylesheet' href='./CSS/intro.css'>
@@ -92,7 +92,7 @@
                 </div>
                 <div id="app">
 
-                    <table class="type05" v-if="!info==[]">
+                    <table class="type05">
                         <thead>
                             <h2 style="text-align: center; margin-top: 1%; font-size: 25px;">예약 전체 조회</h2>
                         </thead><br>
@@ -104,7 +104,6 @@
                             <th>동물타입</th>
                             <th>고객아이디</th>
                             <th>예약취소</th>
-                            <th>진료여부</th>
 
                         </tr>
                         <tr v-for="rev in info">
@@ -114,26 +113,34 @@
                             <td>{{rev.revComment}}</td>
                             <td>{{rev.revAnimalType}}</td>
                             <td>{{rev.custId}}</td>
-                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId)" value="취소" v-if="Date.parse(rev.revDate) > Date.now()">
-                            </td>
-                            <td><input id="buttonBack" name="rev.custId" type="button" @click="completeReservation(rev.custId)" value="진료완료">
+                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId) " value="취소" v-if="Date.parse(rev.revDate)> Date.now()">
                             </td>
                             <td v-else>지난예약</td>
                         </tr>
                     </table>
-                    <div v-else>
-                        <tr>
-                            <th>No</th>
-                            <th>예약날짜</th>
-                            <th>담당의사</th>
-                            <th>진료내용</th>
-                            <th>동물타입</th>
-                            <th>고객아이디</th>
-                        </tr>
-                        <tr>
-                            <td>예약 내용이 없습니다.</td>
-                        </tr>
-                    </div>
+                    <table class="type05">
+                        <div>
+                            <thead>
+                                <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">지난 예약 상세내역</h2>
+                            </thead><br>
+                            <tr>
+                                <th>예약번호</th>
+                                <th>예약날짜</th>
+                                <th>담당의사</th>
+                                <th>진료내용</th>
+                                <th>동물타입</th>
+                                <th>고객아이디</th>
+                            </tr>
+                            <tr v-for="hisRev in hisInfo">
+                                <td>{{hisRev.revHisId}}</td>
+                                <td>{{hisRev.revHisDate}}</td>
+                                <td>{{hisRev.revHisDoctor}}</td>
+                                <td>{{hisRev.revHisComment}}</td>
+                                <td>{{hisRev.revHisAnimalType}}</td>
+                                <td>{{hisRev.custId}}</td>
+                            </tr>
+                        </div>
+                    </table>
                 </div>
             </section>
             <footer include-html='./source/footer.html'>
@@ -172,33 +179,50 @@
             data() {
                 return {
                     info: [],
-                    oldInfo: [],
+                    hisInfo: [],
                     custId: id,
                     loading: true,
                     errored: false,
-                    oldReservation: false,
-                    canRevNumber: 1
+                    canRevNumber: 1,
+                    custIdModel: ""
                 }
-            },
+            }, //data
             mounted() {
 
                 axios
                     .get("http://localhost:7000/mijung/getAllReservation/")
                     .then(response => {
                         this.info = response.data.reverse();
-                        console.log(this.info[0].custId)
-                        for (let index = 0; index < this.info.length; index++) {
-                            localStorage.setItem("revId", this.info[index].custId)
-                        }
-                        this.costIds
-
                     })
                     .catch(e => {
                         console.log(e);
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
-            },
+                axios
+                    .get("http://localhost:7000/mijung/findAllReservationHistory/")
+                    .then(response => {
+                        this.hisInfo = response.data.reverse();
+                        console.log(this.hisInfo)
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+                axios
+                    .get("http://localhost:7000/mijung/getAllBoard/")
+                    .then(response => {
+                        this.hisInfo = response.data.reverse();
+                        console.log(this.hisInfo)
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+
+            }, //mounted
             methods: {
                 cancelReservation(custids) {
                     let con_cancel = confirm("예약을 취소하시겠습니까")
@@ -228,30 +252,48 @@
                                 this.errored = true
                             })
                             .finally(() => this.loading = false)
+
                     }
-                },
-                completeReservation(custids) {
-                    let compRev = confirm("진료가 완료되었습니까?")
-                    if (compRev) {
-                        axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
-                            .then(response => {
-                                alert("진료 완료처리되었습니다.")
 
-                                document.getElementsByName("rev.custId").style.display = "none"
-                            })
-                            .catch(error => {
-                                console.log(error);
-                                this.errored = true
-                            })
-                            .finally(() => this.loading = false)
-                    }
-                },
+                }
+                // completeReservation(custids) {
+                //     let compRev = confirm("진료가 완료되었습니까?")
+                //     if (compRev) {
+                //         axios
+                //             .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
+                //             .then(response => {
+
+                //                 document.getElementById("buttonBack2").style.display = "none";
+                //             })
+                //             .catch(error => {
+                //                 console.log(error);
+                //                 this.errored = true
+                //             })
+                //             .finally(() => this.loading = false)
+                //         axios
+                //             .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
+                //             .then(() => {
+                //                 alert("진료 완료처리되었습니다.")
+                //                 location.reload(true);
+                //                 localStorage.removeItem("onceRev");
+                //             })
+                //             .catch(e => {
+                //                 console.log(e);
+                //                 this.errored = true;
+                //             })
+                //             .finally(() => {
+                //                 this.loading = false;
+                //             })
+                //     }
+                // },
 
 
-            },
+            }
         })
     </script>
 </body>
+<script>
+    includeHTML();
+</script>
 
 </html>

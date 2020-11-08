@@ -14,15 +14,39 @@
     <select id="getReservation" parameterType="string" resultType="reservation">
 		SELECT rev_id, rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id
 		FROM reservation
-		WHERE cust_id = #{VALUE} 
+		WHERE cust_id = #{VALUE} AND rev_date > now()
     </select>
     <delete id="cancelReservation" parameterType="string">
         DELETE FROM reservation WHERE cust_id=#{VALUE} AND rev_date > now()
     </delete>
     <select id="getAllReservation" resultType="reservation">
     	SELECT rev_id, rev_date, rev_doctor, rev_comment, rev_animal_type, cust_id
-		FROM reservation
+		FROM reservation 
+		WHERE rev_date > now()
     </select>
+    
+    <insert id="addReservationHistory" parameterType="reservationHistory">
+    	INSERT INTO reservation_history     
+		(rev_his_date, rev_his_doctor, rev_his_comment, rev_his_animal_type, cust_id)
+		VALUES(#{revHisDate},#{revHisDoctor}, #{revHisComment}, #{revHisAnimalType}, #{custId})
+    </insert>
+    <delete id="deleteReservationHistory" parameterType="int">
+        DELETE 
+        FROM reservation_history 
+        WHERE rev_his_id = #{VALUE}
+    </delete>
+    <select id="findAllReservationHistory" resultType="reservationHistory">
+    	SELECT rev_his_id, rev_his_date, rev_his_doctor, rev_his_comment, rev_his_animal_type, cust_id
+		FROM reservation_history
+		WHERE now() > rev_his_date
+    </select>
+    <select id="findReservationHistoryById" parameterType="string" resultType="reservationHistory">
+    	SELECT rev_his_id, rev_his_date, rev_his_doctor, rev_his_comment, rev_his_animal_type, cust_id
+		FROM reservation_history
+		WHERE cust_id = #{custId} AND now() > rev_his_date
+    </select>
+    
+    
 </mapper>
 
 

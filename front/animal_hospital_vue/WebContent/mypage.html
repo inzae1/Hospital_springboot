@@ -133,45 +133,60 @@
                     </table>
                 </div>
                 <div id="app">
-                    <div v-if="info!=[]">
-                        <table class="type05">
-                            <div>
-                                <thead>
-                                    <h2 style="text-align: center; margin-top: 5%; font-size: 25px;">예약 상세내역</h2>
-                                </thead><br>
-                                <tr>
-                                    <th>예약번호</th>
-                                    <th>예약날짜</th>
-                                    <th>담당의사</th>
-                                    <th>진료내용</th>
-                                    <th>동물타입</th>
-                                    <th>예약취소</th>
+                    <table class="type05">
+                        <div v-if="JSON.stringify(info)!=[]">
+                            <thead>
+                                <h2 style="text-align: center; margin-top: 5%; font-size: 25px;">예약 상세내역</h2>
+                            </thead><br>
+                            <tr>
+                                <th>예약번호</th>
+                                <th>예약날짜</th>
+                                <th>담당의사</th>
+                                <th>진료내용</th>
+                                <th>동물타입</th>
+                                <th>예약취소</th>
 
-                                </tr>
-                                <tr v-for="rev in info">
-                                    <td>{{rev.revId}}</td>
-                                    <td>{{rev.revDate}}</td>
-                                    <td>{{rev.revDoctor}}</td>
-                                    <td>{{rev.revComment}}</td>
-                                    <td>{{rev.revAnimalType}}</td>
-                                    <td><input id="buttonTable1" type="button" @click="cancelReservation" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
-                                </tr>
-                            </div>
-                        </table>
+                            </tr>
+                            <tr v-for="rev in info">
+                                <td>{{rev.revId}}</td>
+                                <td>{{rev.revDate}}</td>
+                                <td>{{rev.revDoctor}}</td>
+                                <td>{{rev.revComment}}</td>
+                                <td>{{rev.revAnimalType}}</td>
+                                <td><input id="buttonTable1" type="button" @click="cancelReservation(rev.revId)" value="취소" v-if="Date.parse(rev.revDate) > Date.now()"></td>
+                            </tr>
+                        </div>
+                    </table>
+                    <div v-else>
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/0/49.svg" style="opacity: 0.5; width: 100px; display: block; margin: 0px auto;"><br><br>
+                        <h2 style="display: block; margin: 0px auto; opacity: 0.5; text-align: center;">예약내역이 없습니다.</h2>
                     </div>
-                    <div v-if="info==[]">
-                        <center>
-                            <img src="https://www.flaticon.com/svg/static/icons/svg/0/49.svg" style="opacity: 0.5; width: 100px; margin-top: 10%; display: block;">
-                            <span style="opacity: 0.5; display: block; ; text-align: center; font-size: 40px;">예약 내역이 없습니다.</span>
-                        </center>
-                    </div>
+                    <table class="type05">
+                        <div>
+                            <thead>
+                                <h2 style="text-align: center; margin-top: 20%; font-size: 25px;">지난 예약 상세내역</h2>
+                            </thead><br>
+                            <tr>
+                                <th>예약번호</th>
+                                <th>예약날짜</th>
+                                <th>담당의사</th>
+                                <th>진료내용</th>
+                                <th>동물타입</th>
+                            </tr>
+                            <tr v-for="rev in hisInfo">
+                                <td>{{rev.revHisId}}</td>
+                                <td>{{rev.revHisDate}}</td>
+                                <td>{{rev.revHisDoctor}}</td>
+                                <td>{{rev.revHisComment}}</td>
+                                <td>{{rev.revHisAnimalType}}</td>
+                            </tr>
+                        </div>
+                    </table>
                 </div>
-
             </section>
         </div>
         <footer include-html='./source/footer.html'>
         </footer>
-    </div>
     </div>
     <script>
         function back() {
@@ -207,6 +222,7 @@
             data() {
                 return {
                     info: [],
+                    hisInfo: [],
                     custId: id,
                     loading: true,
                     errored: false
@@ -223,9 +239,21 @@
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
+                axios
+                    .get("http://localhost:7000/mijung/findReservationHistoryById/" + this.custId)
+                    .then(response => {
+                        this.hisInfo = response.data.reverse();
+                        console.log(this.hisInfo)
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+                console.log(JSON.stringify(this.info) == [])
             },
             methods: {
-                cancelReservation() {
+                cancelReservation(revId) {
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
                         axios
@@ -263,6 +291,19 @@
                                 this.errored = true
                             })
                             .finally(() => this.loading = false)
+                        axios
+                            .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(revId))
+                            .then(() => {
+                                location.reload(true);
+
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
                     }
                 }
 
@@ -392,6 +433,8 @@
             }
         });
     </script>
+    <script>
+        includeHTML();
     </script>
 </body>
 
