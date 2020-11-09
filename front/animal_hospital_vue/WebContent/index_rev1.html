@@ -264,6 +264,16 @@
                 methods: {
                     reservation() {
                         axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev0/" + this.custId)
+                            .then(function(response) {
+                                localStorage.setItem("onceRev", 1);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
+                        axios
                             .post("http://127.0.0.1:7000/mijung/reservation", {
                                 revDate: this.revDate,
                                 revDoctor: this.revDoctor,
@@ -283,14 +293,7 @@
                                 alert("예약 실패하셨습니다.");
                             }) //catch
                             .finally(() => this.loading = false)
-                        axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev0/" + this.custId)
-                            .then(function(response) {})
-                            .catch(error => {
-                                console.log(error);
-                                this.errored = true
-                            })
-                            .finally(() => this.loading = false)
+
                         axios
                             .get("http://localhost:7000/mijung/findId/" + JSON.parse(localStorage.getItem("info")).custName + "/" + JSON.parse(localStorage.getItem("info")).custPhone)
                             .then(response => {
