@@ -38,7 +38,6 @@
     <select id="findAllReservationHistory" resultType="reservationHistory">
     	SELECT rev_his_id, rev_his_date, rev_his_doctor, rev_his_comment, rev_his_animal_type, cust_id
 		FROM reservation_history
-		WHERE now() > rev_his_date
     </select>
     <select id="findReservationHistoryById" parameterType="string" resultType="reservationHistory">
     	SELECT rev_his_id, rev_his_date, rev_his_doctor, rev_his_comment, rev_his_animal_type, cust_id
