@@ -104,6 +104,7 @@
                             <th>동물타입</th>
                             <th>고객아이디</th>
                             <th>예약취소</th>
+                            <th>진료여부</th>
 
                         </tr>
                         <tr v-for="rev in info">
@@ -113,7 +114,8 @@
                             <td>{{rev.revComment}}</td>
                             <td>{{rev.revAnimalType}}</td>
                             <td>{{rev.custId}}</td>
-                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId) " value="취소" v-if="Date.parse(rev.revDate)> Date.now()">
+                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.revId) " value="취소" v-if="Date.parse(rev.revDate)> Date.now()"></td>
+                            <td><input id="buttonBack" type="button" @click="completeReservation(rev.revId) " value="진료완료" v-if="Date.parse(rev.revDate)> Date.now()">
                             </td>
                             <td v-else>지난예약</td>
                         </tr>
