@@ -39,7 +39,7 @@
     width: 70%;
     height: 90%;
     max-height: 100%;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
     border-top: 1px solid rgba(51, 51, 51, 0.3);
     border-bottom: 1px solid rgba(51, 51, 51, 0.3);
     border-collapse: collapse;
@@ -50,10 +50,10 @@
     width: 70%;
     height: 90%;
     max-height: 100%;
-    padding-bottom: 10px;
-    border-top: 1px solid rgba(51, 51, 51, 0.3);
-    /* border-bottom: 1px solid rgba(51, 51, 51, 0.3); */
-    border-collapse: collapse;
+    /* padding-bottom: 10px; */
+    /* border-top: 1px solid rgba(51, 51, 51, 0.3);
+    border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+    border-collapse: collapse; */
 }
 
 #app .table thead {
@@ -74,7 +74,8 @@
     text-align: center;
 }
 
-#app .table thead:after {
+
+/* #app .table thead:after {
     content: '';
     position: absolute;
     display: block;
@@ -88,7 +89,7 @@
     display: block;
     width: 65.3%;
     border-bottom: 1px solid rgba(51, 51, 51, 0.3);
-}
+} */
 
 #app .table tbody {
     font-size: 14px;
@@ -96,10 +97,19 @@
     height: 1500px;
 }
 
+#app .table tbody th {
+    height: 200px;
+}
+
 #app .table-2 tbody {
     font-size: 14px;
     line-height: 30px;
     height: 1500px;
+}
+
+#app .list {
+    float: left;
+    margin-left: 15%;
 }
 
 #app .editor {

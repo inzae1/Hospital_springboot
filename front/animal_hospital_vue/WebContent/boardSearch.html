@@ -113,12 +113,13 @@
                         </thead>
                         <tbody class='tbody'>
 
-                            <tr v-for='board in info'>
-                                <td>{{board.bdID}}</td>
+                            <tr v-for='(board, index) in info'>
+                                <td v-if="page === Math.ceil(countBoard / 5)">{{info.length - index}}</td>
+                                <td v-else>{{(Math.ceil(countBoard / 5) - page) * 5 + (countBoard % 5) - index}}</td>
                                 <td v-if="board.bdReply!=null">Y</td>
                                 <td v-else>N</td>
-                                <td v-if='isSecret(board)' @click="getBoard(board)">{{board.bdTitle}}**</td>
-                                <td v-else @click="getBoard(board)">{{board.bdTitle}}</td>
+                                <td v-if='isSecret(board)' @click="getBoard(board)"> <a href="#" id="boardTitle">{{board.bdTitle}}<img src="./img/secret.png" width="15px"></a></td>
+                                <td v-else @click="getBoard(board)"><a id="boardTitle" href="#">{{board.bdTitle}}</a></td>
                                 <td>{{board.custName}}</td>
                                 <td>{{board.bdDate}}</td>
                                 <td>{{board.bdView}}</td><br>
@@ -144,7 +145,7 @@
                                 </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="search" id="search" v-model="searchContent">
+                                    <input type="text" name="search" id="search" v-model="searchContent" @keyup.enter="searchBoard">
                                 </td>
                                 <td>
                                     <button type="button" @click="searchBoard">검색</button>

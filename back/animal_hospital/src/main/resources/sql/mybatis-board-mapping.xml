@@ -49,7 +49,7 @@
 	SELECT COUNT(bd_ID) FROM board
 </select>
 <select id="searchBoardByTitle" parameterType="search" resultType="board">
-	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id, cust_name
 	FROM board
 	WHERE bd_title LIKE '%' #{searchContent} '%'
 	ORDER BY bd_ID desc
@@ -60,7 +60,7 @@
 	WHERE bd_title LIKE '%' #{VALUE} '%'
 </select>
 <select id="searchBoardByContent" parameterType="search" resultType="board">
-	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id
+	SELECT bd_ID, bd_title, bd_content, bd_view, bd_Date, bd_is_Secret, bd_Reply, cust_id, cust_name
 	FROM board
 	WHERE bd_content LIKE '%' #{searchContent} '%'
 	ORDER BY bd_ID desc
