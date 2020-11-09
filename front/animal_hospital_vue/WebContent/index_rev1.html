@@ -81,7 +81,7 @@
                         if (loginLocation) {
                             return location.href = "login.html"
                         }
-                    } else if (JSON.parse(localStorage.getItem("info")).custCanRev == "0") {
+                    } else if (localStorage.getItem("onceRev") == "1") {
                         return alert("하나 이상의 예약을 할 수 없습니다.")
                     } else if (arg.event.id == "revPossible") {
                         revData.$data.revDoctor = arg.event.title;
@@ -284,6 +284,7 @@
                             .then(function(response) {
                                 alert("예약 완료되셨습니다.");
                                 location.reload()
+                                localStorage.setItem("onceRev", 1);
                                 localStorage.setItem("reLoad", 1);
 
                             }) //then
