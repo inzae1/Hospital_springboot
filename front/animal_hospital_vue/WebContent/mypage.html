@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image⁄x-icon" href="img/logo2.png">
     <title>마이페이지</title>
     <link rel='stylesheet' href='./CSS/mypage.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
@@ -266,7 +267,6 @@
                             .delete("http://localhost:7000/mijung/cancelReservation/" + revId)
                             .then(() => {
                                 alert("예약을 취소하였습니다");
-                                localStorage.removeItem("onceRev");
                                 location.reload(true);
                             })
                             .catch(e => {

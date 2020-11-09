@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 화면</title>
+    <link rel="shortcut icon" type="image⁄x-icon" href="img/logo2.png">
+    <title>로그인</title>
     <link rel='stylesheet' href='./CSS/login.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
     <link rel='stylesheet' href='./CSS/header.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./source/includeHTML.js"></script>
-
 </head>
 
 <body>
@@ -206,6 +206,8 @@
                                     localStorage.setItem("animal_admin", this.info.custAdmin);
                                     if (response.data.custCanRev == 0) {
                                         localStorage.setItem("onceRev", 1);
+                                    } else {
+                                        localStorage.removeItem("onceRev");
                                     }
                                     alert(response.data.custName + "님이 로그인하였습니다.");
                                     location.href = "index.html";

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미정이네 관리자페이지</title>
+    <link href='img/logo2.png' rel="shortcut icon" type="image/x-icon">
+    <title>관리자</title>
     <link rel='stylesheet' href='./CSS/adminpage.css'>
     <link rel='stylesheet' href='./CSS/default_copy.css'>
     <link rel='stylesheet' href='./CSS/intro.css'>
@@ -247,7 +248,7 @@
                         axios
                             .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
                             .then(response => {
-                                localStorage.removeItem("onceRev ");
+                                localStorage.removeItem("onceRev");
                             })
                             .catch(error => {
                                 console.log(error);
