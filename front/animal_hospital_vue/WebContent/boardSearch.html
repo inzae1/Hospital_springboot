@@ -136,6 +136,9 @@
                             </ul>
                         </nav>
                     </center>
+                    <div class='list' style="margin-left: 15%;">
+                        <button @click='gotoBoardIndex'>목록보기</button>&emsp;
+                    </div>
                     <center>
                         <table>
                             <tr>
@@ -148,11 +151,13 @@
                                 <td>
                                     <input type="text" name="search" id="search" v-model="searchContent" @keyup.enter="searchBoard">
                                 </td>
+
                                 <td>
                                     <button type="button" @click="searchBoard">검색</button>
                                 </td>
                             </tr>
                         </table>
+
                     </center>
                 </div>
             </section>
@@ -250,6 +255,9 @@
                 }
             },
             methods: {
+                gotoBoardIndex() {
+                    location.href = './boardIndex.html';
+                },
                 getBoard(board) {
                     // 비밀글일 경우 작성자만 볼 수 있도록 해야함.
                     if (board.bdIsSecret === 1) {

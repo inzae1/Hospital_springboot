@@ -116,15 +116,10 @@
                             <tr v-for='(board, index) in info'>
                                 <td v-if="page === Math.ceil(countBoard / 5)">{{info.length - index}}</td>
                                 <td v-else>{{(Math.ceil(countBoard / 5) - page) * 5 + (countBoard % 5) - index}}</td>
-                                <td v-if="board.bdReply!=null">Y</td>
-                                <td v-else>N</td>
-                                <td v-if='isSecret(board)' @click="getBoard(board)">
-                                    <a href="#" id="boardTitle">{{board.bdTitle}}
-                                        <img src="./img/secret.png" width="15px">
-                                    </a>
-                                </td>
-                                <td v-else @click="getBoard(board)"><a id="boardTitle" href="#">{{board.bdTitle}}</a>
-                                </td>
+                                <td v-if="board.bdReply!=null"><b>Y</b></td>
+                                <td v-else><b style="color: #CC6666;">N</b></td>
+                                <td v-if='isSecret(board)' @click="getBoard(board)"> <a href="#" id="boardTitle">{{board.bdTitle}}<img src="./img/secret.png" width="15px"></a></td>
+                                <td v-else @click="getBoard(board)"><a id="boardTitle" href="#">{{board.bdTitle}}</a></td>
                                 <td>{{board.custName}}</td>
                                 <td>{{board.bdDate}}</td>
                                 <td>{{board.bdView}}</td><br>
