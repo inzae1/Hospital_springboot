@@ -106,7 +106,7 @@
                             <tr>
                                 <tbody>
                                     <th>내용</th>
-                                    <td colspan="3"><span cols="50" rows="10" border='1'>{{info.bdContent}}</span><br></td>
+                                    <td colspan="3"><span cols="50" rows="10" border='1' v-html="info.bdContent"></span><br></td>
                                 </tbody>
                             </tr>
                         </table>
@@ -165,6 +165,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script>
+            function replaceAll(str, searchStr, replaceStr) {
+
+                return str.split(searchStr).join(replaceStr);
+            }
+
             new Vue({
                 el: "#loginApp",
                 data: {
@@ -206,6 +211,7 @@
                         .get("http://localhost:7000/mijung/getBoard/" + bdID)
                         .then(response => {
                             this.info = response.data;
+                            this.info.bdContent = replaceAll(this.info.bdContent, "\n", "<br>");
                         })
                         .catch(e => {
                             console.log(e);
