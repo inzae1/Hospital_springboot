@@ -200,9 +200,11 @@
                 }
             },
             mounted() {
+
                 if (location.href.indexOf('?') != -1) {
-                    this.page = location.href.split('?')[1].split('=')[1];
+                    this.page = location.href.split('?')[1].split('=')[1].replace('#', '');
                 }
+
                 this.loginId = localStorage.getItem('animal_login');
                 this.admin = localStorage.getItem('animal_admin');
                 axios
