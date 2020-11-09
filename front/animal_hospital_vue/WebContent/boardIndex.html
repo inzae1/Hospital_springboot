@@ -114,7 +114,8 @@
                         <tbody class='tbody'>
 
                             <tr v-for='(board, index) in info'>
-                                <td>{{info.length - index}}</td>
+                                <td v-if="page === Math.ceil(countBoard / 5)">{{info.length - index}}</td>
+                                <td v-else>{{(Math.ceil(countBoard / 5) - page) * 5 + (countBoard % 5) - index}}</td>
                                 <td v-if="board.bdReply!=null">Y</td>
                                 <td v-else>N</td>
                                 <td v-if='isSecret(board)' @click="getBoard(board)"> <a href="#" id="boardTitle">{{board.bdTitle}}<img src="./img/secret.png" width="15px"></a></td>
@@ -208,6 +209,7 @@
                     .get("http://localhost:7000/mijung/countBoard")
                     .then(response => {
                         this.countBoard = response.data;
+                        console.log(this.countBoard);
                     })
                     .catch(e => {
                         console.log(e);
