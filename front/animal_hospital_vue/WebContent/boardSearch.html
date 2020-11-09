@@ -202,7 +202,7 @@
             mounted() {
                 let searchBoard = JSON.parse(localStorage.getItem("animal_search"));
                 if (location.href.indexOf('?') != -1) {
-                    this.page = location.href.split('?')[1].split('=')[1];
+                    this.page = location.href.split('?')[1].split('=')[1].replace('#', '');
                 }
                 if (searchBoard.isTitle == 1) {
                     axios
