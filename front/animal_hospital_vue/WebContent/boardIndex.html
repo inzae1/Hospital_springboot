@@ -145,7 +145,7 @@
                                 </select>
                                 </td>
                                 <td>
-                                    <input type="text" name="search" id="search" v-model="searchContent">
+                                    <input type="text" name="search" id="search" v-model="searchContent" @keyup.enter="searchBoard">
                                 </td>
                                 <td>
                                     <button type="button" @click="searchBoard">검색</button>
