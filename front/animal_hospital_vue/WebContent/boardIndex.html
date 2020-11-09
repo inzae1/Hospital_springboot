@@ -211,7 +211,6 @@
                     .get("http://localhost:7000/mijung/countBoard")
                     .then(response => {
                         this.countBoard = response.data;
-                        console.log(this.countBoard);
                     })
                     .catch(e => {
                         console.log(e);
