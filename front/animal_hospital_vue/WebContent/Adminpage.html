@@ -94,7 +94,7 @@
 
                     <table class="type05">
                         <thead>
-                            <h2 style="text-align: center; margin-top: 1%; font-size: 25px;">예약 전체 조회</h2>
+                            <h2 style="text-align: center; margin-top: 1%; font-size: 25px;">미진료 예약 조회</h2>
                         </thead><br>
                         <tr>
                             <th>No</th>
@@ -104,6 +104,7 @@
                             <th>동물타입</th>
                             <th>고객아이디</th>
                             <th>예약취소</th>
+                            <th>진료여부</th>
 
                         </tr>
                         <tr v-for="rev in info">
@@ -113,7 +114,8 @@
                             <td>{{rev.revComment}}</td>
                             <td>{{rev.revAnimalType}}</td>
                             <td>{{rev.custId}}</td>
-                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId) " value="취소" v-if="Date.parse(rev.revDate)> Date.now()">
+                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.revId, rev.custId)" value="취소" v-if="Date.parse(rev.revDate)> Date.now()"></td>
+                            <td><input id="buttonBack" type="button" @click="completeReservation(rev.revId, rev.custId)" value="진료완료" v-if="Date.parse(rev.revDate)> Date.now()">
                             </td>
                             <td v-else>지난예약</td>
                         </tr>
@@ -121,7 +123,7 @@
                     <table class="type05">
                         <div>
                             <thead>
-                                <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">지난 예약 상세내역</h2>
+                                <h2 style="text-align: center; margin-top: 10%; font-size: 25px;">예약 전체 조회</h2>
                             </thead><br>
                             <tr>
                                 <th>예약번호</th>
@@ -224,11 +226,11 @@
 
             }, //mounted
             methods: {
-                cancelReservation(custids) {
+                cancelReservation(revid, custids) {
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + revid)
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
@@ -243,7 +245,7 @@
                                 this.loading = false;
                             })
                         axios
-                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + id)
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
                             .then(response => {
                                 localStorage.removeItem("onceRev ");
                             })
@@ -253,7 +255,7 @@
                             })
                             .finally(() => this.loading = false)
                         axios
-                            .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(custids))
+                            .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(revid))
                             .then(() => {
                                 location.reload();
 
@@ -270,7 +272,7 @@
 
 
                 },
-                completeReservation(custids) {
+                completeReservation(revid, custids) {
                     let compRev = confirm("진료가 완료되었습니까?")
                     if (compRev) {
                         axios
@@ -285,7 +287,7 @@
                             })
                             .finally(() => this.loading = false)
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + revid)
                             .then(() => {
                                 alert("진료 완료처리되었습니다.")
                                 location.reload(true);

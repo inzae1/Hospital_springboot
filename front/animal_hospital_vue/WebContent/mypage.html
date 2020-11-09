@@ -419,7 +419,7 @@
                 },
                 changePassword2() {
                     axios
-                        .put("http://localhost:7000/mijung/changePassword/" + this.custIdPw + "/" + this.custPassword1)
+                        .put("http://localhost:7000/mijung/changePassword/" + this.custId + "/" + this.custPassword1)
                         .then(response => {
                             if (!this.custPwCheck) {
                                 return alert("비밀번호가 일치하지 않습니다.");
