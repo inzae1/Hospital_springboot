@@ -29,12 +29,14 @@ public class BoardController {
 	
 	@PostMapping("addBoard")
 	public ResponseEntity addBoard(@RequestBody Board board) throws Exception{
+		board.setBdContent(board.getBdContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 		service.addBoard(board);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	@PutMapping("updateBoard")
 	public ResponseEntity updateBoard(@RequestBody Board board) throws Exception{
+		board.setBdContent(board.getBdContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
 		boolean result = service.updateBoard(board);
 		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		return new ResponseEntity(HttpStatus.OK);
@@ -69,6 +71,7 @@ public class BoardController {
 	@GetMapping("getBoard/{bdID}")
 	public ResponseEntity getBoard(@PathVariable int bdID) throws Exception{
 		Board board = service.getBoard(bdID);
+		board.setBdContent(board.getBdContent().replaceAll("<br>", "\n"));
 		if(board==null) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		else return new ResponseEntity(board,HttpStatus.OK);
 	}
