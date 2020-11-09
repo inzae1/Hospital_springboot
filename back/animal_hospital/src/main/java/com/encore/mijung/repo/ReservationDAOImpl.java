@@ -30,8 +30,8 @@ public class ReservationDAOImpl implements ReservationDAO{
 	}
 
 	@Override
-	public boolean cancelReservation(String custId) throws Exception {
-		return sqlSession.delete(ns+"cancelReservation",custId)==1;
+	public boolean cancelReservation(int revId) throws Exception {
+		return sqlSession.delete(ns+"cancelReservation",revId)==1;
 		
 	}
 

@@ -252,40 +252,54 @@
                                 this.errored = true
                             })
                             .finally(() => this.loading = false)
+                        axios
+                            .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(custids))
+                            .then(() => {
+                                location.reload();
+
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
 
                     }
 
-                }
-                // completeReservation(custids) {
-                //     let compRev = confirm("진료가 완료되었습니까?")
-                //     if (compRev) {
-                //         axios
-                //             .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
-                //             .then(response => {
 
-                //                 document.getElementById("buttonBack2").style.display = "none";
-                //             })
-                //             .catch(error => {
-                //                 console.log(error);
-                //                 this.errored = true
-                //             })
-                //             .finally(() => this.loading = false)
-                //         axios
-                //             .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
-                //             .then(() => {
-                //                 alert("진료 완료처리되었습니다.")
-                //                 location.reload(true);
-                //                 localStorage.removeItem("onceRev");
-                //             })
-                //             .catch(e => {
-                //                 console.log(e);
-                //                 this.errored = true;
-                //             })
-                //             .finally(() => {
-                //                 this.loading = false;
-                //             })
-                //     }
-                // },
+                },
+                completeReservation(custids) {
+                    let compRev = confirm("진료가 완료되었습니까?")
+                    if (compRev) {
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
+                            .then(response => {
+
+                                document.getElementById("buttonBack2").style.display = "none";
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
+                            .then(() => {
+                                alert("진료 완료처리되었습니다.")
+                                location.reload(true);
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
+                    }
+                }
 
 
             }
