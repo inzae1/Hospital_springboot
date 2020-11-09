@@ -231,21 +231,6 @@
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/" + revid)
-                            .then(() => {
-                                alert("예약을 취소하였습니다");
-                                location.reload(true);
-
-                                localStorage.removeItem("onceRev");
-                            })
-                            .catch(e => {
-                                console.log(e);
-                                this.errored = true;
-                            })
-                            .finally(() => {
-                                this.loading = false;
-                            })
-                        axios
                             .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
                             .then(response => {
                                 localStorage.removeItem("onceRev");
@@ -255,6 +240,20 @@
                                 this.errored = true
                             })
                             .finally(() => this.loading = false)
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + revid)
+                            .then(() => {
+                                alert("예약을 취소하였습니다");
+                                location.reload(true);
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
+
                         axios
                             .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(revid))
                             .then(() => {
