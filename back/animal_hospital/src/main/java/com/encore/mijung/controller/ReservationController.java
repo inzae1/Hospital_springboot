@@ -44,10 +44,10 @@ public class ReservationController {
 		return new ResponseEntity(getReservation,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/cancelReservation/{custId}")
-	public ResponseEntity cancelReservation(@PathVariable String custId) throws Exception{
+	@DeleteMapping("/cancelReservation/{revId}")
+	public ResponseEntity cancelReservation(@PathVariable int revId) throws Exception{
 		System.out.println("cancel");
-		boolean result = reservationService.cancelReservation(custId);
+		boolean result = reservationService.cancelReservation(revId);
 		if(!result) return new ResponseEntity(HttpStatus.NO_CONTENT);
 		return new ResponseEntity(HttpStatus.OK);
 	}

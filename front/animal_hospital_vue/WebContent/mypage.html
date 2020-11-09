@@ -263,7 +263,7 @@
                     let con_cancel = confirm("예약을 취소하시겠습니까")
                     if (con_cancel) {
                         axios
-                            .delete("http://localhost:7000/mijung/cancelReservation/" + id)
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + revId)
                             .then(() => {
                                 alert("예약을 취소하였습니다");
                                 location.reload(true);
@@ -290,6 +290,7 @@
                             .then(response => {
                                 localStorage.setItem("info", JSON.stringify(response.data))
                                 console.log(response.data)
+                                location.reload();
                             })
                             .catch(error => {
                                 console.log(error)
@@ -299,7 +300,7 @@
                         axios
                             .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(revId))
                             .then(() => {
-                                location.reload(true);
+                                location.reload();
 
                             })
                             .catch(e => {
@@ -418,7 +419,7 @@
                 },
                 changePassword2() {
                     axios
-                        .put("http://localhost:7000/mijung/changePassword/" + this.custIdPw + "/" + this.custPassword1)
+                        .put("http://localhost:7000/mijung/changePassword/" + this.custId + "/" + this.custPassword1)
                         .then(response => {
                             if (!this.custPwCheck) {
                                 return alert("비밀번호가 일치하지 않습니다.");

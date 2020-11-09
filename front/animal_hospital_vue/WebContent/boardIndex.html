@@ -113,8 +113,8 @@
                         </thead>
                         <tbody class='tbody'>
 
-                            <tr v-for='board in info'>
-                                <td>{{board.bdID}}</td>
+                            <tr v-for='(board, index) in info'>
+                                <td>{{info.length - index}}</td>
                                 <td v-if="board.bdReply!=null">Y</td>
                                 <td v-else>N</td>
                                 <td v-if='isSecret(board)' @click="getBoard(board)"> <a href="#" id="boardTitle">{{board.bdTitle}}<img src="./img/secret.png" width="15px"></a></td>

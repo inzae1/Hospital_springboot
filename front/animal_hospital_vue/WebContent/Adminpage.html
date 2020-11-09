@@ -104,6 +104,7 @@
                             <th>동물타입</th>
                             <th>고객아이디</th>
                             <th>예약취소</th>
+                            <th>진료여부</th>
 
                         </tr>
                         <tr v-for="rev in info">
@@ -113,7 +114,8 @@
                             <td>{{rev.revComment}}</td>
                             <td>{{rev.revAnimalType}}</td>
                             <td>{{rev.custId}}</td>
-                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.custId) " value="취소" v-if="Date.parse(rev.revDate)> Date.now()">
+                            <td><input id="buttonBack" type="button" @click="cancelReservation(rev.revId) " value="취소" v-if="Date.parse(rev.revDate)> Date.now()"></td>
+                            <td><input id="buttonBack" type="button" @click="completeReservation(rev.revId) " value="진료완료" v-if="Date.parse(rev.revDate)> Date.now()">
                             </td>
                             <td v-else>지난예약</td>
                         </tr>
@@ -252,40 +254,54 @@
                                 this.errored = true
                             })
                             .finally(() => this.loading = false)
+                        axios
+                            .delete("http://localhost:7000/mijung/deleteReservationHistory/" + Number(custids))
+                            .then(() => {
+                                location.reload();
+
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
 
                     }
 
-                }
-                // completeReservation(custids) {
-                //     let compRev = confirm("진료가 완료되었습니까?")
-                //     if (compRev) {
-                //         axios
-                //             .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
-                //             .then(response => {
 
-                //                 document.getElementById("buttonBack2").style.display = "none";
-                //             })
-                //             .catch(error => {
-                //                 console.log(error);
-                //                 this.errored = true
-                //             })
-                //             .finally(() => this.loading = false)
-                //         axios
-                //             .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
-                //             .then(() => {
-                //                 alert("진료 완료처리되었습니다.")
-                //                 location.reload(true);
-                //                 localStorage.removeItem("onceRev");
-                //             })
-                //             .catch(e => {
-                //                 console.log(e);
-                //                 this.errored = true;
-                //             })
-                //             .finally(() => {
-                //                 this.loading = false;
-                //             })
-                //     }
-                // },
+                },
+                completeReservation(custids) {
+                    let compRev = confirm("진료가 완료되었습니까?")
+                    if (compRev) {
+                        axios
+                            .put("http://127.0.0.1:7000/mijung/changeCustRev1/" + custids)
+                            .then(response => {
+
+                                document.getElementById("buttonBack2").style.display = "none";
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                this.errored = true
+                            })
+                            .finally(() => this.loading = false)
+                        axios
+                            .delete("http://localhost:7000/mijung/cancelReservation/" + custids)
+                            .then(() => {
+                                alert("진료 완료처리되었습니다.")
+                                location.reload(true);
+                                localStorage.removeItem("onceRev");
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.errored = true;
+                            })
+                            .finally(() => {
+                                this.loading = false;
+                            })
+                    }
+                }
 
 
             }
