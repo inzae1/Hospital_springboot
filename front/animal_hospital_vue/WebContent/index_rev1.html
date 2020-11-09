@@ -19,6 +19,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            //로컬스토리지에서 예약된 날짜 json 파일 불러오기
             var revInfo = JSON.parse(localStorage.getItem("revInfo"));
             var calendarEl = document.getElementById('calendar');
             var date = new Date();
@@ -32,7 +33,7 @@
             for (let index = 0; index < (date2 - date1) / (3600 * 24 * 1000); index++) {
                 dates[index] = new Date(date.getFullYear(), date.getMonth(), Number(date.getDate()) + 1 + index);
             }
-
+            //예약 가능, 불가능날짜 나워서 배열저장
             var models = new Array();
             var modelsFalse = new Array();
             for (let index = 0; index < revInfo.length; index++) {
@@ -42,12 +43,14 @@
             for (let index = 0; index < doctorList.length; index++) {
                 for (let index2 = 0; index2 < dates.length; index2++) {
                     var revDate = dates[index2].getFullYear() + "-" + ("0" + (Number(dates[index2].getMonth()) + 1)).slice(-2) + "-" + ("0" + dates[index2].getDate()).slice(-2)
+                        //예약가능한 날짜 뿌리기
                     if (revInfoArray.includes(revDate + doctorList[index]) == false) {
                         var dateInfo = new Object();
                         dateInfo.title = doctorList[index];
                         dateInfo.start = revDate + "T16:00:00";
                         dateInfo.id = "revPossible"
                         models.push(dateInfo);
+                        //예약불가능한 날짜 뿌리기
                     } else {
                         var dateInfo = new Object();
                         dateInfo.title = doctorList[index];
@@ -59,18 +62,20 @@
                 }
             }
             var date = new Date();
-
+            //FullCalender 라이브러리 사용
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: date.getFullYear() + "-" + ("0" + (Number(date.getMonth()) + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2),
                 editable: false,
                 selectable: false,
                 businessHours: true,
-                dayMaxEvents: true, // allow "more" link when too many events
+                dayMaxEvents: true,
                 eventSources: [{
+                    //예약 불가능한 이벤트 뿌리기
                     events: modelsFalse,
                     color: "gray",
 
                 }, {
+                    ////예약 가능한 이벤트 뿌리기
                     events: models,
                     color: "#3788d8",
                     id: "revPossible"
