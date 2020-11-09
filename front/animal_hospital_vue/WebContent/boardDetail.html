@@ -112,7 +112,9 @@
                         </table>
 
                         <br>
-
+                        <div class='list'>
+                            <button @click='gotoBoardIndex'>목록보기</button>&emsp;
+                        </div>
                         <div v-if='checkWriter()'>
                             <div class='editor'>
                                 <button @click='updateBoard'>수정하기</button>&emsp;
@@ -220,6 +222,9 @@
                         .finally(() => this.loading = false)
                 },
                 methods: {
+                    gotoBoardIndex() {
+                        location.href = './boardIndex.html';
+                    },
                     updateBoard() {
                         location.href = "./boardUpdate.html?bdID=" + app.info.bdID;
                     },

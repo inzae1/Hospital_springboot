@@ -107,6 +107,11 @@
     height: 1500px;
 }
 
+#app .list {
+    float: left;
+    margin-left: 15%;
+}
+
 #app .editor {
     float: right;
     margin-right: 15%;
